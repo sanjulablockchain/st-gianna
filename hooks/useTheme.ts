@@ -1,32 +1,65 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useSyncExternalStore } from "react";
 
 export type Theme = "dark" | "light";
 
 const STORAGE_KEY = "sgm-theme";
 
+let currentTheme: Theme = "dark";
+let initialized = false;
+const listeners = new Set<() => void>();
+
 function readStoredTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
   return window.localStorage.getItem(STORAGE_KEY) === "light" ? "light" : "dark";
 }
 
+function notify() {
+  listeners.forEach((listener) => listener());
+}
+
+function setSharedTheme(next: Theme) {
+  currentTheme = next;
+  document.documentElement.dataset.theme = next;
+  window.localStorage.setItem(STORAGE_KEY, next);
+  notify();
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function getSnapshot(): Theme {
+  return currentTheme;
+}
+
+function getServerSnapshot(): Theme {
+  return "dark";
+}
+
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   useEffect(() => {
-    setTheme(readStoredTheme());
-  }, []);
-
-  const applyTheme = useCallback((next: Theme) => {
-    document.documentElement.dataset.theme = next;
-    window.localStorage.setItem(STORAGE_KEY, next);
-    setTheme(next);
+    if (initialized) return;
+    initialized = true;
+    const stored = readStoredTheme();
+    if (stored !== currentTheme) {
+      currentTheme = stored;
+      notify();
+    }
   }, []);
 
   const toggleTheme = useCallback(() => {
-    applyTheme(theme === "dark" ? "light" : "dark");
-  }, [theme, applyTheme]);
+    setSharedTheme(currentTheme === "dark" ? "light" : "dark");
+  }, []);
 
   return { theme, toggleTheme };
+}
+
+export function __resetThemeForTests() {
+  currentTheme = "dark";
+  initialized = false;
+  listeners.clear();
 }

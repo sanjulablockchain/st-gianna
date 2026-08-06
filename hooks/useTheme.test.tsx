@@ -1,9 +1,10 @@
 import { describe, expect, it, beforeEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import { useTheme } from "./useTheme";
+import { useTheme, __resetThemeForTests } from "./useTheme";
 
 describe("useTheme", () => {
   beforeEach(() => {
+    __resetThemeForTests();
     window.localStorage.clear();
     document.documentElement.removeAttribute("data-theme");
   });
@@ -39,5 +40,17 @@ describe("useTheme", () => {
     });
     expect(result.current.theme).toBe("dark");
     expect(window.localStorage.getItem("sgm-theme")).toBe("dark");
+  });
+
+  it("synchronizes theme across two independent hook instances", () => {
+    const a = renderHook(() => useTheme());
+    const b = renderHook(() => useTheme());
+
+    act(() => {
+      a.result.current.toggleTheme();
+    });
+
+    expect(a.result.current.theme).toBe("light");
+    expect(b.result.current.theme).toBe("light");
   });
 });
