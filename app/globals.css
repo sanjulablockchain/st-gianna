@@ -3,6 +3,7 @@
 }
 
 :root {
+  --logo-img: url("/images/logo-dark.png");
   --bg: #06161C;
   --bg-2: #0B2229;
   --ink: #EAF4F3;
@@ -23,6 +24,7 @@
 }
 
 html[data-theme="light"] {
+  --logo-img: url("/images/logo-light.png");
   --bg: #F5F8F7;
   --bg-2: #FFFFFF;
   --ink: #0A2540;

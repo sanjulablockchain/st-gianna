@@ -1,0 +1,25 @@
+.pill {
+  position: fixed;
+  right: 26px;
+  top: 26px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--bg);
+  font-weight: 800;
+  font-size: 14.5px;
+  letter-spacing: -.01em;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .9);
+  transition: background .3s ease;
+}
+
+/* The color is repeated here so the global a:hover rule cannot override it;
+   the source kept its color through hover via inline-style precedence. */
+.pill:hover {
+  background: var(--link);
+  color: var(--bg);
+}

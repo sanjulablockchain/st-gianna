@@ -20,8 +20,11 @@
   display: block;
   height: 96px;
   width: 168px;
-  object-fit: contain;
-  object-position: left center;
+  align-self: flex-start;
+  background-image: var(--logo-img);
+  background-size: contain;
+  background-position: left center;
+  background-repeat: no-repeat;
 }
 
 .tagline {

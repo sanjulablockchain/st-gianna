@@ -5,6 +5,7 @@ import Footer from "./Footer";
 describe("Footer", () => {
   it("renders the tagline, link columns, and contact details", () => {
     render(<Footer />);
+    expect(screen.getByRole("img", { name: "St. Gianna Medical Group" })).toBeInTheDocument();
     expect(
       screen.getByText(/pediatric and family healthcare across los angeles/i),
     ).toBeInTheDocument();

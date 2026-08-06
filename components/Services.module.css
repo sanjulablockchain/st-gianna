@@ -1,9 +1,15 @@
 .section {
   position: relative;
   padding: clamp(70px, 9vw, 120px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 120px) clamp(24px, 9vw, 150px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs.
+   :not(.revealed) keeps .revealed winning over this higher-specificity rule. */
+:global(html.js) .section:not(.revealed) {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity .6s ease, transform .6s ease;
 }
 
 .revealed {

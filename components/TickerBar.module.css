@@ -2,7 +2,7 @@
   position: relative;
   padding: 22px 0;
   background: var(--link);
-  color: var(--bg);
+  color: var(--on-accent);
   overflow: hidden;
   white-space: nowrap;
 }

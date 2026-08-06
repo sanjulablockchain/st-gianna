@@ -55,6 +55,12 @@ export default function Hero() {
       <span className={styles.gradient} />
       <span className={styles.scanlines} />
 
+      <span
+        role="img"
+        aria-label="St. Gianna Medical Group"
+        className={styles.logo}
+      />
+
       <div className={styles.content}>
         <span className={styles.eyebrow}>
           <span className={styles.liveDot} />

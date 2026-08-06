@@ -7,17 +7,23 @@
   width: 52px;
 }
 
+/* Mirrors .list's own flex layout so blobs always line up with the visible
+   links on every breakpoint, and items hidden via .extraOnly drop out of the
+   blob flow exactly as they drop out of the link flow. */
 .blobLayer {
   position: absolute;
   inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   filter: url(#goo);
   pointer-events: none;
 }
 
 .blob {
-  position: absolute;
-  left: 0;
   height: 52px;
+  flex-shrink: 0;
   border-radius: 999px;
   background: var(--pill);
   transition: width .42s cubic-bezier(.2, .9, .2, 1), background .3s ease;
@@ -48,6 +54,11 @@
   flex-shrink: 0;
   color: var(--ink);
   transition: color .3s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--on-accent);
 }
 
 .iconWrap {
@@ -94,6 +105,8 @@
 
   .blobLayer {
     inset: 6px;
+    flex-direction: row;
+    gap: 6px;
   }
 
   .list {

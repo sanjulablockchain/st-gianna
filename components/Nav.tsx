@@ -16,25 +16,23 @@ import {
   DarkModeIcon,
 } from "@/components/icons";
 
-const SLOT_HEIGHT = 60;
-
 export default function Nav() {
   const { theme, toggleTheme } = useTheme();
   const [hoverIndex, setHoverIndex] = useState(-1);
 
   const items = [
-    { label: "Home", href: "#top", icon: <HomeIcon />, primary: true },
-    { label: "Services", href: "#services", icon: <StethoscopeIcon />, primary: true },
-    { label: "Why us", href: "#why", icon: <FavoriteIcon />, primary: false },
-    { label: "Locations", href: "#locations", icon: <NearMeIcon />, primary: true },
-    { label: "Journal", href: "#insight", icon: <MenuBookIcon />, primary: false },
-    { label: "Partners", href: "#partners", icon: <HandshakeIcon />, primary: false },
-    { label: "Contact", href: "#footer", icon: <ChatBubbleIcon />, primary: false },
-    { label: "Call us", href: "tel:13105550123", icon: <CallIcon />, primary: true },
+    { label: "Home", href: "#top", icon: <HomeIcon size={23} />, primary: true },
+    { label: "Services", href: "#services", icon: <StethoscopeIcon size={23} />, primary: true },
+    { label: "Why us", href: "#why", icon: <FavoriteIcon size={23} />, primary: false },
+    { label: "Locations", href: "#locations", icon: <NearMeIcon size={23} />, primary: true },
+    { label: "Journal", href: "#insight", icon: <MenuBookIcon size={23} />, primary: false },
+    { label: "Partners", href: "#partners", icon: <HandshakeIcon size={23} />, primary: false },
+    { label: "Contact", href: "#footer", icon: <ChatBubbleIcon size={23} />, primary: false },
+    { label: "Call us", href: "tel:13105550123", icon: <CallIcon size={23} />, primary: true },
     {
       label: theme === "dark" ? "Light mode" : "Dark mode",
       href: "#top",
-      icon: theme === "dark" ? <LightModeIcon /> : <DarkModeIcon />,
+      icon: theme === "dark" ? <LightModeIcon size={23} /> : <DarkModeIcon size={23} />,
       primary: true,
       onClick: toggleTheme,
     },
@@ -52,7 +50,7 @@ export default function Nav() {
               className={`${styles.blob} ${distance === 0 ? styles.blobActive : ""} ${
                 item.primary ? "" : styles.extraOnly
               }`}
-              style={{ top: `${i * SLOT_HEIGHT}px`, width: `${width}px` }}
+              style={{ width: `${width}px` }}
             />
           );
         })}

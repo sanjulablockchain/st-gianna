@@ -19,4 +19,11 @@ describe("Hero", () => {
     render(<Hero />);
     expect(document.getElementById("top")).toBeInTheDocument();
   });
+
+  it("renders the brand logo as the first in-flow child of the hero", () => {
+    render(<Hero />);
+    const logo = screen.getByRole("img", { name: "St. Gianna Medical Group" });
+    expect(logo).toBeInTheDocument();
+    expect(logo.parentElement).toBe(document.getElementById("top"));
+  });
 });

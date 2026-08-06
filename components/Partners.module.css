@@ -4,9 +4,15 @@
   background: var(--bg-2);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs.
+   :not(.revealed) keeps .revealed winning over this higher-specificity rule. */
+:global(html.js) .section:not(.revealed) {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity .6s ease, transform .6s ease;
 }
 
 .revealed {

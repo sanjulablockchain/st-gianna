@@ -18,6 +18,10 @@ export const metadata: Metadata = {
 
 const THEME_BOOTSTRAP_SCRIPT = `
 (function () {
+  // Marks the document as JS-capable before first paint. Scroll-reveal CSS
+  // hides sections only under html.js, so the page stays fully visible if
+  // JS is disabled or fails to execute.
+  document.documentElement.classList.add("js");
   try {
     var stored = localStorage.getItem("sgm-theme");
     document.documentElement.dataset.theme = stored === "light" ? "light" : "dark";

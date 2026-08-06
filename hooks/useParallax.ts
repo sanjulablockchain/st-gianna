@@ -15,7 +15,6 @@ export function useParallax<T extends HTMLElement>(speed = 0.12, max = 40) {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReducedMotion) {
-      setOffset(0);
       return;
     }
 
