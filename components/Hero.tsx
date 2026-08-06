@@ -5,6 +5,7 @@ import styles from "./Hero.module.css";
 
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -18,8 +19,8 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video || typeof window.matchMedia !== "function") return;
+    const wrap = wrapRef.current;
+    if (!wrap || typeof window.matchMedia !== "function") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let frame = 0;
@@ -27,7 +28,7 @@ export default function Hero() {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
         const offset = Math.min(window.scrollY * 0.12, 60);
-        video.style.transform = `translateY(${offset}px)`;
+        wrap.style.transform = `translateY(${offset}px)`;
       });
     };
 
@@ -40,15 +41,17 @@ export default function Hero() {
 
   return (
     <section id="top" className={styles.hero} data-dark="1">
-      <video
-        ref={videoRef}
-        className={styles.video}
-        src="/videos/hero.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
+      <div ref={wrapRef} className={styles.videoLayer}>
+        <video
+          ref={videoRef}
+          className={styles.video}
+          src="/videos/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </div>
       <span className={styles.gradient} />
       <span className={styles.scanlines} />
 
