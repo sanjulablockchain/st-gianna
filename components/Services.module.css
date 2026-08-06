@@ -60,7 +60,7 @@
 
 .row:hover,
 .row:focus-visible {
-  padding: 26px 26px;
+  padding: 26px 18px;
   border-color: var(--line-2);
 }
 
@@ -156,6 +156,6 @@
   }
 
   .row:hover {
-    padding: 20px;
+    padding: 20px 18px;
   }
 }
