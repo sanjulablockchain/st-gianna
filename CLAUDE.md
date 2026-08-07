@@ -40,6 +40,13 @@ Breakpoints already established across the codebase (see `*.module.css`): `max-w
 - Reuse the existing breakpoint values above instead of inventing new ones, unless a component genuinely needs a different threshold.
 - Be checked at mobile, tablet, and desktop widths (e.g. via browser devtools or Playwright resize) before calling work done.
 
+**3. Follow the established scroll/parallax/reveal-animation system — don't hand-roll new motion patterns.**
+Scroll-driven motion goes through [hooks/useScrollReveal.ts](hooks/useScrollReveal.ts) (`IntersectionObserver`-based fade/slide-in on entry) and [hooks/useParallax.ts](hooks/useParallax.ts) (scroll-position-driven offset via `requestAnimationFrame`). Both hooks already respect `prefers-reduced-motion`. Any new section or UI element with entrance/scroll motion must:
+- Reuse `useScrollReveal`/`useParallax` instead of adding new scroll listeners, observers, or animation libraries.
+- Preserve the `prefers-reduced-motion` bail-out — never ship motion that ignores it.
+- Rely on `html.js` (see Gotchas) for the pre-hydration reveal state instead of introducing another flash-of-unanimated-content workaround.
+- Be verified by scrolling the full page to confirm reveal/parallax timing looks correct alongside the theme and responsive checks above.
+
 ## Gotchas
 
 - `html.js` class + `suppressHydrationWarning`: `app/layout.tsx` adds a pre-paint inline script that sets `document.documentElement.classList.add("js")` and reads the stored theme before React hydrates, so scroll-reveal CSS and theme don't flash-of-wrong-state on load. Don't remove this without checking `useScrollReveal`'s CSS dependency on `html.js`.
