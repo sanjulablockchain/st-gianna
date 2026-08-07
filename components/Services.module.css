@@ -1,0 +1,167 @@
+.section {
+  position: relative;
+  padding: clamp(70px, 9vw, 120px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 120px) clamp(24px, 9vw, 150px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs.
+   :not(.revealed) keeps .revealed winning over this higher-specificity rule. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  padding-bottom: 34px;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(32px, 4.4vw, 62px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.kicker {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.rows {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+  padding: 26px 0;
+  border-top: 1px solid var(--line);
+  transition: padding .4s cubic-bezier(.2, .9, .2, 1), border-color .3s ease, background .3s ease;
+  color: inherit;
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.row:hover,
+.row:focus-visible {
+  padding: 26px 18px;
+  border-color: var(--line-2);
+}
+
+.num {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: var(--muted-2);
+  width: 46px;
+  flex-shrink: 0;
+  transition: color .35s ease;
+}
+
+.row:hover .num {
+  color: var(--accent);
+}
+
+.title {
+  flex: 1;
+  min-width: 220px;
+  font-size: clamp(24px, 3.2vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -.035em;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.body {
+  max-width: 34ch;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--dim-3);
+  transition: color .35s ease;
+}
+
+.row:hover .body {
+  color: var(--ink-2);
+}
+
+.arrow {
+  color: var(--muted-2);
+  flex-shrink: 0;
+  transition: color .35s ease;
+}
+
+.row:hover .arrow {
+  color: var(--accent);
+}
+
+.previewWrap {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 300px;
+  height: 380px;
+  border-radius: 200px 200px 12px 12px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity .45s ease, transform .6s cubic-bezier(.2, .9, .2, 1);
+  opacity: 0;
+  transform: translateY(-50%) scale(.9) rotate(6deg);
+}
+
+.previewVisible {
+  opacity: 1;
+  transform: translateY(-50%) scale(1) rotate(0deg);
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 1180px) {
+  .rows {
+    padding-right: 330px;
+  }
+}
+
+@media (max-width: 1179px) {
+  .previewWrap {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .row {
+    align-items: flex-start;
+    gap: 10px 16px;
+    padding: 20px 0;
+  }
+
+  .row:hover {
+    padding: 20px 18px;
+  }
+}

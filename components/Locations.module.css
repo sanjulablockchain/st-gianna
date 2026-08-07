@@ -1,0 +1,183 @@
+.section {
+  padding: clamp(70px, 9vw, 118px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 118px) clamp(24px, 9vw, 150px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs.
+   :not(.revealed) keeps .revealed winning over this higher-specificity rule. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  padding-bottom: 34px;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(32px, 4.4vw, 62px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.subtext {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.panels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 460px;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  min-width: 220px;
+  min-height: 460px;
+  display: flex;
+  align-items: flex-end;
+  flex: 1;
+  transition: flex .55s cubic-bezier(.2, .9, .2, 1);
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.panelActive {
+  flex: 3.2;
+}
+
+.imageLayer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -24px;
+  bottom: -24px;
+}
+
+.image {
+  opacity: .5;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 22, 28, .25), rgba(6, 22, 28, .92));
+}
+
+.status {
+  position: absolute;
+  top: 26px;
+  left: 32px;
+  pointer-events: none;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--italic-highlight);
+}
+
+.statusDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--italic-highlight);
+  margin-right: 8px;
+  animation: livePulse 1.8s infinite;
+}
+
+.body {
+  position: relative;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 32px;
+  color: #fff;
+}
+
+.name {
+  font-size: clamp(26px, 2.8vw, 38px);
+  line-height: 1;
+  letter-spacing: -.035em;
+  font-weight: 800;
+}
+
+.detail {
+  display: block;
+  overflow: hidden;
+  transition: opacity .35s ease, max-height .5s ease;
+  opacity: 0;
+  max-height: 0;
+}
+
+.detailVisible {
+  opacity: 1;
+  max-height: 200px;
+}
+
+.address {
+  display: block;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, .72);
+  max-width: 30ch;
+}
+
+.phone {
+  display: block;
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: #fff;
+}
+
+.hours {
+  display: block;
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, .6);
+}
+
+@media (max-width: 640px) {
+  .panels {
+    min-height: 0;
+  }
+
+  .panel {
+    min-width: 100%;
+    min-height: 300px;
+    flex: 1 !important;
+  }
+
+  .detail {
+    opacity: 1;
+    max-height: 200px;
+  }
+}

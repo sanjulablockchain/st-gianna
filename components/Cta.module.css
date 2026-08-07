@@ -1,0 +1,71 @@
+.section {
+  padding: clamp(70px, 9vw, 130px) clamp(28px, 6vw, 96px) clamp(60px, 7vw, 90px) clamp(24px, 9vw, 150px);
+  background: var(--link);
+  color: var(--on-accent);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs.
+   :not(.revealed) keeps .revealed winning over this higher-specificity rule. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading {
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(40px, 7.4vw, 116px);
+  line-height: .92;
+  letter-spacing: -.045em;
+  font-weight: 800;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 38px;
+}
+
+.primary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 34px;
+  border-radius: 999px;
+  background: var(--on-accent);
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  transition: background .3s ease;
+}
+
+.primary:hover {
+  background: var(--bg-2);
+  color: #fff;
+}
+
+.secondary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(6, 22, 28, .35);
+  color: var(--on-accent);
+  font-weight: 800;
+  font-size: 16px;
+  transition: background .3s ease;
+}
+
+.secondary:hover {
+  background: rgba(6, 22, 28, .08);
+  color: var(--on-accent);
+}

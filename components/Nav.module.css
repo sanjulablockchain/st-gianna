@@ -1,0 +1,135 @@
+.nav {
+  position: fixed;
+  left: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  width: 52px;
+}
+
+/* Mirrors .list's own flex layout so blobs always line up with the visible
+   links on every breakpoint, and items hidden via .extraOnly drop out of the
+   blob flow exactly as they drop out of the link flow. */
+.blobLayer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  filter: url(#goo);
+  pointer-events: none;
+}
+
+.blob {
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: var(--pill);
+  transition: width .42s cubic-bezier(.2, .9, .2, 1), background .3s ease;
+}
+
+.blobActive {
+  background: var(--accent);
+}
+
+.list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  position: relative;
+  height: 52px;
+  width: 52px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--ink);
+  transition: color .3s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--on-accent);
+}
+
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label {
+  display: block;
+  position: absolute;
+  left: 54px;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: inherit;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .28s ease .06s, transform .38s cubic-bezier(.2, .9, .2, 1);
+}
+
+.labelVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 859px) {
+  .nav {
+    left: 50%;
+    top: auto;
+    bottom: 14px;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: calc(100vw - 24px);
+    padding: 6px;
+    border-radius: 999px;
+    background: var(--pill);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 16px 34px -18px rgba(0, 0, 0, .7);
+  }
+
+  .blobLayer {
+    inset: 6px;
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .list {
+    flex-direction: row;
+    gap: 6px;
+  }
+
+  .link,
+  .iconWrap {
+    width: 46px;
+    height: 46px;
+  }
+
+  .blob {
+    height: 46px;
+    width: 46px !important;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .extraOnly {
+    display: none;
+  }
+}

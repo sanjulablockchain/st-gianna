@@ -2563,7 +2563,7 @@ Expected: FAIL, module not found.
 
 .row:hover,
 .row:focus-visible {
-  padding: 24px;
+  padding: 24px 18px;
   border-color: var(--line-2);
 }
 
@@ -2661,7 +2661,7 @@ Expected: FAIL, module not found.
   }
 
   .row:hover {
-    padding: 20px;
+    padding: 20px 18px;
   }
 
   .icon {
