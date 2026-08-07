@@ -8,11 +8,11 @@ describe("Nav", () => {
     document.documentElement.removeAttribute("data-theme");
   });
 
-  it("renders all primary destinations", () => {
+  it("renders all primary destinations as page-aware anchors", () => {
     render(<Nav />);
-    expect(screen.getByRole("link", { name: /home/i })).toHaveAttribute("href", "#top");
-    expect(screen.getByRole("link", { name: /services/i })).toHaveAttribute("href", "#services");
-    expect(screen.getByRole("link", { name: /locations/i })).toHaveAttribute("href", "#locations");
+    expect(screen.getByRole("link", { name: /home/i })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: /services/i })).toHaveAttribute("href", "/services");
+    expect(screen.getByRole("link", { name: /locations/i })).toHaveAttribute("href", "/#locations");
     expect(screen.getByRole("link", { name: /call us/i })).toHaveAttribute("href", "tel:13105550123");
   });
 

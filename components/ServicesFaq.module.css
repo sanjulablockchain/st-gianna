@@ -1,0 +1,116 @@
+.section {
+  padding: clamp(70px, 9vw, 118px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 118px) clamp(24px, 9vw, 150px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 22px;
+  padding-bottom: 34px;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(32px, 4.4vw, 62px);
+  line-height: 1;
+  letter-spacing: -.04em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.kicker {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.item {
+  border-top: 1px solid var(--line);
+  transition: border-color .3s ease;
+}
+
+.item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.itemOpen {
+  border-color: var(--line-2);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 26px 0;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.question {
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.15;
+  letter-spacing: -.028em;
+  font-weight: 700;
+  color: var(--ink-2);
+  transition: color .3s ease;
+}
+
+.itemOpen .question {
+  color: var(--ink);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: var(--muted-2);
+  transition: transform .4s cubic-bezier(.2, .9, .2, 1), color .3s ease;
+}
+
+.itemOpen .icon {
+  color: var(--accent);
+  transform: rotate(135deg);
+}
+
+.answerWrap {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height .5s cubic-bezier(.2, .9, .2, 1), opacity .35s ease;
+}
+
+.itemOpen .answerWrap {
+  max-height: 260px;
+  opacity: 1;
+}
+
+.answer {
+  margin: 0;
+  padding-bottom: 26px;
+  max-width: 62ch;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}

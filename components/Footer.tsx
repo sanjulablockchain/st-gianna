@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -17,17 +18,17 @@ export default function Footer() {
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Explore</span>
-          <a href="#services" className={styles.link}>Services</a>
-          <a href="#why" className={styles.link}>Why us</a>
-          <a href="#locations" className={styles.link}>Locations</a>
-          <a href="#insight" className={styles.link}>Journal</a>
+          <Link href="/services" className={styles.link}>Services</Link>
+          <Link href="/#why" className={styles.link}>Why us</Link>
+          <Link href="/#locations" className={styles.link}>Locations</Link>
+          <Link href="/#insight" className={styles.link}>Journal</Link>
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Patients</span>
-          <a href="#book" className={styles.link}>Book appointment</a>
-          <a href="#footer" className={styles.link}>Patient portal</a>
-          <a href="#footer" className={styles.link}>Insurance &amp; billing</a>
-          <a href="#footer" className={styles.link}>Careers</a>
+          <Link href="/#book" className={styles.link}>Book appointment</Link>
+          <Link href="/#footer" className={styles.link}>Patient portal</Link>
+          <Link href="/#footer" className={styles.link}>Insurance &amp; billing</Link>
+          <Link href="/#footer" className={styles.link}>Careers</Link>
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Contact</span>
@@ -42,9 +43,9 @@ export default function Footer() {
       <div className={styles.bottomRow}>
         <span>&copy; 2026 St. Gianna Medical Group. All rights reserved.</span>
         <span className={styles.legalLinks}>
-          <a href="#footer">Privacy</a>
-          <a href="#footer">Terms</a>
-          <a href="#footer">Accessibility</a>
+          <Link href="/#footer">Privacy</Link>
+          <Link href="/#footer">Terms</Link>
+          <Link href="/#footer">Accessibility</Link>
         </span>
       </div>
     </footer>
