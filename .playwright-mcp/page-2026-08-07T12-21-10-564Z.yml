@@ -1,0 +1,236 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e2]:
+    - navigation [ref=f2e3]:
+      - list [ref=f2e4]:
+        - listitem [ref=f2e5]:
+          - link "Home" [ref=f2e6] [cursor=pointer]:
+            - /url: "#top"
+        - listitem [ref=f2e11]:
+          - link "Services" [ref=f2e12] [cursor=pointer]:
+            - /url: "#services"
+        - listitem [ref=f2e17]:
+          - link "Why us" [ref=f2e18] [cursor=pointer]:
+            - /url: "#why"
+        - listitem [ref=f2e23]:
+          - link "Locations" [ref=f2e24] [cursor=pointer]:
+            - /url: "#locations"
+        - listitem [ref=f2e29]:
+          - link "Journal" [ref=f2e30] [cursor=pointer]:
+            - /url: "#insight"
+        - listitem [ref=f2e35]:
+          - link "Partners" [ref=f2e36] [cursor=pointer]:
+            - /url: "#partners"
+        - listitem [ref=f2e41]:
+          - link "Contact" [ref=f2e42] [cursor=pointer]:
+            - /url: "#footer"
+        - listitem [ref=f2e47]:
+          - link "Call us" [ref=f2e48] [cursor=pointer]:
+            - /url: tel:13105550123
+        - listitem [ref=f2e53]:
+          - link "Light mode" [ref=f2e54] [cursor=pointer]:
+            - /url: "#top"
+    - link "Book a visit" [ref=f2e59] [cursor=pointer]:
+      - /url: "#book"
+    - generic [ref=f2e62]:
+      - img "St. Gianna Medical Group" [ref=f2e67]
+      - generic [ref=f2e68]:
+        - generic [ref=f2e69]: Los Angeles · Pediatric & family medicine
+        - heading "Care that keeps up with childhood." [level=1] [ref=f2e71]: Care thatkeeps upwith childhood.
+        - generic [ref=f2e72]:
+          - paragraph [ref=f2e73]: Same-day sick visits, round-the-clock booking, telehealth after dinner, and one chart that follows your child to every office we run.
+          - generic [ref=f2e74]:
+            - generic [ref=f2e75]:
+              - generic [ref=f2e76]: "3"
+              - generic [ref=f2e77]: LA clinics
+            - generic [ref=f2e78]:
+              - generic [ref=f2e79]: 24/7
+              - generic [ref=f2e80]: Booking
+            - generic [ref=f2e81]:
+              - generic [ref=f2e82]: "4.9"
+              - generic [ref=f2e83]: Parent rating
+      - generic [ref=f2e84]: Scroll
+    - generic [ref=f2e89]:
+      - generic [ref=f2e90]: Same-day appointments
+      - generic [ref=f2e92]: 24/7 online booking
+      - generic [ref=f2e94]: Telehealth tonight
+      - generic [ref=f2e96]: Most HMO & IPA plans
+      - generic [ref=f2e98]: Board-certified pediatricians
+      - generic [ref=f2e100]: One chart, three clinics
+      - generic [ref=f2e102]: Same-day appointments
+      - generic [ref=f2e104]: 24/7 online booking
+      - generic [ref=f2e106]: Telehealth tonight
+      - generic [ref=f2e108]: Most HMO & IPA plans
+      - generic [ref=f2e110]: Board-certified pediatricians
+      - generic [ref=f2e112]: One chart, three clinics
+    - generic [ref=f2e114]:
+      - generic [ref=f2e115]:
+        - heading "What we do" [level=2] [ref=f2e116]
+        - generic [ref=f2e117]: Six lines of care
+      - generic [ref=f2e118]:
+        - link "01 Well-child & physicals Growth checks, school and sports physicals, immunizations, developmental screening." [ref=f2e119] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e120]: "01"
+          - generic [ref=f2e121]: Well-child & physicals
+          - generic [ref=f2e122]: Growth checks, school and sports physicals, immunizations, developmental screening.
+        - link "02 Same-day sick visits Fevers, infections and acute illness, usually seen the day you call." [ref=f2e125] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e126]: "02"
+          - generic [ref=f2e127]: Same-day sick visits
+          - generic [ref=f2e128]: Fevers, infections and acute illness, usually seen the day you call.
+        - link "03 Telehealth Virtual consults, diagnosis and prescriptions from home, evenings included." [ref=f2e131] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e132]: "03"
+          - generic [ref=f2e133]: Telehealth
+          - generic [ref=f2e134]: Virtual consults, diagnosis and prescriptions from home, evenings included.
+        - link "04 Advanced wound care Specialist treatment for chronic and non-healing wounds." [ref=f2e137] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e138]: "04"
+          - generic [ref=f2e139]: Advanced wound care
+          - generic [ref=f2e140]: Specialist treatment for chronic and non-healing wounds.
+        - link "05 Immunizations Full childhood schedule plus travel and seasonal vaccines, tracked across offices." [ref=f2e143] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e144]: "05"
+          - generic [ref=f2e145]: Immunizations
+          - generic [ref=f2e146]: Full childhood schedule plus travel and seasonal vaccines, tracked across offices.
+        - link "06 Chronic care Asthma, allergy and ongoing conditions with one consistent care team." [ref=f2e149] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e150]: "06"
+          - generic [ref=f2e151]: Chronic care
+          - generic [ref=f2e152]: Asthma, allergy and ongoing conditions with one consistent care team.
+    - generic [ref=f2e155]:
+      - heading "Built around a parent's real day, not a clinic's schedule." [level=2] [ref=f2e156]
+      - generic [ref=f2e157]:
+        - generic [ref=f2e158]:
+          - generic [ref=f2e161]: Same-day slots
+          - generic [ref=f2e162]: Held daily for sick visits, so you are not waiting a week with a feverish child.
+        - generic [ref=f2e163]:
+          - generic [ref=f2e166]: Book at 2am
+          - generic [ref=f2e167]: Online scheduling never closes, and confirmation lands instantly.
+        - generic [ref=f2e168]:
+          - generic [ref=f2e171]: One chart, everywhere
+          - generic [ref=f2e172]: Your child's record is live at whichever office you walk into.
+        - generic [ref=f2e173]:
+          - generic [ref=f2e176]: Insurance handled
+          - generic [ref=f2e177]: Most HMO and IPA plans, with benefits checked before the visit.
+    - generic [ref=f2e178]:
+      - generic [ref=f2e179]:
+        - heading "Three doors across the city" [level=2] [ref=f2e180]: Three doorsacross the city
+        - paragraph [ref=f2e181]: Hover a panel. Your child's chart is already there before you arrive.
+      - generic [ref=f2e182]:
+        - button [ref=f2e183] [cursor=pointer]:
+          - img "Santa Monica clinic" [ref=f2e185]
+          - generic: Open now
+          - generic:
+            - generic: Santa Monica
+            - generic:
+              - generic: 1234 Wilshire Blvd, Santa Monica, CA 90403
+              - generic: (310) 555-0123
+              - generic: Mon-Sat 8am-8pm
+        - button [ref=f2e186] [cursor=pointer]:
+          - img "Hollywood clinic" [ref=f2e188]
+          - generic: Open now
+          - generic:
+            - generic: Hollywood
+            - generic:
+              - generic: 5678 Sunset Blvd, Los Angeles, CA 90028
+              - generic: (323) 555-0199
+              - generic: Mon-Sun 8am-9pm
+        - button [ref=f2e189] [cursor=pointer]:
+          - img "La Mirada clinic" [ref=f2e191]
+          - generic: Opens 9am
+          - generic:
+            - generic: La Mirada
+            - generic:
+              - generic: 910 Rosecrans Ave, La Mirada, CA 90638
+              - generic: (562) 555-0144
+              - generic: Mon-Fri 9am-6pm
+    - generic [ref=f2e192]:
+      - generic [ref=f2e193]:
+        - heading "We never treat your family alone" [level=2] [ref=f2e194]: We never treatyour family alone
+        - paragraph [ref=f2e195]: Five partnerships carry the weight behind every visit. You feel one clinic; behind it stands a network.
+      - generic [ref=f2e196]:
+        - link "KT Doctor Primary network Shared charting and specialist referrals across the group." [ref=f2e197] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e200]: KT Doctor
+          - generic [ref=f2e201]: Primary network
+          - generic [ref=f2e202]: Shared charting and specialist referrals across the group.
+        - link "Serendib Health Diagnostics Same-week labs and imaging read by pediatric radiologists." [ref=f2e205] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e208]: Serendib Health
+          - generic [ref=f2e209]: Diagnostics
+          - generic [ref=f2e210]: Same-week labs and imaging read by pediatric radiologists.
+        - link "Pediatric After Hours Nights & weekends A pediatric nurse answers every call, 24 hours a day." [ref=f2e213] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e216]: Pediatric After Hours
+          - generic [ref=f2e217]: Nights & weekends
+          - generic [ref=f2e218]: A pediatric nurse answers every call, 24 hours a day.
+        - link "LAIPT Therapy Physical, occupational and speech therapy for growing kids." [ref=f2e221] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e224]: LAIPT
+          - generic [ref=f2e225]: Therapy
+          - generic [ref=f2e226]: Physical, occupational and speech therapy for growing kids.
+        - link "HMO & IPA plans Coverage Most Los Angeles plans accepted, benefits checked before the visit." [ref=f2e229] [cursor=pointer]:
+          - /url: "#book"
+          - generic [ref=f2e232]: HMO & IPA plans
+          - generic [ref=f2e233]: Coverage
+          - generic [ref=f2e234]: Most Los Angeles plans accepted, benefits checked before the visit.
+    - 'link "Journal 5 min read 10 essential habits for a healthier family year Preventive care, sleep, screen time and nutrition: what our pediatricians actually recommend. Read the piece" [ref=f2e238] [cursor=pointer]':
+      - /url: "#insight"
+      - generic:
+        - generic:
+          - text: Journal
+          - generic: 5 min read
+        - generic: 10 essential habits for a healthier family year
+        - generic: "Preventive care, sleep, screen time and nutrition: what our pediatricians actually recommend."
+        - generic: Read the piece
+    - generic [ref=f2e239]:
+      - heading "Ready when your family is." [level=2] [ref=f2e240]
+      - generic [ref=f2e241]:
+        - link "Book online" [ref=f2e242] [cursor=pointer]:
+          - /url: "#book"
+        - link "(310) 555-0123" [ref=f2e245] [cursor=pointer]:
+          - /url: tel:13105550123
+    - contentinfo [ref=f2e248]:
+      - generic [ref=f2e249]:
+        - generic [ref=f2e250]:
+          - img "St. Gianna Medical Group" [ref=f2e251]
+          - paragraph [ref=f2e252]: Pediatric and family healthcare across Los Angeles. Same-day, telehealth, after hours.
+        - generic [ref=f2e253]:
+          - generic [ref=f2e254]: Explore
+          - link "Services" [ref=f2e255] [cursor=pointer]:
+            - /url: "#services"
+          - link "Why us" [ref=f2e256] [cursor=pointer]:
+            - /url: "#why"
+          - link "Locations" [ref=f2e257] [cursor=pointer]:
+            - /url: "#locations"
+          - link "Journal" [ref=f2e258] [cursor=pointer]:
+            - /url: "#insight"
+        - generic [ref=f2e259]:
+          - generic [ref=f2e260]: Patients
+          - link "Book appointment" [ref=f2e261] [cursor=pointer]:
+            - /url: "#book"
+          - link "Patient portal" [ref=f2e262] [cursor=pointer]:
+            - /url: "#footer"
+          - link "Insurance & billing" [ref=f2e263] [cursor=pointer]:
+            - /url: "#footer"
+          - link "Careers" [ref=f2e264] [cursor=pointer]:
+            - /url: "#footer"
+        - generic [ref=f2e265]:
+          - generic [ref=f2e266]: Contact
+          - generic [ref=f2e267]: Santa Monica · (310) 555-0123
+          - generic [ref=f2e268]: Hollywood · (323) 555-0199
+          - generic [ref=f2e269]: La Mirada · (562) 555-0144
+          - link "contact@sgmdoctor.com" [ref=f2e270] [cursor=pointer]:
+            - /url: mailto:contact@sgmdoctor.com
+      - generic [ref=f2e271]:
+        - generic [ref=f2e272]: © 2026 St. Gianna Medical Group. All rights reserved.
+        - generic [ref=f2e273]:
+          - link "Privacy" [ref=f2e274] [cursor=pointer]:
+            - /url: "#footer"
+          - link "Terms" [ref=f2e275] [cursor=pointer]:
+            - /url: "#footer"
+          - link "Accessibility" [ref=f2e276] [cursor=pointer]:
+            - /url: "#footer"
+    - button "Back to top"
+  - button "Open Next.js Dev Tools" [ref=f2e282] [cursor=pointer]
+  - alert [ref=f2e286]
