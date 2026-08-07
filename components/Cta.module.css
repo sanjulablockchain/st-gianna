@@ -47,8 +47,11 @@
   transition: background .3s ease;
 }
 
+/* Hardcoded, not var(--bg-2): the pill background is always dark (var(--on-accent)
+   is theme-invariant) with white text, so the hover shade must stay dark too.
+   var(--bg-2) flips to white in light theme, which made this white-on-white. */
 .primary:hover {
-  background: var(--bg-2);
+  background: #0B2229;
   color: #fff;
 }
 
