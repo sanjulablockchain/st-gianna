@@ -13,7 +13,7 @@ const LOCATIONS = [
     address: "1234 Wilshire Blvd, Santa Monica, CA 90403",
     phone: "(310) 555-0123",
     hours: "Mon-Sat 8am-8pm",
-    image: "/images/location-santa-monica.jpg",
+    image: "/images/photo-hospital-hallway.jpg",
   },
   {
     name: "Hollywood",
@@ -21,7 +21,7 @@ const LOCATIONS = [
     address: "5678 Sunset Blvd, Los Angeles, CA 90028",
     phone: "(323) 555-0199",
     hours: "Mon-Sun 8am-9pm",
-    image: "/images/location-hollywood.jpg",
+    image: "/images/photo-counseling-session.jpg",
   },
   {
     name: "La Mirada",
@@ -29,7 +29,7 @@ const LOCATIONS = [
     address: "910 Rosecrans Ave, La Mirada, CA 90638",
     phone: "(562) 555-0144",
     hours: "Mon-Fri 9am-6pm",
-    image: "/images/location-la-mirada.jpg",
+    image: "/images/photo-pediatric-checkup.jpg",
   },
 ];
 
