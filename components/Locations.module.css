@@ -78,7 +78,7 @@
 }
 
 .image {
-  opacity: .5;
+  opacity: .4;
   object-fit: cover;
 }
 
@@ -86,7 +86,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(6, 22, 28, .48), rgba(6, 22, 28, .92));
+  background: linear-gradient(180deg, rgba(6, 22, 28, .62), rgba(6, 22, 28, .92));
 }
 
 .status {
