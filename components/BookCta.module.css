@@ -18,8 +18,10 @@
 }
 
 /* The color is repeated here so the global a:hover rule cannot override it;
-   the source kept its color through hover via inline-style precedence. */
+   the source kept its color through hover via inline-style precedence. It is
+   --on-accent rather than --bg because the hover background is the teal
+   accent, not the page background, so the ink must stay dark in both themes. */
 .pill:hover {
   background: var(--link);
-  color: var(--bg);
+  color: var(--on-accent);
 }
