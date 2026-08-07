@@ -10,32 +10,39 @@ const SERVICES = [
   {
     title: "Well-child & physicals",
     body: "Growth checks, school and sports physicals, immunizations, developmental screening.",
+    image: "/images/service-well-child.jpg",
   },
   {
     title: "Same-day sick visits",
     body: "Fevers, infections and acute illness, usually seen the day you call.",
+    image: "/images/service-sick-visit.jpg",
   },
   {
     title: "Telehealth",
     body: "Virtual consults, diagnosis and prescriptions from home, evenings included.",
+    image: "/images/service-telehealth.jpg",
   },
   {
     title: "Advanced wound care",
     body: "Specialist treatment for chronic and non-healing wounds.",
+    image: "/images/service-wound-care.jpg",
   },
   {
     title: "Immunizations",
     body: "Full childhood schedule plus travel and seasonal vaccines, tracked across offices.",
+    image: "/images/service-immunizations.jpg",
   },
   {
     title: "Chronic care",
     body: "Asthma, allergy and ongoing conditions with one consistent care team.",
+    image: "/images/service-chronic-care.jpg",
   },
 ];
 
 export default function Services() {
   const { ref, revealed } = useScrollReveal<HTMLDivElement>();
   const [hovered, setHovered] = useState(-1);
+  const previewIndex = hovered >= 0 ? hovered : 0;
 
   return (
     <section
@@ -64,8 +71,8 @@ export default function Services() {
         ))}
         <span className={`${styles.previewWrap} ${hovered >= 0 ? styles.previewVisible : ""}`}>
           <Image
-            src="/images/photo-doctor-portrait.jpg"
-            alt="A St. Gianna clinician"
+            src={SERVICES[previewIndex].image}
+            alt={`${SERVICES[previewIndex].title} preview`}
             width={300}
             height={380}
             className={styles.previewImage}

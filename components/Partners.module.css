@@ -152,6 +152,12 @@
   object-fit: cover;
 }
 
+@media (min-width: 1180px) {
+  .rows {
+    padding-right: 330px;
+  }
+}
+
 @media (max-width: 1179px) {
   .previewWrap {
     display: none;
