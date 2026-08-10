@@ -14,6 +14,10 @@ describe("LocationsDetails", () => {
       "href",
       "tel:+18182757006",
     );
+    expect(screen.getByRole("link", { name: /818-308-4100/ })).toHaveAttribute(
+      "href",
+      "tel:+18183084100",
+    );
     expect(screen.getByRole("link", { name: /562-941-9853/ })).toHaveAttribute(
       "href",
       "tel:+15629419853",
