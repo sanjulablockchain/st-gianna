@@ -5,6 +5,7 @@ import styles from "./Nav.module.css";
 import { useTheme } from "@/hooks/useTheme";
 import {
   HomeIcon,
+  DiversityIcon,
   StethoscopeIcon,
   FavoriteIcon,
   NearMeIcon,
@@ -22,13 +23,14 @@ export default function Nav() {
 
   const items = [
     { label: "Home", href: "/", icon: <HomeIcon size={23} />, primary: true },
+    { label: "About us", href: "/about", icon: <DiversityIcon size={23} />, primary: true },
     { label: "Services", href: "/services", icon: <StethoscopeIcon size={23} />, primary: true },
     { label: "Why us", href: "/#why", icon: <FavoriteIcon size={23} />, primary: false },
     { label: "Locations", href: "/#locations", icon: <NearMeIcon size={23} />, primary: true },
     { label: "Journal", href: "/#insight", icon: <MenuBookIcon size={23} />, primary: false },
     { label: "Partners", href: "/#partners", icon: <HandshakeIcon size={23} />, primary: false },
     { label: "Contact", href: "/#footer", icon: <ChatBubbleIcon size={23} />, primary: false },
-    { label: "Call us", href: "tel:13105550123", icon: <CallIcon size={23} />, primary: true },
+    { label: "Call us", href: "tel:8183084100", icon: <CallIcon size={23} />, primary: true },
     {
       label: theme === "dark" ? "Light mode" : "Dark mode",
       href: "/#top",
