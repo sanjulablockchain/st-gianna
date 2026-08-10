@@ -12,7 +12,7 @@ describe("icon components", () => {
     });
   });
 
-  it("has exactly 25 icons", () => {
-    expect(Object.keys(Icons)).toHaveLength(25);
+  it("has exactly 26 icons", () => {
+    expect(Object.keys(Icons)).toHaveLength(26);
   });
 });
