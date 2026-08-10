@@ -133,3 +133,21 @@
     display: none;
   }
 }
+
+@media (max-width: 359px) {
+  .link,
+  .iconWrap {
+    width: 40px;
+    height: 40px;
+  }
+
+  .blob {
+    height: 40px;
+    width: 40px !important;
+  }
+
+  .blobLayer,
+  .list {
+    gap: 4px;
+  }
+}
