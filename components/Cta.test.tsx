@@ -12,7 +12,7 @@ describe("Cta", () => {
     );
     expect(screen.getByRole("link", { name: /818-308-4100/i })).toHaveAttribute(
       "href",
-      "tel:8183084100",
+      "tel:+18183084100",
     );
   });
 });

@@ -10,11 +10,11 @@ describe("AboutLocations", () => {
     expect(screen.getByText("La Mirada")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /818-308-4100/ })).toHaveAttribute(
       "href",
-      "tel:8183084100",
+      "tel:+18183084100",
     );
     expect(screen.getByRole("link", { name: /562-941-9853/ })).toHaveAttribute(
       "href",
-      "tel:5629419853",
+      "tel:+15629419853",
     );
   });
 });

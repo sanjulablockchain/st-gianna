@@ -58,9 +58,9 @@ Per the user's decision to fix this everywhere rather than just on the new page,
 
 | Location | Field | Old (placeholder) | New (real) |
 |---|---|---|---|
-| `Nav.tsx` | "Call us" href | `tel:13105550123` | `tel:8183084100` |
+| `Nav.tsx` | "Call us" href | `tel:13105550123` | `tel:+18183084100` |
 | `Cta.tsx` | primary button href | `#book` | `https://app.nexhealth.com/appt/ktdoctor?atid=275899,275901,275900,275904,275905,275903` |
-| `Cta.tsx` | secondary button href/text | `tel:13105550123` / "(310) 555-0123" | `tel:8183084100` / "818-308-4100" |
+| `Cta.tsx` | secondary button href/text | `tel:13105550123` / "(310) 555-0123" | `tel:+18183084100` / "818-308-4100" |
 | `Locations.tsx` | Santa Monica address/phone | `1234 Wilshire Blvd, Santa Monica, CA 90403` / `(310) 555-0123` | `2221 Lincoln Blvd, Santa Monica, CA 90405` / `818-308-4100` |
 | `Locations.tsx` | Hollywood address/phone | `5678 Sunset Blvd, Los Angeles, CA 90028` / `(323) 555-0199` | `5255 W Sunset Blvd, Los Angeles, CA 90027` / `818-275-7006` |
 | `Locations.tsx` | La Mirada address/phone | `910 Rosecrans Ave, La Mirada, CA 90638` / `(562) 555-0144` | `12675 La Mirada Blvd, #200, La Mirada, CA 90638` / `562-941-9853` |

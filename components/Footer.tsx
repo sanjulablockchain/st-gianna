@@ -33,9 +33,9 @@ export default function Footer() {
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Contact</span>
-          <a href="tel:8183084100" className={styles.link}>Santa Monica &middot; 818-308-4100</a>
-          <a href="tel:8182757006" className={styles.link}>Hollywood &middot; 818-275-7006</a>
-          <a href="tel:5629419853" className={styles.link}>La Mirada &middot; 562-941-9853</a>
+          <a href="tel:+18183084100" className={styles.link}>Santa Monica &middot; 818-308-4100</a>
+          <a href="tel:+18182757006" className={styles.link}>Hollywood &middot; 818-275-7006</a>
+          <a href="tel:+15629419853" className={styles.link}>La Mirada &middot; 562-941-9853</a>
           <a href="mailto:contact@sgmdoctor.com" className={styles.emailLink}>
             contact@sgmdoctor.com
           </a>

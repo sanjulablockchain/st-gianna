@@ -14,15 +14,15 @@ describe("Footer", () => {
     expect(screen.getByRole("link", { name: "Book appointment" })).toHaveAttribute("href", "/#book");
     expect(screen.getByRole("link", { name: /santa monica/i })).toHaveAttribute(
       "href",
-      "tel:8183084100",
+      "tel:+18183084100",
     );
     expect(screen.getByRole("link", { name: /hollywood/i })).toHaveAttribute(
       "href",
-      "tel:8182757006",
+      "tel:+18182757006",
     );
     expect(screen.getByRole("link", { name: /la mirada/i })).toHaveAttribute(
       "href",
-      "tel:5629419853",
+      "tel:+15629419853",
     );
     expect(screen.getByRole("link", { name: "contact@sgmdoctor.com" })).toHaveAttribute(
       "href",

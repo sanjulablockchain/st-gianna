@@ -21,7 +21,7 @@ export default function Cta() {
         >
           Book online <ArrowOutwardIcon size={20} />
         </a>
-        <a href="tel:8183084100" className={styles.secondary}>
+        <a href="tel:+18183084100" className={styles.secondary}>
           <CallIcon size={20} />
           818-308-4100
         </a>

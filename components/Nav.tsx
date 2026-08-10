@@ -30,7 +30,7 @@ export default function Nav() {
     { label: "Journal", href: "/#insight", icon: <MenuBookIcon size={23} />, primary: false },
     { label: "Partners", href: "/#partners", icon: <HandshakeIcon size={23} />, primary: false },
     { label: "Contact", href: "/#footer", icon: <ChatBubbleIcon size={23} />, primary: false },
-    { label: "Call us", href: "tel:8183084100", icon: <CallIcon size={23} />, primary: true },
+    { label: "Call us", href: "tel:+18183084100", icon: <CallIcon size={23} />, primary: true },
     {
       label: theme === "dark" ? "Light mode" : "Dark mode",
       href: "/#top",

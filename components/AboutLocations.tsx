@@ -9,19 +9,19 @@ const OFFICES = [
     name: "Hollywood",
     address: "5255 W Sunset Blvd,\nLos Angeles, CA 90027",
     phone: "818-275-7006",
-    tel: "tel:8182757006",
+    tel: "tel:+18182757006",
   },
   {
     name: "Santa Monica",
     address: "2221 Lincoln Blvd,\nSanta Monica, CA 90405",
     phone: "818-308-4100",
-    tel: "tel:8183084100",
+    tel: "tel:+18183084100",
   },
   {
     name: "La Mirada",
     address: "12675 La Mirada Blvd, #200,\nLa Mirada, CA 90638",
     phone: "562-941-9853",
-    tel: "tel:5629419853",
+    tel: "tel:+15629419853",
   },
 ];
 

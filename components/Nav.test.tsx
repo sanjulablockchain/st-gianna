@@ -16,7 +16,7 @@ describe("Nav", () => {
     expect(screen.getByRole("link", { name: /locations/i })).toHaveAttribute("href", "/#locations");
     expect(screen.getByRole("link", { name: /call us/i })).toHaveAttribute(
       "href",
-      "tel:8183084100",
+      "tel:+18183084100",
     );
   });
 
