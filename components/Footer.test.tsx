@@ -9,9 +9,21 @@ describe("Footer", () => {
     expect(
       screen.getByText(/pediatric and family healthcare across los angeles/i),
     ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "About us" })).toHaveAttribute("href", "/about");
     expect(screen.getByRole("link", { name: "Services" })).toHaveAttribute("href", "/services");
     expect(screen.getByRole("link", { name: "Book appointment" })).toHaveAttribute("href", "/#book");
-    expect(screen.getByText("Santa Monica · (310) 555-0123")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /santa monica/i })).toHaveAttribute(
+      "href",
+      "tel:8183084100",
+    );
+    expect(screen.getByRole("link", { name: /hollywood/i })).toHaveAttribute(
+      "href",
+      "tel:8182757006",
+    );
+    expect(screen.getByRole("link", { name: /la mirada/i })).toHaveAttribute(
+      "href",
+      "tel:5629419853",
+    );
     expect(screen.getByRole("link", { name: "contact@sgmdoctor.com" })).toHaveAttribute(
       "href",
       "mailto:contact@sgmdoctor.com",

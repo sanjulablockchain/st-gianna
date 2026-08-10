@@ -18,6 +18,7 @@ export default function Footer() {
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Explore</span>
+          <Link href="/about" className={styles.link}>About us</Link>
           <Link href="/services" className={styles.link}>Services</Link>
           <Link href="/#why" className={styles.link}>Why us</Link>
           <Link href="/#locations" className={styles.link}>Locations</Link>
@@ -32,9 +33,9 @@ export default function Footer() {
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Contact</span>
-          <span className={styles.link}>Santa Monica &middot; (310) 555-0123</span>
-          <span className={styles.link}>Hollywood &middot; (323) 555-0199</span>
-          <span className={styles.link}>La Mirada &middot; (562) 555-0144</span>
+          <a href="tel:8183084100" className={styles.link}>Santa Monica &middot; 818-308-4100</a>
+          <a href="tel:8182757006" className={styles.link}>Hollywood &middot; 818-275-7006</a>
+          <a href="tel:5629419853" className={styles.link}>La Mirada &middot; 562-941-9853</a>
           <a href="mailto:contact@sgmdoctor.com" className={styles.emailLink}>
             contact@sgmdoctor.com
           </a>
