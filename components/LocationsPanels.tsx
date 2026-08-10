@@ -53,6 +53,7 @@ export default function LocationsPanels() {
         {OFFICES.map((office, i) => (
           <div
             key={office.name}
+            data-testid={`panel-${office.name}`}
             className={`${styles.panel} ${active === i ? styles.panelActive : ""}`}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}

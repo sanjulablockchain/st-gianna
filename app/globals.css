@@ -21,6 +21,7 @@
   --link: #4FC3C2;
   --link-hover: #9BE7E5;
   --italic-highlight: #7AD5D5;
+  --link-tint: rgba(79, 195, 194, .2);
 }
 
 html[data-theme="light"] {
