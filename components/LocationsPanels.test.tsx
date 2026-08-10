@@ -54,15 +54,16 @@ describe("LocationsPanels", () => {
     // Get the detail container within the panel
     const detailContainer = santaMonicaPanel.querySelector("div[class*='detail']");
 
-    if (detailContainer) {
-      // Initially, detail should not have the detailVisible class
-      expect(detailContainer.className).not.toMatch(/detailVisible/);
+    // Assert the detail container exists (fail loudly if selector doesn't match)
+    expect(detailContainer).toBeInTheDocument();
 
-      // Fire mouseEnter to activate the panel
-      fireEvent.mouseEnter(santaMonicaPanel);
+    // Initially, detail should not have the detailVisible class
+    expect(detailContainer!.className).not.toMatch(/detailVisible/);
 
-      // After hover, detail should now have detailVisible class
-      expect(detailContainer.className).toMatch(/detailVisible/);
-    }
+    // Fire mouseEnter to activate the panel
+    fireEvent.mouseEnter(santaMonicaPanel);
+
+    // After hover, detail should now have detailVisible class
+    expect(detailContainer!.className).toMatch(/detailVisible/);
   });
 });
