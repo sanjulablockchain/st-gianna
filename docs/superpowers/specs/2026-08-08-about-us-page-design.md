@@ -42,14 +42,14 @@ All specialty/value/mission copy is reused exactly as written in the draft.
   - `AboutCommitment.tsx` — heading + kicker + paragraph + portrait image (`next/image`, `/images/photo-doctor-portrait.jpg`) in the draft's pill-top/square-bottom rounded frame (`border-radius: 200px 200px 20px 20px`), grid layout that stacks on mobile/tablet and goes side-by-side at the `1180px` desktop breakpoint (matching the draft's `wide` check).
   - `AboutMission.tsx` — two-column grid (`repeat(auto-fit, minmax(320px, 1fr))`), kicker color `var(--link)`.
   - `AboutSpecialties.tsx` — numbered row list with hover highlight/dim state (mirrors the interaction pattern in `Services.tsx`/`ServiceCatalog.tsx` rows), but **no image preview panel** (text-only, per the approved design choice — the draft itself has no preview here and no specialty-specific photos exist in `public/images`).
-  - `AboutValues.tsx` — 4-card icon grid styled like `WhyUs.tsx`. Reuses `BoltIcon`, `ScheduleIcon`, `VerifiedIcon`; adds **one new icon** (`VolunteerActivismIcon` or similar community/compassion glyph, hand-rolled in the same Material-Symbols-outlined style as the rest of `components/icons/index.tsx`) for "Compassionate care".
+  - `AboutValues.tsx` — 4-card icon grid styled like `WhyUs.tsx`. Reuses `BoltIcon`, `ScheduleIcon`, `VerifiedIcon`; adds **one new icon** (`VolunteerActivismIcon`, the Material Symbols Outlined "volunteer_activism" glyph — same one named in the draft's own data for this card — hand-rolled in the same style as the rest of `components/icons/index.tsx`) for "Compassionate care".
   - `AboutLocations.tsx` — simple bordered cards (name, address, `tel:` phone link), **no photos** (per the approved design choice, matching the draft exactly rather than the richer hover-panel `Locations.tsx` used on the homepage).
 - All new sections use `useScrollReveal` for entrance animation, consistent with every other section in the codebase. No parallax is used, matching the draft (which has none in this page beyond what shared components already do).
 - **Reused unchanged**: `TickerBar`, `Cta`, `Footer` (aside from the link addition below), `BackToTop`, `BookCta`.
 
 ## Nav & Footer wiring
 
-- `Nav.tsx`: new item `{ label: "About us", href: "/about", icon: <NewIcon size={23} />, primary: true }`, inserted right after "Home" and before "Services" in the `items` array. `primary: true` so it's visible in the mobile pill nav, consistent with Home/Services/Locations/Call us.
+- `Nav.tsx`: new item `{ label: "About us", href: "/about", icon: <DiversityIcon size={23} />, primary: true }`, inserted right after "Home" and before "Services" in the `items` array. `primary: true` so it's visible in the mobile pill nav, consistent with Home/Services/Locations/Call us. `DiversityIcon` is a new hand-rolled icon matching the Material Symbols Outlined "diversity_1" glyph — the exact icon the draft itself uses for this nav concept ("who we are").
 - `Footer.tsx`: new `<Link href="/about">About us</Link>` in the "Explore" column, before the existing "Services" link.
 
 ## Sitewide data correction
