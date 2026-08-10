@@ -26,7 +26,7 @@ export default function Nav() {
     { label: "About us", href: "/about", icon: <DiversityIcon size={23} />, primary: true },
     { label: "Services", href: "/services", icon: <StethoscopeIcon size={23} />, primary: true },
     { label: "Why us", href: "/#why", icon: <FavoriteIcon size={23} />, primary: false },
-    { label: "Locations", href: "/#locations", icon: <NearMeIcon size={23} />, primary: true },
+    { label: "Locations", href: "/locations", icon: <NearMeIcon size={23} />, primary: true },
     { label: "Journal", href: "/#insight", icon: <MenuBookIcon size={23} />, primary: false },
     { label: "Partners", href: "/#partners", icon: <HandshakeIcon size={23} />, primary: false },
     { label: "Contact", href: "/#footer", icon: <ChatBubbleIcon size={23} />, primary: false },

@@ -11,6 +11,7 @@ describe("Footer", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "About us" })).toHaveAttribute("href", "/about");
     expect(screen.getByRole("link", { name: "Services" })).toHaveAttribute("href", "/services");
+    expect(screen.getByRole("link", { name: "Locations" })).toHaveAttribute("href", "/locations");
     expect(screen.getByRole("link", { name: "Book appointment" })).toHaveAttribute("href", "/#book");
     expect(screen.getByRole("link", { name: /santa monica/i })).toHaveAttribute(
       "href",

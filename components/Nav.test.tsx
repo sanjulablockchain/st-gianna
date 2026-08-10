@@ -13,7 +13,7 @@ describe("Nav", () => {
     expect(screen.getByRole("link", { name: /home/i })).toHaveAttribute("href", "/");
     expect(screen.getByRole("link", { name: /about us/i })).toHaveAttribute("href", "/about");
     expect(screen.getByRole("link", { name: /services/i })).toHaveAttribute("href", "/services");
-    expect(screen.getByRole("link", { name: /locations/i })).toHaveAttribute("href", "/#locations");
+    expect(screen.getByRole("link", { name: /locations/i })).toHaveAttribute("href", "/locations");
     expect(screen.getByRole("link", { name: /call us/i })).toHaveAttribute(
       "href",
       "tel:+18183084100",
