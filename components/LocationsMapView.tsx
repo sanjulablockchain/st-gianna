@@ -5,6 +5,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+delete (L.Icon.Default.prototype as unknown as { _getIconUrl?: unknown })._getIconUrl;
+
 L.Icon.Default.mergeOptions({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
   iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
@@ -21,7 +23,14 @@ export type MapOffice = {
 function FocusHandler({ office }: { office: MapOffice }) {
   const map = useMap();
   useEffect(() => {
-    map.flyTo([office.lat, office.lng], 14, { duration: 0.8 });
+    const prefersReducedMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      map.setView([office.lat, office.lng], 14, { animate: false });
+    } else {
+      map.flyTo([office.lat, office.lng], 14, { duration: 0.8 });
+    }
   }, [map, office]);
   return null;
 }
@@ -44,7 +53,7 @@ export default function LocationsMapView({
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {offices.map((office) => (
         <Marker key={office.name} position={[office.lat, office.lng]}>

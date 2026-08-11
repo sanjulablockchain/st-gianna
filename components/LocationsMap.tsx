@@ -18,8 +18,8 @@ const OFFICES: MapOffice[] = [
   {
     name: "Santa Monica",
     address: "2221 Lincoln Blvd, Santa Monica, CA 90405",
-    lat: 34.0025873,
-    lng: -118.4703697,
+    lat: 34.0097309,
+    lng: -118.4803111,
   },
   {
     name: "La Mirada",
@@ -32,6 +32,7 @@ const OFFICES: MapOffice[] = [
 export default function LocationsMap() {
   const { ref, revealed } = useScrollReveal<HTMLElement>();
   const [focusedIndex, setFocusedIndex] = useState(0);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
   return (
     <section
@@ -51,6 +52,7 @@ export default function LocationsMap() {
               key={office.name}
               type="button"
               className={`${styles.chip} ${i === focusedIndex ? styles.chipActive : ""}`}
+              aria-pressed={i === focusedIndex}
               onClick={() => setFocusedIndex(i)}
             >
               {office.name}
@@ -58,8 +60,21 @@ export default function LocationsMap() {
           ))}
         </span>
       </div>
-      <div className={styles.mapFrame}>
+      <div className={styles.mapFrame} aria-label="Map of St. Gianna Medical Group office locations">
         <LocationsMapView offices={OFFICES} focusedIndex={focusedIndex} />
+        {!hasInteracted && (
+          <button
+            type="button"
+            className={styles.mapOverlay}
+            onClick={(e) => {
+              e.stopPropagation();
+              setHasInteracted(true);
+            }}
+            aria-label="Tap to interact with the map"
+          >
+            <span className={styles.mapOverlayLabel}>Tap to explore map</span>
+          </button>
+        )}
       </div>
     </section>
   );
