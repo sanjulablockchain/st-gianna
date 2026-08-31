@@ -52,3 +52,13 @@ Scroll-driven motion goes through [hooks/useScrollReveal.ts](hooks/useScrollReve
 - `html.js` class + `suppressHydrationWarning`: `app/layout.tsx` adds a pre-paint inline script that sets `document.documentElement.classList.add("js")` and reads the stored theme before React hydrates, so scroll-reveal CSS and theme don't flash-of-wrong-state on load. Don't remove this without checking `useScrollReveal`'s CSS dependency on `html.js`.
 - `useTheme` uses a module-level store (`useSyncExternalStore`) shared across every component instance, not React context — all theme reads/writes go through [hooks/useTheme.ts](hooks/useTheme.ts).
 - Images referenced by CSS `var(--logo-img)` swap per theme; see `public/images/logo-dark.png` / `logo-light.png`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
