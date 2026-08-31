@@ -1,0 +1,75 @@
+.section {
+  padding: clamp(70px, 9vw, 118px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 118px) clamp(24px, 9vw, 150px);
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading {
+  margin: 0 0 clamp(36px, 4.5vw, 56px);
+  font-size: clamp(30px, 3.8vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -.038em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 2px 30px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  padding: 26px 26px 32px 0;
+  border-top: 2px solid var(--rule-accent);
+  /* Keeps the footer's /contact#careers jump clear of the floating nav. */
+  scroll-margin-top: 90px;
+  transition: opacity .6s ease, transform .6s ease;
+  transition-delay: calc(var(--reveal-index, 0) * 70ms);
+}
+
+:global(html.js) .section:not(.revealed) .card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.urgent {
+  border-top-color: var(--danger);
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.body {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding-right: 0;
+  }
+}
