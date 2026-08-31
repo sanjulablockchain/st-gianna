@@ -13,7 +13,7 @@ describe("ServicesHero", () => {
     expect(screen.getByText("3")).toBeInTheDocument();
     expect(screen.getByText("LA clinics")).toBeInTheDocument();
     expect(screen.getByText("24/7")).toBeInTheDocument();
-    expect(screen.getByText("8")).toBeInTheDocument();
+    expect(screen.getByText("10")).toBeInTheDocument();
     expect(screen.getByText("Service lines")).toBeInTheDocument();
   });
 });
