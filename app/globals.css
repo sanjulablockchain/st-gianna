@@ -22,6 +22,21 @@
   --link-hover: #9BE7E5;
   --italic-highlight: #7AD5D5;
   --link-tint: rgba(79, 195, 194, .2);
+  --hero-band: #06161C;
+  --hero-glow: rgba(15, 163, 163, .34);
+  --hero-scanline: rgba(255, 255, 255, .045);
+  --hero-ink: #FFFFFF;
+  --hero-ink-2: rgba(255, 255, 255, .78);
+  --hero-ink-3: rgba(255, 255, 255, .55);
+  --hero-line: rgba(255, 255, 255, .16);
+  --rule-accent: rgba(79, 195, 194, .45);
+  --field-bg: rgba(255, 255, 255, .04);
+  --field-border: rgba(255, 255, 255, .14);
+  --field-border-focus: #4FC3C2;
+  --danger: #FF8A7A;
+  --success: #6FE3C4;
+  --chip-bg: rgba(255, 255, 255, .06);
+  --chip-bg-active: rgba(79, 195, 194, .22);
 }
 
 html[data-theme="light"] {
@@ -39,6 +54,24 @@ html[data-theme="light"] {
   --line-2: rgba(10, 37, 64, .26);
   --pill: rgba(255, 255, 255, .94);
   --on-accent: #06161C;
+  /* The hero band stays dark in both themes by design, so these five tokens
+     intentionally hold the same values as :root. They are declared here anyway
+     so a future change has one obvious place to happen. */
+  --hero-band: #06161C;
+  --hero-glow: rgba(15, 163, 163, .34);
+  --hero-scanline: rgba(255, 255, 255, .045);
+  --hero-ink: #FFFFFF;
+  --hero-ink-2: rgba(255, 255, 255, .78);
+  --hero-ink-3: rgba(255, 255, 255, .55);
+  --hero-line: rgba(255, 255, 255, .16);
+  --rule-accent: rgba(15, 163, 163, .5);
+  --field-bg: #FFFFFF;
+  --field-border: rgba(10, 37, 64, .18);
+  --field-border-focus: #0FA3A3;
+  --danger: #C0392B;
+  --success: #0E7C66;
+  --chip-bg: rgba(10, 37, 64, .06);
+  --chip-bg-active: rgba(15, 163, 163, .16);
 }
 
 html, body {
