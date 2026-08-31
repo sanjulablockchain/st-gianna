@@ -1,0 +1,111 @@
+.section {
+  padding: clamp(70px, 9vw, 118px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 118px) clamp(24px, 9vw, 150px);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heading {
+  margin: 0 0 clamp(36px, 4.5vw, 56px);
+  font-size: clamp(30px, 3.8vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -.038em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 22px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg-2);
+  color: inherit;
+  transition: border-color .3s ease, transform .3s ease, opacity .6s ease;
+  transition-delay: calc(var(--reveal-index, 0) * 70ms);
+}
+
+:global(html.js) .section:not(.revealed) .card {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.card:hover {
+  border-color: var(--line-2);
+  transform: translateY(-3px);
+  color: inherit;
+}
+
+.iconWrap {
+  color: var(--link);
+}
+
+.title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.body {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--link);
+}
+
+.assist {
+  margin: 26px 0 0;
+  padding: 18px 22px;
+  border: 1px solid var(--rule-accent);
+  border-radius: 14px;
+  background: var(--chip-bg);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.assistLink {
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}
