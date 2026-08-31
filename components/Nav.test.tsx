@@ -1,6 +1,9 @@
-import { describe, expect, it, beforeEach } from "vitest";
+import { describe, expect, it, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import Nav from "./Nav";
+
+// usePathname has no router provider in jsdom, so it is stubbed here.
+vi.mock("next/navigation", () => ({ usePathname: () => "/services" }));
 
 describe("Nav", () => {
   beforeEach(() => {
@@ -20,8 +23,25 @@ describe("Nav", () => {
     );
   });
 
-  it("shows the theme toggle labeled for the current (dark) theme", () => {
+  it("links the four secondary destinations to their own pages", () => {
     render(<Nav />);
-    expect(screen.getByRole("link", { name: /light mode/i })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /why us/i })).toHaveAttribute("href", "/why-us");
+    expect(screen.getByRole("link", { name: /journal/i })).toHaveAttribute("href", "/journal");
+    expect(screen.getByRole("link", { name: /partners/i })).toHaveAttribute("href", "/partners");
+    expect(screen.getByRole("link", { name: /contact/i })).toHaveAttribute("href", "/contact");
+  });
+
+  it("marks the current route as the active page", () => {
+    render(<Nav />);
+    expect(screen.getByRole("link", { name: /services/i })).toHaveAttribute(
+      "aria-current",
+      "page",
+    );
+    expect(screen.getByRole("link", { name: /home/i })).not.toHaveAttribute("aria-current");
+  });
+
+  it("shows the theme toggle as a button labeled for the current (dark) theme", () => {
+    render(<Nav />);
+    expect(screen.getByRole("button", { name: /light mode/i })).toBeInTheDocument();
   });
 });

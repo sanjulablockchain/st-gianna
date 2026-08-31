@@ -37,6 +37,9 @@
   --success: #6FE3C4;
   --chip-bg: rgba(255, 255, 255, .06);
   --chip-bg-active: rgba(79, 195, 194, .22);
+  --nav-pill: rgba(15, 39, 50, .92);
+  --nav-ink: #EAF4F3;
+  --shadow: rgba(0, 0, 0, .7);
 }
 
 html[data-theme="light"] {
@@ -72,6 +75,11 @@ html[data-theme="light"] {
   --success: #0E7C66;
   --chip-bg: rgba(10, 37, 64, .06);
   --chip-bg-active: rgba(15, 163, 163, .16);
+  /* The floating nav pill is dark in both themes by design, so these match
+     :root rather than inverting. */
+  --nav-pill: rgba(15, 39, 50, .92);
+  --nav-ink: #EAF4F3;
+  --shadow: rgba(0, 0, 0, .7);
 }
 
 html, body {

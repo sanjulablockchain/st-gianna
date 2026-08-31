@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Nav.module.css";
 import { useTheme } from "@/hooks/useTheme";
 import {
@@ -19,21 +21,21 @@ import {
 
 export default function Nav() {
   const { theme, toggleTheme } = useTheme();
+  const pathname = usePathname();
   const [hoverIndex, setHoverIndex] = useState(-1);
 
   const items = [
     { label: "Home", href: "/", icon: <HomeIcon size={23} />, primary: true },
     { label: "About us", href: "/about", icon: <DiversityIcon size={23} />, primary: true },
     { label: "Services", href: "/services", icon: <StethoscopeIcon size={23} />, primary: true },
-    { label: "Why us", href: "/#why", icon: <FavoriteIcon size={23} />, primary: false },
+    { label: "Why us", href: "/why-us", icon: <FavoriteIcon size={23} />, primary: false },
     { label: "Locations", href: "/locations", icon: <NearMeIcon size={23} />, primary: true },
-    { label: "Journal", href: "/#insight", icon: <MenuBookIcon size={23} />, primary: false },
-    { label: "Partners", href: "/#partners", icon: <HandshakeIcon size={23} />, primary: false },
-    { label: "Contact", href: "/#footer", icon: <ChatBubbleIcon size={23} />, primary: false },
+    { label: "Journal", href: "/journal", icon: <MenuBookIcon size={23} />, primary: false },
+    { label: "Partners", href: "/partners", icon: <HandshakeIcon size={23} />, primary: false },
+    { label: "Contact", href: "/contact", icon: <ChatBubbleIcon size={23} />, primary: false },
     { label: "Call us", href: "tel:+18183084100", icon: <CallIcon size={23} />, primary: true },
     {
       label: theme === "dark" ? "Light mode" : "Dark mode",
-      href: "/#top",
       icon: theme === "dark" ? <LightModeIcon size={23} /> : <DarkModeIcon size={23} />,
       primary: true,
       onClick: toggleTheme,
@@ -58,32 +60,51 @@ export default function Nav() {
         })}
       </div>
       <ul className={styles.list}>
-        {items.map((item, i) => (
-          <li
-            key={item.label}
-            className={item.primary ? undefined : styles.extraOnly}
-            style={{ listStyle: "none" }}
-          >
-            <a
-              href={item.href}
-              className={styles.link}
-              onMouseEnter={() => setHoverIndex(i)}
-              onClick={
-                item.onClick
-                  ? (event) => {
-                      event.preventDefault();
-                      item.onClick?.();
-                    }
-                  : undefined
-              }
-            >
+        {items.map((item, i) => {
+          const content = (
+            <>
               <span className={styles.iconWrap}>{item.icon}</span>
               <span className={`${styles.label} ${hoverIndex === i ? styles.labelVisible : ""}`}>
                 {item.label}
               </span>
+            </>
+          );
+
+          // The theme toggle is a control, not a destination.
+          const control = item.onClick ? (
+            <button
+              type="button"
+              className={styles.link}
+              onMouseEnter={() => setHoverIndex(i)}
+              onClick={item.onClick}
+            >
+              {content}
+            </button>
+          ) : item.href.startsWith("tel:") || item.href.startsWith("http") ? (
+            <a href={item.href} className={styles.link} onMouseEnter={() => setHoverIndex(i)}>
+              {content}
             </a>
-          </li>
-        ))}
+          ) : (
+            <Link
+              href={item.href}
+              className={styles.link}
+              aria-current={pathname === item.href ? "page" : undefined}
+              onMouseEnter={() => setHoverIndex(i)}
+            >
+              {content}
+            </Link>
+          );
+
+          return (
+            <li
+              key={item.label}
+              className={item.primary ? undefined : styles.extraOnly}
+              style={{ listStyle: "none" }}
+            >
+              {control}
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
