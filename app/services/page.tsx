@@ -5,6 +5,8 @@ import ServicesHero from "@/components/ServicesHero";
 import TickerBar from "@/components/TickerBar";
 import CorePillars from "@/components/CorePillars";
 import ServiceCatalog from "@/components/ServiceCatalog";
+import ServiceConditions from "@/components/ServiceConditions";
+import ServicesInsurance from "@/components/ServicesInsurance";
 import VisitSteps from "@/components/VisitSteps";
 import ServicesFaq from "@/components/ServicesFaq";
 import Cta from "@/components/Cta";
@@ -26,6 +28,8 @@ export default function ServicesPage() {
       <TickerBar />
       <CorePillars />
       <ServiceCatalog />
+      <ServiceConditions />
+      <ServicesInsurance />
       <VisitSteps />
       <ServicesFaq />
       <Cta />

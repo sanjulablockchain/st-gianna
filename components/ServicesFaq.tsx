@@ -26,6 +26,22 @@ const FAQS = [
     q: "Do my records follow me between offices?",
     a: "Yes. One chart is live at whichever of our offices you walk into, so any of our clinicians can pick up where the last visit left off.",
   },
+  {
+    q: "How do I refill a prescription?",
+    a: "Ask your pharmacy to send the request to us and it lands straight in your chart, which is faster than calling. Controlled medications need a visit before a refill, so book one rather than writing in.",
+  },
+  {
+    q: "Can you refer me to see a specialist?",
+    a: "Yes, and where the specialist sits inside our partner network your chart travels with the referral, so the first appointment is not spent repeating your history. If your plan needs authorization we start that for you.",
+  },
+  {
+    q: "Do you see adults, or only children?",
+    a: "Both. We are a family practice: newborns through to seniors, with the same chart following each person. Plenty of our families book a parent and a child back to back.",
+  },
+  {
+    q: "How do I transfer records from a previous clinic?",
+    a: "Email contact@sgmdoctor.com with the practice name and we will send you a release to sign. Most transfers land within five business days, and we will chase if they do not.",
+  },
 ];
 
 export default function ServicesFaq() {
