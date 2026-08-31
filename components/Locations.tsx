@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Locations.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
@@ -56,9 +57,10 @@ export default function Locations() {
       </div>
       <div className={styles.panels} ref={parallaxRef} onMouseLeave={() => setActive(0)}>
         {LOCATIONS.map((location, i) => (
-          <button
+          <Link
             key={location.name}
-            type="button"
+            href="/locations"
+            aria-label={`${location.name} clinic, see all locations`}
             className={`${styles.panel} ${active === i ? styles.panelActive : ""}`}
             onMouseEnter={() => setActive(i)}
             onFocus={() => setActive(i)}
@@ -86,7 +88,7 @@ export default function Locations() {
                 <span className={styles.hours}>{location.hours}</span>
               </span>
             </span>
-          </button>
+          </Link>
         ))}
       </div>
     </section>

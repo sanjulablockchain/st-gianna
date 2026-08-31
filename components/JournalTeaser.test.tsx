@@ -11,7 +11,7 @@ describe("JournalTeaser", () => {
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /read the piece/i })).toHaveAttribute(
       "href",
-      "#insight",
+      "/journal",
     );
   });
 });

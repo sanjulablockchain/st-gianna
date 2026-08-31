@@ -63,6 +63,11 @@
   padding: 0;
   text-align: left;
   cursor: pointer;
+  color: inherit;
+}
+
+.panel:hover {
+  color: inherit;
 }
 
 .panelActive {

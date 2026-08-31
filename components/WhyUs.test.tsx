@@ -16,4 +16,24 @@ describe("WhyUs", () => {
       },
     );
   });
+
+  it("links each reason card to its section on the why-us page", () => {
+    render(<WhyUs />);
+    expect(screen.getByRole("link", { name: /same-day slots/i })).toHaveAttribute(
+      "href",
+      "/why-us#same-day",
+    );
+    expect(screen.getByRole("link", { name: /book at 2am/i })).toHaveAttribute(
+      "href",
+      "/why-us#booking",
+    );
+    expect(screen.getByRole("link", { name: /one chart, everywhere/i })).toHaveAttribute(
+      "href",
+      "/why-us#one-chart",
+    );
+    expect(screen.getByRole("link", { name: /insurance handled/i })).toHaveAttribute(
+      "href",
+      "/why-us#insurance",
+    );
+  });
 });

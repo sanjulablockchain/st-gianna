@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Partners.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
@@ -80,9 +81,9 @@ export default function Partners() {
         {PARTNERS.map((partner, i) => {
           const PartnerIcon = partner.icon;
           return (
-            <a
+            <Link
               key={partner.name}
-              href="#book"
+              href="/partners#network"
               className={styles.row}
               onMouseEnter={() => setHovered(i)}
             >
@@ -91,7 +92,7 @@ export default function Partners() {
               <span className={styles.role}>{partner.role}</span>
               <span className={styles.body}>{partner.body}</span>
               <ArrowOutwardIcon size={23} className={styles.arrow} />
-            </a>
+            </Link>
           );
         })}
         <span

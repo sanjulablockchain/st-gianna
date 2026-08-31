@@ -38,10 +38,17 @@
 .card {
   padding: 30px 30px 34px 0;
   margin-right: 30px;
-  border-top: 2px solid rgba(79, 195, 194, .45);
+  border-top: 2px solid var(--rule-accent);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  color: inherit;
+  transition: border-top-color .3s ease;
+}
+
+.card:hover {
+  border-top-color: var(--accent);
+  color: inherit;
 }
 
 .icon {

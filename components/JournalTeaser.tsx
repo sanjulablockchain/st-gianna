@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./JournalTeaser.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowOutwardIcon } from "@/components/icons";
@@ -15,7 +16,7 @@ export default function JournalTeaser() {
       data-dark="1"
       ref={ref}
     >
-      <a href="#insight" className={styles.link}>
+      <Link href="/journal" className={styles.link}>
         <Image
           src="/images/photo-physical-therapy.jpg"
           alt=""
@@ -36,7 +37,7 @@ export default function JournalTeaser() {
             Read the piece <ArrowOutwardIcon size={19} />
           </span>
         </span>
-      </a>
+      </Link>
     </section>
   );
 }

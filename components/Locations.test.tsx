@@ -14,4 +14,11 @@ describe("Locations", () => {
     expect(screen.getByText("12675 La Mirada Blvd, #200, La Mirada, CA 90638")).toBeInTheDocument();
     expect(screen.getByText("Opens 9am")).toBeInTheDocument();
   });
+
+  it("makes each clinic panel a link to the locations page", () => {
+    render(<Locations />);
+    const links = screen.getAllByRole("link");
+    expect(links).toHaveLength(3);
+    links.forEach((link) => expect(link).toHaveAttribute("href", "/locations"));
+  });
 });

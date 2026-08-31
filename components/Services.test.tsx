@@ -18,11 +18,20 @@ describe("Services", () => {
     });
   });
 
-  it("each row links to #book", () => {
-    render(<Services />);
+  it("points every row at the services catalog", () => {
+    const { container } = render(<Services />);
     expect(screen.getByRole("link", { name: /well-child & physicals/i })).toHaveAttribute(
       "href",
-      "#book",
+      "/services#catalog",
+    );
+    expect(container.querySelectorAll('a[href="#book"]')).toHaveLength(0);
+  });
+
+  it("offers a see-all link to the services page", () => {
+    render(<Services />);
+    expect(screen.getByRole("link", { name: /see all services/i })).toHaveAttribute(
+      "href",
+      "/services",
     );
   });
 });

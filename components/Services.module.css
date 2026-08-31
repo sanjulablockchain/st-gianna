@@ -148,6 +148,17 @@
   }
 }
 
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 34px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--link);
+}
+
 @media (max-width: 1179px) {
   .previewWrap {
     display: none;

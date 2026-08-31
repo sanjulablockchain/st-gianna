@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./Services.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowOutwardIcon } from "@/components/icons";
@@ -57,9 +58,9 @@ export default function Services() {
       </div>
       <div className={styles.rows}>
         {SERVICES.map((service, i) => (
-          <a
+          <Link
             key={service.title}
-            href="#book"
+            href="/services#catalog"
             className={styles.row}
             onMouseEnter={() => setHovered(i)}
           >
@@ -67,7 +68,7 @@ export default function Services() {
             <span className={styles.title}>{service.title}</span>
             <span className={styles.body}>{service.body}</span>
             <ArrowOutwardIcon size={26} className={styles.arrow} />
-          </a>
+          </Link>
         ))}
         <span className={`${styles.previewWrap} ${hovered >= 0 ? styles.previewVisible : ""}`}>
           <Image
@@ -79,6 +80,10 @@ export default function Services() {
           />
         </span>
       </div>
+      <Link href="/services" className={styles.seeAll}>
+        See all services
+        <ArrowOutwardIcon size={19} />
+      </Link>
     </section>
   );
 }

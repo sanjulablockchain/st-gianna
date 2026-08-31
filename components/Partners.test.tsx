@@ -14,4 +14,13 @@ describe("Partners", () => {
       },
     );
   });
+
+  it("points every partner row at the partners page", () => {
+    const { container } = render(<Partners />);
+    expect(screen.getByRole("link", { name: /KT Doctor/i })).toHaveAttribute(
+      "href",
+      "/partners#network",
+    );
+    expect(container.querySelectorAll('a[href="#book"]')).toHaveLength(0);
+  });
 });
