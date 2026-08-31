@@ -31,4 +31,39 @@ describe("Footer", () => {
     );
     expect(screen.getByText(/all rights reserved/i)).toBeInTheDocument();
   });
+
+  it("links the expanded Explore column", () => {
+    render(<Footer />);
+    expect(screen.getByRole("link", { name: "Why us" })).toHaveAttribute("href", "/why-us");
+    expect(screen.getByRole("link", { name: "Journal" })).toHaveAttribute("href", "/journal");
+    expect(screen.getByRole("link", { name: "Partners" })).toHaveAttribute("href", "/partners");
+  });
+
+  it("links the Patients column to real destinations", () => {
+    render(<Footer />);
+    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute("href", "/contact");
+    expect(screen.getByRole("link", { name: /insurance/i })).toHaveAttribute(
+      "href",
+      "/services#insurance",
+    );
+    expect(screen.getByRole("link", { name: "Careers" })).toHaveAttribute(
+      "href",
+      "/contact#careers",
+    );
+  });
+
+  it("links the legal row to the legal pages", () => {
+    render(<Footer />);
+    expect(screen.getByRole("link", { name: "Privacy" })).toHaveAttribute("href", "/privacy");
+    expect(screen.getByRole("link", { name: "Terms" })).toHaveAttribute("href", "/terms");
+    expect(screen.getByRole("link", { name: "Accessibility" })).toHaveAttribute(
+      "href",
+      "/terms#accessibility",
+    );
+  });
+
+  it("no longer parks any link on the footer anchor", () => {
+    const { container } = render(<Footer />);
+    expect(container.querySelectorAll('a[href="/#footer"]')).toHaveLength(0);
+  });
 });

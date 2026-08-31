@@ -20,16 +20,17 @@ export default function Footer() {
           <span className={styles.columnHeading}>Explore</span>
           <Link href="/about" className={styles.link}>About us</Link>
           <Link href="/services" className={styles.link}>Services</Link>
-          <Link href="/#why" className={styles.link}>Why us</Link>
+          <Link href="/why-us" className={styles.link}>Why us</Link>
           <Link href="/locations" className={styles.link}>Locations</Link>
-          <Link href="/#insight" className={styles.link}>Journal</Link>
+          <Link href="/journal" className={styles.link}>Journal</Link>
+          <Link href="/partners" className={styles.link}>Partners</Link>
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Patients</span>
           <Link href="/#book" className={styles.link}>Book appointment</Link>
-          <Link href="/#footer" className={styles.link}>Patient portal</Link>
-          <Link href="/#footer" className={styles.link}>Insurance &amp; billing</Link>
-          <Link href="/#footer" className={styles.link}>Careers</Link>
+          <Link href="/contact" className={styles.link}>Contact</Link>
+          <Link href="/services#insurance" className={styles.link}>Insurance &amp; billing</Link>
+          <Link href="/contact#careers" className={styles.link}>Careers</Link>
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Contact</span>
@@ -44,9 +45,9 @@ export default function Footer() {
       <div className={styles.bottomRow}>
         <span>&copy; 2026 St. Gianna Medical Group. All rights reserved.</span>
         <span className={styles.legalLinks}>
-          <Link href="/#footer">Privacy</Link>
-          <Link href="/#footer">Terms</Link>
-          <Link href="/#footer">Accessibility</Link>
+          <Link href="/privacy">Privacy</Link>
+          <Link href="/terms">Terms</Link>
+          <Link href="/terms#accessibility">Accessibility</Link>
         </span>
       </div>
     </footer>
