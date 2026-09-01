@@ -1,14 +1,40 @@
-import { describe, expect, it, beforeEach, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Nav from "./Nav";
 
 // usePathname has no router provider in jsdom, so it is stubbed here.
 vi.mock("next/navigation", () => ({ usePathname: () => "/services" }));
 
+/** The suite defaults to desktop; opt a test into the mobile wheel. */
+function setViewport({ mobile }: { mobile: boolean }) {
+  window.matchMedia = ((query: string) => ({
+    matches: query.includes("prefers-reduced-motion")
+      ? true
+      : query.includes("max-width: 859px")
+        ? mobile
+        : false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  })) as unknown as typeof window.matchMedia;
+}
+
+const originalMatchMedia = window.matchMedia;
+
 describe("Nav", () => {
   beforeEach(() => {
     window.localStorage.clear();
     document.documentElement.removeAttribute("data-theme");
+    setViewport({ mobile: false });
+  });
+
+  afterEach(() => {
+    window.matchMedia = originalMatchMedia;
   });
 
   it("renders all primary destinations as page-aware anchors", () => {
@@ -45,8 +71,6 @@ describe("Nav", () => {
     expect(screen.getByRole("button", { name: /light mode/i })).toBeInTheDocument();
   });
 
-  // Every nav destination is a real page now, so none may be hidden at any
-  // width. The old extraOnly class hid four of them below 859px.
   it("hides no destination behind the extraOnly class", () => {
     const { container } = render(<Nav />);
     expect(container.querySelectorAll('[class*="extraOnly"]')).toHaveLength(0);
@@ -72,5 +96,83 @@ describe("Nav", () => {
       ].sort(),
     );
     expect(screen.getAllByRole("button")).toHaveLength(1);
+  });
+});
+
+describe("Nav mobile wheel", () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+    document.documentElement.removeAttribute("data-theme");
+    setViewport({ mobile: true });
+  });
+
+  afterEach(() => {
+    window.matchMedia = originalMatchMedia;
+  });
+
+  it("still exposes every destination as a real link", () => {
+    render(<Nav />);
+    expect(screen.getAllByRole("link")).toHaveLength(9);
+    expect(screen.getByRole("link", { name: /partners/i })).toHaveAttribute("href", "/partners");
+  });
+
+  it("opens centred on the current route and names it", () => {
+    const { container } = render(<Nav />);
+    // The stubbed pathname is /services.
+    expect(container.querySelector('[class*="readout"]')).toHaveTextContent("Services");
+    expect(screen.getByRole("link", { name: /services/i }).className).toMatch(/centred/);
+  });
+
+  it("tracks position with one dot per destination", () => {
+    const { container } = render(<Nav />);
+    const dots = container.querySelectorAll('[class*="dot"]:not([class*="dots"])');
+    expect(dots).toHaveLength(10);
+    expect(container.querySelectorAll('[class*="dotActive"]')).toHaveLength(1);
+  });
+
+  // fireEvent.click returns false when the handler cancelled the event, which
+  // is how the two-tap rule is enforced. userEvent is avoided here because a
+  // native listener would run before React's delegated one and read
+  // defaultPrevented too early.
+  it("centres a nearby off-centre item on first tap instead of navigating", () => {
+    const { container } = render(<Nav />);
+    // Why us sits one step from the centred Services chip.
+    const target = screen.getByRole("link", { name: /why us/i });
+    expect(target.className).not.toMatch(/centred/);
+
+    const notCancelled = fireEvent.click(target);
+    expect(notCancelled).toBe(false);
+    expect(screen.getByRole("link", { name: /why us/i }).className).toMatch(/centred/);
+    expect(container.querySelector('[class*="readout"]')).toHaveTextContent("Why us");
+  });
+
+  it("commits on the second tap once the item is centred", () => {
+    render(<Nav />);
+    expect(fireEvent.click(screen.getByRole("link", { name: /why us/i }))).toBe(false);
+    // Now centred, so the click is allowed through to navigate.
+    expect(fireEvent.click(screen.getByRole("link", { name: /why us/i }))).toBe(true);
+  });
+
+  it("keeps far-off items out of reach until the wheel is turned to them", () => {
+    render(<Nav />);
+    // Partners is four steps from centre, so it is faded out and inert. The
+    // wheel has to be flicked to it, which is the whole point of the control.
+    const far = screen.getByRole("link", { name: /partners/i }).closest("li");
+    expect(far).toHaveStyle({ pointerEvents: "none" });
+    const near = screen.getByRole("link", { name: /why us/i }).closest("li");
+    expect(near).toHaveStyle({ pointerEvents: "auto" });
+  });
+
+  it("centres a chip on keyboard focus, so the wheel is reachable without dragging", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<Nav />);
+    const toggle = screen.getByRole("button", { name: /light mode/i });
+
+    // Focus alone centres it, which is how keyboard users turn the wheel.
+    fireEvent.focus(toggle);
+    expect(container.querySelector('[class*="readout"]')).toHaveTextContent("Light mode");
+
+    await user.click(screen.getByRole("button", { name: /light mode/i }));
+    expect(screen.getByRole("button", { name: /dark mode/i })).toBeInTheDocument();
   });
 });
