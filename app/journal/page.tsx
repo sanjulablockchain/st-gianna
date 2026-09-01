@@ -5,7 +5,7 @@ import JournalHero from "@/components/JournalHero";
 import TickerBar from "@/components/TickerBar";
 import JournalFeatured from "@/components/JournalFeatured";
 import JournalGrid from "@/components/JournalGrid";
-import JournalNewsletter from "@/components/JournalNewsletter";
+import JournalGuides from "@/components/JournalGuides";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
@@ -25,7 +25,7 @@ export default function JournalPage() {
       <TickerBar />
       <JournalFeatured />
       <JournalGrid />
-      <JournalNewsletter />
+      <JournalGuides />
       <Cta />
       <Footer />
       <BackToTop />

@@ -1,0 +1,242 @@
+.section {
+  padding: clamp(70px, 9vw, 118px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 118px) clamp(24px, 9vw, 150px);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.backRow {
+  margin: 0 0 22px;
+}
+
+.back {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  transition: color .25s ease;
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+.title {
+  margin: 0 0 16px;
+  max-width: 22ch;
+  font-size: clamp(30px, 4.6vw, 62px);
+  line-height: 1.03;
+  letter-spacing: -.04em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 30px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.meta span:first-child {
+  color: var(--accent);
+}
+
+.imageWrap {
+  position: relative;
+  display: block;
+  height: clamp(220px, 38vw, 460px);
+  margin-bottom: clamp(34px, 4vw, 54px);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Inset vertically so the parallax offset never exposes an edge. */
+.imageLayer {
+  position: absolute;
+  inset: -40px 0;
+  display: block;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: clamp(30px, 5vw, 70px);
+  align-items: start;
+}
+
+.summary {
+  position: sticky;
+  top: 110px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  border: 1px solid var(--rule-accent);
+  border-radius: 18px;
+  background: var(--bg-2);
+}
+
+.summaryHeading {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.summaryItem {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.body {
+  max-width: 68ch;
+}
+
+.block {
+  margin-bottom: 34px;
+}
+
+.blockHeading {
+  margin: 0 0 12px;
+  font-size: clamp(19px, 2.1vw, 25px);
+  font-weight: 700;
+  letter-spacing: -.025em;
+  color: var(--ink);
+}
+
+.paragraph {
+  margin: 0 0 14px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.disclaimer {
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-2);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted-2);
+}
+
+.related {
+  margin-top: clamp(44px, 5vw, 68px);
+  padding-top: clamp(30px, 3.5vw, 44px);
+  border-top: 1px solid var(--line-2);
+}
+
+.relatedHeading {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.relatedCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg-2);
+  color: inherit;
+  transition: border-color .3s ease, transform .3s ease;
+}
+
+.relatedCard:hover {
+  border-color: var(--line-2);
+  transform: translateY(-3px);
+  color: inherit;
+}
+
+.relatedCategory {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.relatedTitle {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.relatedCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--link);
+}
+
+@media (max-width: 1179px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .imageWrap {
+    border-radius: 14px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -89,8 +89,24 @@
   border-radius: 18px;
   overflow: hidden;
   background: var(--bg-2);
-  transition: opacity .6s ease, transform .6s ease;
+  color: inherit;
+  transition: opacity .6s ease, transform .6s ease, border-color .3s ease;
   transition-delay: calc(var(--reveal-index, 0) * 70ms);
+}
+
+.card:hover {
+  border-color: var(--line-2);
+  color: inherit;
+}
+
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 22px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--link);
 }
 
 :global(html.js) .section:not(.revealed) .card {

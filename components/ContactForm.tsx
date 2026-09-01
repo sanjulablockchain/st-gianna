@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { EMAIL_PATTERN } from "./JournalNewsletter";
+import { EMAIL_PATTERN } from "@/lib/validation";
 
 const OFFICES = ["No preference", "Hollywood", "Santa Monica", "La Mirada"];
 const TOPICS = ["Appointment", "Billing", "Medical records", "Careers", "Something else"];
