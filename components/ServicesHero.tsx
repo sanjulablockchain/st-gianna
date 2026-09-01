@@ -14,6 +14,8 @@ export default function ServicesHero() {
       italic="services."
       subcopy="At St. Gianna Medical Group, we are committed to providing comprehensive, high-quality healthcare services to meet the diverse needs of our patients. Our experienced team of medical professionals utilizes the latest medical technologies and treatment protocols to ensure the best possible care."
       stats={STATS}
+      image="/images/hero-services.jpg"
+      imageAlt=""
     />
   );
 }

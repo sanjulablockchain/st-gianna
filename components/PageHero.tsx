@@ -5,6 +5,7 @@ import Link from "next/link";
 import styles from "./PageHero.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
+import CountUp from "./CountUp";
 
 export type HeroStat = { n: string; l: string };
 
@@ -71,7 +72,7 @@ export default function PageHero({
             <div className={styles.stats}>
               {stats.map((stat) => (
                 <span key={stat.l} className={styles.stat}>
-                  <span className={styles.statNumber}>{stat.n}</span>
+                  <CountUp value={stat.n} active={revealed} className={styles.statNumber} />
                   <span className={styles.statLabel}>{stat.l}</span>
                 </span>
               ))}

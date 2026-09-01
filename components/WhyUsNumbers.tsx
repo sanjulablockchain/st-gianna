@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./WhyUsNumbers.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
+import CountUp from "./CountUp";
 
 const FIGURES = [
   { n: "18,000+", l: "Visits a year" },
@@ -38,7 +39,7 @@ export default function WhyUsNumbers() {
               className={styles.figure}
               style={{ "--reveal-index": Math.min(i, 8) } as React.CSSProperties}
             >
-              <span className={styles.figureNumber}>{figure.n}</span>
+              <CountUp value={figure.n} active={revealed} className={styles.figureNumber} />
               <span className={styles.figureLabel}>{figure.l}</span>
             </span>
           ))}

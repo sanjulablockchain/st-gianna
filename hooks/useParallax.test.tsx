@@ -2,6 +2,23 @@ import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { render } from "@testing-library/react";
 import { useParallax } from "./useParallax";
 
+// The suite defaults to prefers-reduced-motion, under which this hook
+// deliberately does nothing. These tests cover the animated path, so opt back
+// into full motion.
+function enableMotion() {
+  window.matchMedia = ((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  })) as unknown as typeof window.matchMedia;
+}
+
+
 function Probe({ speed = 0.5, max = 40 }: { speed?: number; max?: number }) {
   const { ref, offset } = useParallax<HTMLDivElement>(speed, max);
   return <div ref={ref} data-testid="target">{offset}</div>;
@@ -9,6 +26,7 @@ function Probe({ speed = 0.5, max = 40 }: { speed?: number; max?: number }) {
 
 describe("useParallax", () => {
   beforeEach(() => {
+    enableMotion();
     Object.defineProperty(window, "innerHeight", { value: 800, configurable: true });
   });
 

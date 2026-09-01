@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import PageHero from "./PageHero";
 
 describe("PageHero", () => {
-  it("renders breadcrumb, split headline, subcopy, and stats", () => {
+  it("renders breadcrumb, split headline, subcopy, and stats", async () => {
     render(
       <PageHero
         breadcrumb="Partners"
@@ -19,11 +19,11 @@ describe("PageHero", () => {
     expect(heading).toHaveTextContent("One");
     expect(heading).toHaveTextContent("network.");
     expect(screen.getByText(/a network of clinics and specialists/i)).toBeInTheDocument();
-    expect(screen.getByText("9")).toBeInTheDocument();
+    expect(await screen.findByText("9")).toBeInTheDocument();
     expect(screen.getByText("Organizations")).toBeInTheDocument();
   });
 
-  it("omits the stat row when no stats are given", () => {
+  it("omits the stat row when no stats are given", async () => {
     const { container } = render(
       <PageHero breadcrumb="Terms" headline="Terms &" italic="conditions." subcopy="The rules." />,
     );
@@ -31,7 +31,7 @@ describe("PageHero", () => {
     expect(container.querySelectorAll("[class*='statNumber']")).toHaveLength(0);
   });
 
-  it("renders an image layer only when an image is given", () => {
+  it("renders an image layer only when an image is given", async () => {
     const { container, rerender } = render(
       <PageHero breadcrumb="A" headline="A" italic="b." subcopy="c" />,
     );

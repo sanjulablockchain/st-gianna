@@ -14,6 +14,8 @@ export default function AboutHero() {
       italic="are we?"
       subcopy="At St. Gianna Medical Group, we are dedicated to providing exceptional healthcare services for adults and children."
       stats={STATS}
+      image="/images/why-us-band.jpg"
+      imageAlt=""
     />
   );
 }

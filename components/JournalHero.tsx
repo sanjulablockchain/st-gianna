@@ -14,6 +14,8 @@ export default function JournalHero() {
       italic="journal."
       subcopy="Plain writing from the clinicians who see your family. No sponsored supplements, no scare pieces, and no advice we would not give you in the room. When the evidence is uncertain we say so, and when something is genuinely worth worrying about we say that too."
       stats={STATS}
+      image="/images/hero-journal.jpg"
+      imageAlt=""
     />
   );
 }

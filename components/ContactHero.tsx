@@ -14,6 +14,8 @@ export default function ContactHero() {
       italic="touch."
       subcopy="We are here to help with all of it: questions, appointments, billing, records, or just working out whether you need to be seen at all. Pick whichever way of reaching us suits the hour you are reading this."
       stats={STATS}
+      image="/images/photo-doctor-portrait.jpg"
+      imageAlt=""
     />
   );
 }

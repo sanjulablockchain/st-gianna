@@ -14,6 +14,8 @@ export default function LocationsHero() {
       italic="locations."
       subcopy="We are proud to offer our exceptional healthcare services at three convenient locations. Whether you are in Hollywood, Santa Monica, or La Mirada, you can count on St. Gianna Medical Group for top-quality medical care."
       stats={STATS}
+      image="/images/partners-network.jpg"
+      imageAlt=""
     />
   );
 }
