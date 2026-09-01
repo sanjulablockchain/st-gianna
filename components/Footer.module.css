@@ -76,6 +76,15 @@
   gap: 22px;
 }
 
+/* These are the only route into the legal pages, since they are deliberately
+   absent from the nav, so they get body contrast rather than the dim
+   treatment the rest of the bottom row carries. */
 .legalLinks a {
-  color: var(--muted-2);
+  color: var(--ink-2);
+  font-weight: 600;
+  transition: color .25s ease;
+}
+
+.legalLinks a:hover {
+  color: var(--accent);
 }

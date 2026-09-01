@@ -54,8 +54,8 @@ describe("Footer", () => {
 
   it("links the legal row to the legal pages", () => {
     render(<Footer />);
-    expect(screen.getByRole("link", { name: "Privacy" })).toHaveAttribute("href", "/privacy");
-    expect(screen.getByRole("link", { name: "Terms" })).toHaveAttribute("href", "/terms");
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy");
+    expect(screen.getByRole("link", { name: "Terms & Conditions" })).toHaveAttribute("href", "/terms");
     expect(screen.getByRole("link", { name: "Accessibility" })).toHaveAttribute(
       "href",
       "/terms#accessibility",

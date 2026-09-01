@@ -18,6 +18,14 @@ describe("PartnersNetwork", () => {
     expect(screen.getByText("Blockchain BPO")).toBeInTheDocument();
   });
 
+  it("gives every organization a monogram mark", () => {
+    render(<PartnersNetwork />);
+    expect(screen.getAllByRole("img", { name: /monogram$/ })).toHaveLength(9);
+    expect(screen.getByRole("img", { name: "Kids & Teens Medical Group monogram" })).toBeInTheDocument();
+    expect(screen.getByText("KT")).toBeInTheDocument();
+    expect(screen.getByText("BB")).toBeInTheDocument();
+  });
+
   it("opens external partner links safely in a new tab", () => {
     render(<PartnersNetwork />);
     const link = screen.getByRole("link", { name: /LA Intensive Pediatric Therapy/i });

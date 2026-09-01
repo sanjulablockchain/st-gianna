@@ -3,6 +3,7 @@
 import styles from "./PartnersNetwork.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { ArrowOutwardIcon } from "@/components/icons";
+import PartnerMark from "./PartnerMark";
 
 const GROUPS = [
   {
@@ -10,6 +11,7 @@ const GROUPS = [
     partners: [
       {
         name: "Kids & Teens Medical Group",
+        initials: "KT",
         tagline: "The flagship pediatric network",
         body: "Board-certified pediatric care across 25 clinics in Greater LA, for ages 0 to 21. When a case needs a pediatric subspecialist, this is usually where the referral lands.",
         tags: ["Primary care", "Urgent care", "Telehealth", "Newborn care"],
@@ -18,6 +20,7 @@ const GROUPS = [
       },
       {
         name: "St. Gianna Medical Group",
+        initials: "SG",
         tagline: "Family practice for all ages",
         body: "Us. Comprehensive healthcare for adults and children, with same-day appointments and booking that never closes.",
         tags: ["Same-day", "24/7 booking", "Telehealth", "Advanced wound care"],
@@ -25,6 +28,7 @@ const GROUPS = [
       },
       {
         name: "LA Intensive Pediatric Therapy",
+        initials: "LA",
         tagline: "Expert pediatric therapy since 2010",
         body: "Individual and center-based speech, occupational, and developmental therapy. Referrals go out with the chart attached, so the first session is not spent on history.",
         tags: ["Speech therapy", "Occupational therapy", "Sensory integration"],
@@ -32,6 +36,7 @@ const GROUPS = [
       },
       {
         name: "Serendib Healthways",
+        initials: "SH",
         tagline: "Pediatric health plans across Greater LA",
         body: "A pediatric HMO and IPA network with more than 20 clinic locations and over 50 board-certified doctors, offering affordable children's health coverage.",
         tags: ["Pediatric HMO/IPA", "Same-day", "Telehealth", "After-hours urgent care"],
@@ -39,6 +44,7 @@ const GROUPS = [
       },
       {
         name: "After-Hours Pediatric Urgent Care",
+        initials: "AH",
         tagline: "Out of hours, still covered",
         body: "24/7 pediatric urgent care across more than 20 California clinics, for ages 0 to 21, accepted by all major insurance plans. This is who picks up when our offices are dark.",
         tags: ["24/7 urgent care", "Ages 0 to 21", "All insurance accepted"],
@@ -51,6 +57,7 @@ const GROUPS = [
     partners: [
       {
         name: "St. Joseph Hospital Negombo",
+        initials: "SJ",
         tagline: "US-standard care in Negombo",
         body: "Operated by Kids & Teens Medical Group, USA, bringing American healthcare standards to affordable, accessible care for families in Sri Lanka.",
         tags: ["Emergency & outpatient", "Inpatient care", "Telemedicine", "Pharmacy & diagnostics"],
@@ -58,6 +65,7 @@ const GROUPS = [
       },
       {
         name: "ACIG Asiacorp Insurance Brokers",
+        initials: "AC",
         tagline: "Insurance solutions across Sri Lanka",
         body: "An insurance brokerage offering tailored motor, health, life, and corporate cover for individuals and businesses.",
         tags: ["Health insurance", "Life insurance", "Motor insurance", "Corporate"],
@@ -70,6 +78,7 @@ const GROUPS = [
     partners: [
       {
         name: "Human Compass MSO",
+        initials: "HC",
         tagline: "Guiding care, delivering human solutions",
         body: "A Southern California management services organization connecting patients with primary, specialty, and urgent care providers for over 25 years.",
         tags: ["Primary care network", "Specialty care", "Urgent care", "Provider management"],
@@ -77,6 +86,7 @@ const GROUPS = [
       },
       {
         name: "Blockchain BPO",
+        initials: "BB",
         tagline: "Offshore teams for US businesses",
         body: "Dedicated offshore teams in Sri Lanka and Mexico handling customer care, claims processing, and billing support.",
         tags: ["Customer care", "Claims processing", "Billing support", "Data entry"],
@@ -118,7 +128,10 @@ export default function PartnersNetwork() {
                   rel={external ? "noopener noreferrer" : undefined}
                   style={{ "--reveal-index": Math.min(i, 8) } as React.CSSProperties}
                 >
-                  {partner.flagship ? <span className={styles.badge}>Flagship</span> : null}
+                  <span className={styles.markRow}>
+                    <PartnerMark initials={partner.initials} name={partner.name} />
+                    {partner.flagship ? <span className={styles.badge}>Flagship</span> : null}
+                  </span>
                   <h3 className={styles.name}>{partner.name}</h3>
                   <span className={styles.tagline}>{partner.tagline}</span>
                   <span className={styles.body}>{partner.body}</span>

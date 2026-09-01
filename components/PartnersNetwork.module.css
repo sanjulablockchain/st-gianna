@@ -92,6 +92,16 @@
   border-color: var(--rule-accent);
 }
 
+.markRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.card:hover .mark {
+  border-color: var(--accent);
+}
+
 .badge {
   align-self: flex-start;
   padding: 4px 10px;

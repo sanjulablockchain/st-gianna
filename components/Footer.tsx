@@ -42,8 +42,8 @@ export default function Footer() {
       <div className={styles.bottomRow}>
         <span>&copy; 2026 St. Gianna Medical Group. All rights reserved.</span>
         <span className={styles.legalLinks}>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/terms">Terms &amp; Conditions</Link>
           <Link href="/terms#accessibility">Accessibility</Link>
         </span>
       </div>
