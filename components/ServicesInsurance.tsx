@@ -1,9 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import styles from "./ServicesInsurance.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { ArrowOutwardIcon } from "@/components/icons";
+import { CallIcon } from "@/components/icons";
 
 const BLOCKS = [
   {
@@ -80,10 +79,10 @@ export default function ServicesInsurance() {
           </article>
         ))}
       </div>
-      <Link href="/contact#message" className={styles.cta}>
-        Ask us about billing
-        <ArrowOutwardIcon size={19} />
-      </Link>
+      <a href="tel:+18183084100" className={styles.cta}>
+        <CallIcon size={19} />
+        Call us about billing &middot; 818-308-4100
+      </a>
     </section>
   );
 }

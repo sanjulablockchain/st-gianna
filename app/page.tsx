@@ -10,6 +10,7 @@ import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import BookCta from "@/components/BookCta";
+import CallFab from "@/components/CallFab";
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
       <Cta />
       <Footer />
       <BackToTop />
+      <CallFab />
     </div>
   );
 }

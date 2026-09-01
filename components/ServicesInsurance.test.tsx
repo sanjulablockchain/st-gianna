@@ -11,11 +11,11 @@ describe("ServicesInsurance", () => {
     expect(screen.getByText("Paying without insurance")).toBeInTheDocument();
   });
 
-  it("sends billing questions to the contact form", () => {
+  it("dials the main line for billing questions", () => {
     render(<ServicesInsurance />);
-    expect(screen.getByRole("link", { name: /ask us about billing/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /call us about billing/i })).toHaveAttribute(
       "href",
-      "/contact#message",
+      "tel:+18183084100",
     );
   });
 });
