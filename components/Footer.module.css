@@ -88,3 +88,17 @@
 .legalLinks a:hover {
   color: var(--accent);
 }
+
+@media (max-width: 859px) {
+  /* The bottom wheel nav is fixed and about 136px tall, so the footer has to
+     end above it. Without this the legal links sit underneath the wheel, and
+     they are the only route into the privacy and terms pages. */
+  .footer {
+    padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .legalLinks {
+    flex-wrap: wrap;
+    gap: 14px 20px;
+  }
+}

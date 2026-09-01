@@ -33,7 +33,9 @@
 @media (max-width: 859px) {
   .button {
     right: 16px;
-    bottom: 82px;
+    /* Clears the bottom wheel nav, which stands about 136px tall plus the
+       home indicator. Keep in step with the footer's bottom padding. */
+    bottom: calc(150px + env(safe-area-inset-bottom, 0px));
     width: 46px;
     height: 46px;
   }

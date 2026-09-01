@@ -160,6 +160,23 @@
     cursor: grabbing;
   }
 
+  /* The centre well: a fixed ring marking the one slot that commits, so the
+     armed position is legible even while the wheel is mid-spin. It sits
+     behind the chips, which carry their own z-index. */
+  .wheel::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 64px;
+    height: 64px;
+    margin: -32px 0 0 -32px;
+    border: 1px solid var(--line-2);
+    border-radius: var(--wheel-chip-radius);
+    opacity: .45;
+    pointer-events: none;
+  }
+
   .wheelItem {
     position: absolute;
     top: 50%;
@@ -186,7 +203,11 @@
     border: 1px solid var(--line-2);
     border-radius: var(--wheel-chip-radius);
     background: var(--nav-pill);
-    transition: background .28s ease, color .28s ease, border-color .28s ease;
+    /* Colour is deliberately NOT transitioned. Easing the icon from light ink
+       to dark on-accent passes through mid greys that sit at almost zero
+       contrast against the accent fill, so the icon appeared to vanish for a
+       few hundred milliseconds every time the wheel settled. */
+    transition: background .28s ease, border-color .28s ease;
   }
 
   .link.centred {
