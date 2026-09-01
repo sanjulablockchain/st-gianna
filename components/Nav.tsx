@@ -24,20 +24,24 @@ export default function Nav() {
   const pathname = usePathname();
   const [hoverIndex, setHoverIndex] = useState(-1);
 
+  // Every entry is a real destination, so every entry shows at every width.
+  // These used to carry a `primary` flag that hid Why us, Journal, Partners
+  // and Contact below 859px, back when they were hash links into the
+  // homepage. They are their own pages now, so hiding them would strand four
+  // of them on phones.
   const items = [
-    { label: "Home", href: "/", icon: <HomeIcon size={23} />, primary: true },
-    { label: "About us", href: "/about", icon: <DiversityIcon size={23} />, primary: true },
-    { label: "Services", href: "/services", icon: <StethoscopeIcon size={23} />, primary: true },
-    { label: "Why us", href: "/why-us", icon: <FavoriteIcon size={23} />, primary: false },
-    { label: "Locations", href: "/locations", icon: <NearMeIcon size={23} />, primary: true },
-    { label: "Journal", href: "/journal", icon: <MenuBookIcon size={23} />, primary: false },
-    { label: "Partners", href: "/partners", icon: <HandshakeIcon size={23} />, primary: false },
-    { label: "Contact", href: "/contact", icon: <ChatBubbleIcon size={23} />, primary: false },
-    { label: "Call us", href: "tel:+18183084100", icon: <CallIcon size={23} />, primary: true },
+    { label: "Home", href: "/", icon: <HomeIcon size={23} /> },
+    { label: "About us", href: "/about", icon: <DiversityIcon size={23} /> },
+    { label: "Services", href: "/services", icon: <StethoscopeIcon size={23} /> },
+    { label: "Why us", href: "/why-us", icon: <FavoriteIcon size={23} /> },
+    { label: "Locations", href: "/locations", icon: <NearMeIcon size={23} /> },
+    { label: "Journal", href: "/journal", icon: <MenuBookIcon size={23} /> },
+    { label: "Partners", href: "/partners", icon: <HandshakeIcon size={23} /> },
+    { label: "Contact", href: "/contact", icon: <ChatBubbleIcon size={23} /> },
+    { label: "Call us", href: "tel:+18183084100", icon: <CallIcon size={23} /> },
     {
       label: theme === "dark" ? "Light mode" : "Dark mode",
       icon: theme === "dark" ? <LightModeIcon size={23} /> : <DarkModeIcon size={23} />,
-      primary: true,
       onClick: toggleTheme,
     },
   ];
@@ -51,9 +55,7 @@ export default function Nav() {
           return (
             <div
               key={item.label}
-              className={`${styles.blob} ${distance === 0 ? styles.blobActive : ""} ${
-                item.primary ? "" : styles.extraOnly
-              }`}
+              className={`${styles.blob} ${distance === 0 ? styles.blobActive : ""}`}
               style={{ width: `${width}px` }}
             />
           );
@@ -96,11 +98,7 @@ export default function Nav() {
           );
 
           return (
-            <li
-              key={item.label}
-              className={item.primary ? undefined : styles.extraOnly}
-              style={{ listStyle: "none" }}
-            >
+            <li key={item.label} style={{ listStyle: "none" }}>
               {control}
             </li>
           );

@@ -5,7 +5,7 @@ import Footer from "./Footer";
 describe("Footer", () => {
   it("renders the tagline, link columns, and contact details", () => {
     render(<Footer />);
-    expect(screen.getByRole("img", { name: "St. Gianna Medical Group" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "St. Gianna Medical Group" })).toBeInTheDocument();
     expect(
       screen.getByText(/pediatric and family healthcare across los angeles/i),
     ).toBeInTheDocument();
@@ -59,6 +59,15 @@ describe("Footer", () => {
     expect(screen.getByRole("link", { name: "Accessibility" })).toHaveAttribute(
       "href",
       "/terms#accessibility",
+    );
+  });
+
+  it("offers a way home, from both the Explore column and the logo", () => {
+    render(<Footer />);
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+    expect(screen.getByRole("link", { name: "St. Gianna Medical Group" })).toHaveAttribute(
+      "href",
+      "/",
     );
   });
 

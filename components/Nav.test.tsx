@@ -44,4 +44,33 @@ describe("Nav", () => {
     render(<Nav />);
     expect(screen.getByRole("button", { name: /light mode/i })).toBeInTheDocument();
   });
+
+  // Every nav destination is a real page now, so none may be hidden at any
+  // width. The old extraOnly class hid four of them below 859px.
+  it("hides no destination behind the extraOnly class", () => {
+    const { container } = render(<Nav />);
+    expect(container.querySelectorAll('[class*="extraOnly"]')).toHaveLength(0);
+  });
+
+  it("renders every one of the eight page destinations plus call and theme", () => {
+    render(<Nav />);
+    const hrefs = screen
+      .getAllByRole("link")
+      .map((a) => a.getAttribute("href"))
+      .sort();
+    expect(hrefs).toEqual(
+      [
+        "/",
+        "/about",
+        "/contact",
+        "/journal",
+        "/locations",
+        "/partners",
+        "/services",
+        "/why-us",
+        "tel:+18183084100",
+      ].sort(),
+    );
+    expect(screen.getAllByRole("button")).toHaveLength(1);
+  });
 });

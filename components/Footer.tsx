@@ -6,11 +6,7 @@ export default function Footer() {
     <footer id="footer" className={styles.footer}>
       <div className={styles.grid}>
         <div className={styles.brandColumn}>
-          <span
-            role="img"
-            aria-label="St. Gianna Medical Group"
-            className={styles.logo}
-          />
+          <Link href="/" aria-label="St. Gianna Medical Group" className={styles.logo} />
           <p className={styles.tagline}>
             Pediatric and family healthcare across Los Angeles. Same-day, telehealth, after
             hours.
@@ -18,6 +14,7 @@ export default function Footer() {
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Explore</span>
+          <Link href="/" className={styles.link}>Home</Link>
           <Link href="/about" className={styles.link}>About us</Link>
           <Link href="/services" className={styles.link}>Services</Link>
           <Link href="/why-us" className={styles.link}>Why us</Link>

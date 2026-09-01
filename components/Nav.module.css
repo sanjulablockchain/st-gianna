@@ -7,9 +7,8 @@
   width: 52px;
 }
 
-/* Mirrors .list's own flex layout so blobs always line up with the visible
-   links on every breakpoint, and items hidden via .extraOnly drop out of the
-   blob flow exactly as they drop out of the link flow. */
+/* Mirrors .list's own flex layout so blobs always line up with the links on
+   every breakpoint, including when the mobile pill wraps to a second row. */
 .blobLayer {
   position: absolute;
   inset: 0;
@@ -117,14 +116,21 @@
     box-shadow: 0 16px 34px -18px var(--shadow);
   }
 
+  /* Ten 46px items do not fit one row on a phone, so the pill wraps. The blob
+     layer wraps on identical rules so the blobs stay under their links. */
   .blobLayer {
     inset: 6px;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
     gap: 6px;
   }
 
   .list {
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 6px;
   }
 
@@ -140,10 +146,6 @@
   }
 
   .label {
-    display: none;
-  }
-
-  .extraOnly {
     display: none;
   }
 }
