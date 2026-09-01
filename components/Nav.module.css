@@ -66,12 +66,18 @@
   color: var(--on-accent);
 }
 
-.link[aria-current="page"] .iconWrap {
-  color: var(--accent);
-}
+/* Desktop only. On the mobile wheel the current page is also the centred
+   chip, which is already filled with the accent, so tinting its icon accent
+   too painted the icon in exactly the colour of its own background and made
+   it invisible. */
+@media (min-width: 860px) {
+  .link[aria-current="page"] .iconWrap {
+    color: var(--accent);
+  }
 
-.link[aria-current="page"]:hover .iconWrap {
-  color: inherit;
+  .link[aria-current="page"]:hover .iconWrap {
+    color: inherit;
+  }
 }
 
 .iconWrap {
@@ -151,7 +157,10 @@
     margin: 0;
     padding: 0;
     perspective: 620px;
-    transform-style: preserve-3d;
+    /* No transform-style: preserve-3d here. The chips are only one level deep,
+       so perspective alone projects them, and preserve-3d made every rotated
+       chip un-hittable: pointer events fell through to this list and taps did
+       nothing except on the one chip with rotateY(0). */
     touch-action: pan-y;
     cursor: grab;
   }

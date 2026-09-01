@@ -97,6 +97,18 @@
     padding-bottom: calc(150px + env(safe-area-inset-bottom, 0px));
   }
 
+  /* space-between kept the copyright and the legal links on one line, and
+     flex items will not shrink below their content, so both ran off the right
+     edge. Stack them instead and let the copyright wrap. */
+  .bottomRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    /* Keeps the copyright and the legal links clear of the fixed back-to-top
+       button, which sits in this corner and was drawn straight over them. */
+    padding-right: 62px;
+  }
+
   .legalLinks {
     flex-wrap: wrap;
     gap: 14px 20px;
