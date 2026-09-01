@@ -40,6 +40,10 @@
   --nav-pill: rgba(15, 39, 50, .92);
   --nav-ink: #EAF4F3;
   --shadow: rgba(0, 0, 0, .7);
+  /* Partner logo plate: light in both themes so dark wordmarks stay legible. */
+  --logo-plate: #FFFFFF;
+  /* Custom select chevron; the native one ignores our theme. */
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239FB6B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 html[data-theme="light"] {
@@ -80,6 +84,8 @@ html[data-theme="light"] {
   --nav-pill: rgba(15, 39, 50, .92);
   --nav-ink: #EAF4F3;
   --shadow: rgba(0, 0, 0, .7);
+  --logo-plate: #FFFFFF;
+  --select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%235A6C6C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 html, body {

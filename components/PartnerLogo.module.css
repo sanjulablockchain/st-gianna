@@ -1,0 +1,21 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 128px;
+  height: 68px;
+  flex-shrink: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  /* Light in both themes on purpose: these logos are mostly dark wordmarks on
+     transparent backgrounds and would vanish on the dark card. */
+  background: var(--logo-plate);
+  transition: border-color .3s ease;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

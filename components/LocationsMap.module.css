@@ -90,3 +90,47 @@
   font-weight: 700;
   letter-spacing: -.005em;
 }
+
+/* Leaflet renders popups outside this module's scope, so these are :global.
+   Leaflet's own popup chrome stays light, which is why the text colours here
+   are the light-theme ink rather than theme tokens. */
+.section :global(.sgm-popup) {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 190px;
+  font-family: inherit;
+}
+
+.section :global(.sgm-popup-name) {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.section :global(.sgm-popup-address) {
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.section :global(.sgm-popup-phone) {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.section :global(.sgm-popup-actions) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.section :global(.sgm-popup-actions a) {
+  padding: 6px 11px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}

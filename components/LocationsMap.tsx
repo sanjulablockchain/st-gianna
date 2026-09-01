@@ -11,18 +11,24 @@ const LocationsMapView = dynamic(() => import("./LocationsMapView"), { ssr: fals
 const OFFICES: MapOffice[] = [
   {
     name: "Hollywood",
+    phone: "818-275-7006",
+    tel: "tel:+18182757006",
     address: "5255 W Sunset Blvd, Los Angeles, CA 90027",
     lat: 34.0981967,
     lng: -118.3045711,
   },
   {
     name: "Santa Monica",
+    phone: "818-308-4100",
+    tel: "tel:+18183084100",
     address: "2221 Lincoln Blvd, Santa Monica, CA 90405",
     lat: 34.0097309,
     lng: -118.4803111,
   },
   {
     name: "La Mirada",
+    phone: "562-941-9853",
+    tel: "tel:+15629419853",
     address: "12675 La Mirada Blvd, #200, La Mirada, CA 90638",
     lat: 33.9161889,
     lng: -118.0124715,

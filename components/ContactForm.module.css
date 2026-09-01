@@ -103,6 +103,19 @@
   resize: vertical;
 }
 
+/* The native select arrow renders in the OS's own colour and sits hard against
+   the right edge, which reads as misaligned on a dark rounded field. Draw our
+   own chevron instead and leave room for it. */
+.select {
+  appearance: none;
+  padding-right: 44px;
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px 8px;
+  cursor: pointer;
+}
+
 .input:focus-visible,
 .select:focus-visible,
 .textarea:focus-visible {

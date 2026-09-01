@@ -18,12 +18,32 @@ describe("PartnersNetwork", () => {
     expect(screen.getByText("Blockchain BPO")).toBeInTheDocument();
   });
 
-  it("gives every organization a monogram mark", () => {
+  it("shows a real logo for every organization", () => {
     render(<PartnersNetwork />);
-    expect(screen.getAllByRole("img", { name: /monogram$/ })).toHaveLength(9);
-    expect(screen.getByRole("img", { name: "Kids & Teens Medical Group monogram" })).toBeInTheDocument();
-    expect(screen.getByText("KT")).toBeInTheDocument();
-    expect(screen.getByText("BB")).toBeInTheDocument();
+    const logos = screen.getAllByRole("img", { name: /logo$/ });
+    expect(logos).toHaveLength(9);
+    expect(
+      screen.getByRole("img", { name: "Kids & Teens Medical Group logo" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "Blockchain BPO logo" })).toBeInTheDocument();
+  });
+
+  it("points each partner at its real domain", () => {
+    const { container } = render(<PartnersNetwork />);
+    const hrefs = [...container.querySelectorAll("a")].map((a) => a.getAttribute("href")).sort();
+    expect(hrefs).toEqual(
+      [
+        "/",
+        "https://acig.lk",
+        "https://humancompassmso.com",
+        "https://pediatricafterhour.com",
+        "https://www.ktdoctor.com",
+        "https://www.laipt.org",
+        "https://www.myblockchainbpo.com",
+        "https://www.serendibhealthways.com",
+        "https://www.sjhospital.lk",
+      ].sort(),
+    );
   });
 
   it("opens external partner links safely in a new tab", () => {

@@ -16,9 +16,26 @@ L.Icon.Default.mergeOptions({
 export type MapOffice = {
   name: string;
   address: string;
+  phone: string;
+  tel: string;
   lat: number;
   lng: number;
 };
+
+/**
+ * Apple Maps only resolves properly on Apple hardware; everywhere else the
+ * link is a dead end. So both providers are offered rather than sniffing the
+ * user agent and guessing wrong.
+ */
+function googleMapsUrl(office: MapOffice) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${office.lat},${office.lng}`;
+}
+
+function appleMapsUrl(office: MapOffice) {
+  return `https://maps.apple.com/?daddr=${office.lat},${office.lng}&q=${encodeURIComponent(
+    office.name,
+  )}`;
+}
 
 function FocusHandler({ office }: { office: MapOffice }) {
   const map = useMap();
@@ -58,9 +75,21 @@ export default function LocationsMapView({
       {offices.map((office) => (
         <Marker key={office.name} position={[office.lat, office.lng]}>
           <Popup>
-            <strong>{office.name}</strong>
-            <br />
-            {office.address}
+            <span className="sgm-popup">
+              <strong className="sgm-popup-name">{office.name}</strong>
+              <span className="sgm-popup-address">{office.address}</span>
+              <a className="sgm-popup-phone" href={office.tel}>
+                {office.phone}
+              </a>
+              <span className="sgm-popup-actions">
+                <a href={googleMapsUrl(office)} target="_blank" rel="noopener noreferrer">
+                  Google Maps
+                </a>
+                <a href={appleMapsUrl(office)} target="_blank" rel="noopener noreferrer">
+                  Apple Maps
+                </a>
+              </span>
+            </span>
           </Popup>
         </Marker>
       ))}
