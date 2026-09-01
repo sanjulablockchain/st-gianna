@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Git worktrees live inside the repo and carry their own copy of the
+    // source and node_modules. Without this, linting the checkout also lints
+    // every worktree and drowns real findings.
+    ".claude/**",
   ]),
 ]);
 

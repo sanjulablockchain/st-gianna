@@ -42,3 +42,6 @@ next-env.d.ts
 
 # playwright screenshots from local visual checks
 shots/
+
+# git worktrees created inside the repo
+/.claude/worktrees/
