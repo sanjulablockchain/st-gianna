@@ -56,14 +56,18 @@ export default function Nav() {
     },
   ];
 
-  const wheel = useWheelPicker(items.length, SPACING);
+  // Open the wheel on whichever page you are actually looking at. Seeding the
+  // wheel's initial position with this (instead of always starting at 0 and
+  // settling over to it once mounted) means a deep link straight to, say,
+  // Partners never shows Home centred for a frame before sliding away.
+  const routeIndex = items.findIndex((item) => item.href === pathname);
+  const wheel = useWheelPicker(items.length, SPACING, routeIndex >= 0 ? routeIndex : 0);
   const { settleTo } = wheel;
 
-  // Open the wheel on whichever page you are actually looking at.
-  const routeIndex = items.findIndex((item) => item.href === pathname);
+  // Route changes after mount (clicking to a new page) still animate over.
   useEffect(() => {
-    if (isMobile && routeIndex >= 0) settleTo(routeIndex);
-  }, [isMobile, routeIndex, settleTo]);
+    if (routeIndex >= 0) settleTo(routeIndex);
+  }, [routeIndex, settleTo]);
 
   const centred = items[wheel.activeIndex];
 
@@ -94,38 +98,35 @@ export default function Nav() {
     [isMobile, settleTo],
   );
 
+  /* The wheel/readout/dots markup below is always rendered, regardless of
+     `isMobile`. That flag comes from a media-query hook that (by design,
+     see useMediaQuery) starts out "not yet known" on the very first paint,
+     so it must never gate which DOM shows up - only real CSS media queries
+     may do that, or the nav briefly renders as the desktop list even on a
+     phone. `isMobile` still gates pure behaviour (drag handlers, keyboard
+     centring) where a frame of lag is harmless. */
   return (
-    <nav
-      className={`${styles.nav} ${isMobile ? styles.wheelNav : ""}`}
-      onMouseLeave={() => setHoverIndex(-1)}
-      aria-label="Main"
-    >
-      {isMobile ? (
-        <span className={styles.readout} aria-hidden="true">
-          {centred?.label}
-        </span>
-      ) : null}
+    <nav className={styles.nav} onMouseLeave={() => setHoverIndex(-1)} aria-label="Main">
+      <span className={styles.readout} aria-hidden="true">
+        {centred?.label}
+      </span>
 
-      {!isMobile ? (
-        <div className={styles.blobLayer} aria-hidden="true">
-          {items.map((item, i) => {
-            const distance = hoverIndex < 0 ? Infinity : Math.abs(i - hoverIndex);
-            const width = distance === 0 ? 184 : distance === 1 ? 92 : distance === 2 ? 64 : 52;
-            return (
-              <div
-                key={item.label}
-                className={`${styles.blob} ${distance === 0 ? styles.blobActive : ""}`}
-                style={{ width: `${width}px` }}
-              />
-            );
-          })}
-        </div>
-      ) : null}
+      <div className={styles.blobLayer} aria-hidden="true">
+        {items.map((item, i) => {
+          const distance = hoverIndex < 0 ? Infinity : Math.abs(i - hoverIndex);
+          const width = distance === 0 ? 184 : distance === 1 ? 92 : distance === 2 ? 64 : 52;
+          return (
+            <div
+              key={item.label}
+              className={`${styles.blob} ${distance === 0 ? styles.blobActive : ""}`}
+              style={{ width: `${width}px` }}
+            />
+          );
+        })}
+      </div>
 
       <ul
-        className={`${styles.list} ${isMobile ? styles.wheel : ""} ${
-          wheel.dragging ? styles.dragging : ""
-        }`}
+        className={`${styles.list} ${styles.wheel} ${wheel.dragging ? styles.dragging : ""}`}
         onPointerDown={isMobile ? handlePointerDown : undefined}
         onPointerMove={isMobile ? wheel.onPointerMove : undefined}
         onPointerUp={isMobile ? handlePointerUp : undefined}
@@ -137,16 +138,18 @@ export default function Nav() {
           const fade = Math.min(Math.abs(offset), VISIBLE);
           const isCentred = i === wheel.activeIndex;
 
-          const wheelStyle: React.CSSProperties = isMobile
-            ? {
-                transform: `translateX(${offset * SPACING}px) translateZ(${
-                  -Math.abs(capped) * DEPTH
-                }px) rotateY(${-capped * CURVE}deg) scale(${1 - fade * 0.13})`,
-                opacity: Math.abs(offset) > VISIBLE ? 0 : 1 - fade * 0.26,
-                pointerEvents: Math.abs(offset) > VISIBLE ? "none" : "auto",
-                zIndex: 100 - Math.round(Math.abs(offset) * 10),
-              }
-            : {};
+          // Set as CSS custom properties, not direct style props, so they only
+          // ever take visual effect through the `.wheelItem` rule scoped
+          // inside the mobile media query - see the comment above the <nav>.
+          const hidden = Math.abs(offset) > VISIBLE;
+          const wheelStyle = {
+            "--wheel-transform": `translateX(${offset * SPACING}px) translateZ(${
+              -Math.abs(capped) * DEPTH
+            }px) rotateY(${-capped * CURVE}deg) scale(${1 - fade * 0.13})`,
+            "--wheel-opacity": hidden ? 0 : 1 - fade * 0.26,
+            "--wheel-pointer": hidden ? "none" : "auto",
+            "--wheel-z": 100 - Math.round(Math.abs(offset) * 10),
+          } as React.CSSProperties;
 
           const content = (
             <>
@@ -161,7 +164,7 @@ export default function Nav() {
           // commits. That is the deliberate second-tap cost.
           const needsCentring = isMobile && !isCentred;
 
-          const linkClass = `${styles.link} ${isCentred && isMobile ? styles.centred : ""}`;
+          const linkClass = `${styles.link} ${isCentred ? styles.centred : ""}`;
 
           const control = item.onClick ? (
             <button
@@ -215,7 +218,7 @@ export default function Nav() {
           return (
             <li
               key={item.label}
-              className={isMobile ? styles.wheelItem : undefined}
+              className={styles.wheelItem}
               style={{ listStyle: "none", ...wheelStyle }}
             >
               {control}
@@ -224,16 +227,14 @@ export default function Nav() {
         })}
       </ul>
 
-      {isMobile ? (
-        <span className={styles.dots} aria-hidden="true">
-          {items.map((item, i) => (
-            <span
-              key={item.label}
-              className={`${styles.dot} ${i === wheel.activeIndex ? styles.dotActive : ""}`}
-            />
-          ))}
-        </span>
-      ) : null}
+      <span className={styles.dots} aria-hidden="true">
+        {items.map((item, i) => (
+          <span
+            key={item.label}
+            className={`${styles.dot} ${i === wheel.activeIndex ? styles.dotActive : ""}`}
+          />
+        ))}
+      </span>
     </nav>
   );
 }

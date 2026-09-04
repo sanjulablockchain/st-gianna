@@ -16,8 +16,8 @@ const DRAG_THRESHOLD = 6;
  * useScrollReveal or useParallax. It still honours prefers-reduced-motion by
  * dropping momentum and easing and snapping straight to the target.
  */
-export function useWheelPicker(count: number, spacing: number) {
-  const [position, setPosition] = useState(0);
+export function useWheelPicker(count: number, spacing: number, initial = 0) {
+  const [position, setPosition] = useState(initial);
   const [dragging, setDragging] = useState(false);
 
   const frame = useRef(0);

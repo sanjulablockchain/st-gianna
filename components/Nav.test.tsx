@@ -157,10 +157,14 @@ describe("Nav mobile wheel", () => {
     render(<Nav />);
     // Partners is four steps from centre, so it is faded out and inert. The
     // wheel has to be flicked to it, which is the whole point of the control.
-    const far = screen.getByRole("link", { name: /partners/i }).closest("li");
-    expect(far).toHaveStyle({ pointerEvents: "none" });
-    const near = screen.getByRole("link", { name: /why us/i }).closest("li");
-    expect(near).toHaveStyle({ pointerEvents: "auto" });
+    // Pointer-events travel as a --wheel-pointer custom property (consumed by
+    // the CSS module's mobile-only .wheelItem rule) rather than a plain style
+    // prop, so that it only ever takes visual effect inside that breakpoint -
+    // see the comment above <nav> in Nav.tsx for why.
+    const far = screen.getByRole("link", { name: /partners/i }).closest("li") as HTMLElement;
+    expect(far.style.getPropertyValue("--wheel-pointer")).toBe("none");
+    const near = screen.getByRole("link", { name: /why us/i }).closest("li") as HTMLElement;
+    expect(near.style.getPropertyValue("--wheel-pointer")).toBe("auto");
   });
 
   it("centres a chip on keyboard focus, so the wheel is reachable without dragging", async () => {
