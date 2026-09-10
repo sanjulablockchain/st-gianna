@@ -1,0 +1,184 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--shadow);
+  animation: fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dialog {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 780px;
+  max-height: calc(100vh - 40px);
+  overflow: hidden auto;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  box-shadow: 0 40px 90px -30px var(--shadow);
+  animation: riseIn .34s cubic-bezier(.2, .9, .2, 1);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: var(--pill);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease;
+}
+
+.close:hover,
+.close:focus-visible {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 44px 34px;
+}
+
+.heading {
+  margin: 0;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: var(--ink);
+}
+
+.subtext {
+  margin: 0 0 10px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.clinics {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clinic {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 4px;
+  border-top: 1px solid var(--line);
+}
+
+.clinic:first-child {
+  border-top: none;
+}
+
+.clinicName {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.phone {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mapLinks {
+  display: flex;
+  gap: 6px;
+}
+
+.mapLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  color: var(--muted);
+  background: var(--chip-bg);
+  transition: background .25s ease, color .25s ease;
+}
+
+.mapLink:hover,
+.mapLink:focus-visible {
+  background: var(--chip-bg-active);
+  color: var(--accent);
+}
+
+.imageWrap {
+  position: relative;
+  min-height: 220px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+@media (max-width: 859px) {
+  .dialog {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  /* Image first, matching the reference layout collapsing to a single
+     column with the photo up top instead of squeezed to the bottom. */
+  .imageWrap {
+    order: -1;
+    min-height: 160px;
+  }
+
+  .content {
+    padding: 28px 22px 32px;
+  }
+
+  .heading {
+    font-size: 21px;
+  }
+
+  .clinic {
+    grid-template-columns: 1fr auto;
+    row-gap: 4px;
+  }
+
+  .mapLinks {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}

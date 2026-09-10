@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import BookCta from "@/components/BookCta";
 import CallFab from "@/components/CallFab";
+import WelcomePopup from "@/components/WelcomePopup";
 
 export default function HomePage() {
   return (
@@ -28,6 +29,7 @@ export default function HomePage() {
       <Footer />
       <BackToTop />
       <CallFab />
+      <WelcomePopup />
     </div>
   );
 }
