@@ -30,7 +30,7 @@ describe("LocationsMap", () => {
     const OFFICES = [
       { name: "Hollywood", lat: 34.0981967, lng: -118.3045711 },
       { name: "Santa Monica", lat: 34.0097309, lng: -118.4803111 },
-      { name: "La Mirada", lat: 33.9161889, lng: -118.0124715 },
+      { name: "La Mirada", lat: 33.922361, lng: -118.011757 },
     ];
 
     // Reasonable bounding box for Los Angeles County, CA.

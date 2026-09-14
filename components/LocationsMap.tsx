@@ -29,9 +29,9 @@ const OFFICES: MapOffice[] = [
     name: "La Mirada",
     phone: "562-941-9853",
     tel: "tel:+15629419853",
-    address: "12675 La Mirada Blvd, #200, La Mirada, CA 90638",
-    lat: 33.9161889,
-    lng: -118.0124715,
+    address: "11900 La Mirada Blvd, Ste 7, La Mirada, CA 90638",
+    lat: 33.922361,
+    lng: -118.011757,
   },
 ];
 

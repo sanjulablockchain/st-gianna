@@ -8,7 +8,7 @@ describe("ContactOffices", () => {
     expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(3);
     expect(screen.getByText("5255 W Sunset Blvd, Los Angeles, CA 90027")).toBeInTheDocument();
     expect(screen.getByText("2221 Lincoln Blvd, Santa Monica, CA 90405")).toBeInTheDocument();
-    expect(screen.getByText("12675 La Mirada Blvd, #200, La Mirada, CA 90638")).toBeInTheDocument();
+    expect(screen.getByText("11900 La Mirada Blvd, Ste 7, La Mirada, CA 90638")).toBeInTheDocument();
   });
 
   it("links each office phone number and offers directions", () => {

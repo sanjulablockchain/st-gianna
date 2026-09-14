@@ -26,7 +26,7 @@ const OFFICES = [
   },
   {
     name: "La Mirada",
-    address: "12675 La Mirada Blvd, #200,\nLa Mirada, CA 90638",
+    address: "11900 La Mirada Blvd, Ste 7,\nLa Mirada, CA 90638",
     phone: "562-941-9853",
     tel: "tel:+15629419853",
     map: "https://maps.google.com/?q=12675+La+Mirada+Blvd+200,+La+Mirada,+CA+90638",
