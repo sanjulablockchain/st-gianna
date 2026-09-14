@@ -1,13 +1,27 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import BookCta from "./BookCta";
 
 describe("BookCta", () => {
-  it("renders a booking link pointing at the booking URL", () => {
+  it("renders a button that opens the booking modal", async () => {
+    const user = userEvent.setup();
     render(<BookCta />);
-    expect(screen.getByRole("link", { name: /book a visit/i })).toHaveAttribute(
-      "href",
-      "https://healow.com/apps/practice/janesri-de-silva-md-a-prof-corp-dba-kids-and-teens-medical-group-25634?v=2&t=2&f=a8gDE7vnNqvjwXe2"
-    );
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: /book a visit/i }));
+
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("closes the booking modal when its close button is clicked", async () => {
+    const user = userEvent.setup();
+    render(<BookCta />);
+
+    await user.click(screen.getByRole("button", { name: /book a visit/i }));
+    await user.click(screen.getByRole("button", { name: /close/i }));
+
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 });

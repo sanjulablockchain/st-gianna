@@ -43,10 +43,11 @@ describe("Nav", () => {
     expect(screen.getByRole("link", { name: /about us/i })).toHaveAttribute("href", "/about");
     expect(screen.getByRole("link", { name: /services/i })).toHaveAttribute("href", "/services");
     expect(screen.getByRole("link", { name: /locations/i })).toHaveAttribute("href", "/locations");
-    expect(screen.getByRole("link", { name: /call us/i })).toHaveAttribute(
-      "href",
-      "tel:+18183084100",
-    );
+  });
+
+  it("does not render a call-us destination", () => {
+    render(<Nav />);
+    expect(screen.queryByRole("link", { name: /call us/i })).not.toBeInTheDocument();
   });
 
   it("links the four secondary destinations to their own pages", () => {
@@ -76,7 +77,7 @@ describe("Nav", () => {
     expect(container.querySelectorAll('[class*="extraOnly"]')).toHaveLength(0);
   });
 
-  it("renders every one of the eight page destinations plus call and theme", () => {
+  it("renders every one of the eight page destinations plus theme", () => {
     render(<Nav />);
     const hrefs = screen
       .getAllByRole("link")
@@ -92,7 +93,6 @@ describe("Nav", () => {
         "/partners",
         "/services",
         "/why-us",
-        "tel:+18183084100",
       ].sort(),
     );
     expect(screen.getAllByRole("button")).toHaveLength(1);
@@ -112,7 +112,7 @@ describe("Nav mobile wheel", () => {
 
   it("still exposes every destination as a real link", () => {
     render(<Nav />);
-    expect(screen.getAllByRole("link")).toHaveLength(9);
+    expect(screen.getAllByRole("link")).toHaveLength(8);
     expect(screen.getByRole("link", { name: /partners/i })).toHaveAttribute("href", "/partners");
   });
 
@@ -126,7 +126,7 @@ describe("Nav mobile wheel", () => {
   it("tracks position with one dot per destination", () => {
     const { container } = render(<Nav />);
     const dots = container.querySelectorAll('[class*="dot"]:not([class*="dots"])');
-    expect(dots).toHaveLength(10);
+    expect(dots).toHaveLength(9);
     expect(container.querySelectorAll('[class*="dotActive"]')).toHaveLength(1);
   });
 

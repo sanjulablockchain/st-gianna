@@ -16,7 +16,6 @@ import {
   MenuBookIcon,
   HandshakeIcon,
   ChatBubbleIcon,
-  CallIcon,
   LightModeIcon,
   DarkModeIcon,
 } from "@/components/icons";
@@ -48,7 +47,6 @@ export default function Nav() {
     { label: "Journal", href: "/journal", icon: <MenuBookIcon size={23} /> },
     { label: "Partners", href: "/partners", icon: <HandshakeIcon size={23} /> },
     { label: "Contact", href: "/contact", icon: <ChatBubbleIcon size={23} /> },
-    { label: "Call us", href: "tel:+18183084100", icon: <CallIcon size={23} /> },
     {
       label: theme === "dark" ? "Light mode" : "Dark mode",
       icon: theme === "dark" ? <LightModeIcon size={23} /> : <DarkModeIcon size={23} />,

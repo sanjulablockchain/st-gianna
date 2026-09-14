@@ -1,13 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import styles from "./BookCta.module.css";
 import { ArrowOutwardIcon } from "@/components/icons";
+import BookingModal from "@/components/BookingModal";
 
 export default function BookCta() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <a
-      href="https://healow.com/apps/practice/janesri-de-silva-md-a-prof-corp-dba-kids-and-teens-medical-group-25634?v=2&t=2&f=a8gDE7vnNqvjwXe2"
-      className={styles.pill}
-    >
-      Book a visit <ArrowOutwardIcon size={18} />
-    </a>
+    <>
+      <button type="button" className={styles.pill} onClick={() => setOpen(true)}>
+        Book a visit <ArrowOutwardIcon size={18} />
+      </button>
+      <BookingModal open={open} onClose={() => setOpen(false)} />
+    </>
   );
 }
