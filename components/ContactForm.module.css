@@ -126,6 +126,63 @@
   color: var(--ink);
 }
 
+/* Where the browser supports it, the picker stops being an OS window and
+   becomes part of the page, so it can carry the same radius, border and hover
+   as the rest of the form. Everywhere else the rules above still apply and the
+   list stays plain but readable. On phones this never engages, which is right:
+   the native wheel beats anything we would draw. */
+@supports (appearance: base-select) {
+  .select,
+  .select::picker(select) {
+    appearance: base-select;
+  }
+
+  /* We already draw a chevron as a background image on the field. */
+  .select::picker-icon {
+    display: none;
+  }
+
+  .select::picker(select) {
+    width: anchor-size(width);
+    margin-top: 8px;
+    padding: 6px;
+    border: 1px solid var(--field-border);
+    border-radius: 14px;
+    background: var(--bg-2);
+    box-shadow: 0 20px 44px var(--shadow);
+  }
+
+  /* 1px panel border + 6px panel padding + 9px here lines the row text up with
+     the 16px inset of the field above it. */
+  .select option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 9px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .select option:hover {
+    background: var(--chip-bg);
+  }
+
+  .select option:checked {
+    background: var(--chip-bg-active);
+    color: var(--ink);
+  }
+
+  /* The tick the browser inserts; ours sits on the right, in the accent. */
+  .select option::checkmark {
+    order: 1;
+    margin-left: auto;
+    color: var(--accent);
+  }
+}
+
 .input:focus-visible,
 .select:focus-visible,
 .textarea:focus-visible {
