@@ -167,6 +167,32 @@
   opacity: .88;
 }
 
+.button:disabled {
+  opacity: .6;
+  cursor: progress;
+}
+
+/* Pulled off-screen instead of display:none, which some bots skip. Kept out of
+   the tab order and the accessibility tree so nobody can reach it by accident. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.failure {
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--danger);
+  border-radius: 12px;
+  background: var(--field-bg);
+  color: var(--danger);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .success {
   display: flex;
   flex-direction: column;

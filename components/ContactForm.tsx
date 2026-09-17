@@ -3,12 +3,15 @@
 import { useState } from "react";
 import styles from "./ContactForm.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { EMAIL_PATTERN } from "@/lib/validation";
+import {
+  OFFICES,
+  TOPICS,
+  validateContact,
+  type ContactErrors,
+  type ContactSubmission,
+} from "@/lib/validation";
 
-const OFFICES = ["No preference", "Hollywood", "Santa Monica", "La Mirada"];
-const TOPICS = ["Appointment", "Billing", "Medical records", "Careers", "Something else"];
-
-const EMPTY = {
+const EMPTY: ContactSubmission = {
   name: "",
   email: "",
   phone: "",
@@ -18,53 +21,69 @@ const EMPTY = {
   consent: false,
 };
 
-type Values = typeof EMPTY;
-type Errors = Partial<Record<"name" | "email" | "phone" | "message" | "consent", string>>;
+type Status = "idle" | "sending" | "sent";
 
-function validate(values: Values): Errors {
-  const errors: Errors = {};
-  if (!values.name.trim()) errors.name = "Tell us your name.";
-  if (!values.email.trim()) {
-    errors.email = "Enter an email address.";
-  } else if (!EMAIL_PATTERN.test(values.email.trim())) {
-    errors.email = "Enter a valid email address.";
-  }
-  // Phone is optional, but a partial number is worse than none.
-  if (values.phone.trim() && values.phone.replace(/\D/g, "").length < 10) {
-    errors.phone = "Enter a phone number we can reach you on, or leave it blank.";
-  }
-  if (!values.message.trim()) errors.message = "Let us know what you need.";
-  if (!values.consent) errors.consent = "Please confirm we can reply to you.";
-  return errors;
-}
+const GENERIC_FAILURE = "We could not send that just now. Please call 818-308-4100 instead.";
 
 export default function ContactForm() {
   const { ref, revealed } = useScrollReveal<HTMLElement>();
-  const [values, setValues] = useState<Values>(EMPTY);
-  const [errors, setErrors] = useState<Errors>({});
-  const [sent, setSent] = useState(false);
+  const [values, setValues] = useState<ContactSubmission>(EMPTY);
+  const [errors, setErrors] = useState<ContactErrors>({});
+  const [status, setStatus] = useState<Status>("idle");
+  const [failure, setFailure] = useState("");
+  // Hidden from people, so anything in it came from a bot filling every input.
+  const [company, setCompany] = useState("");
 
-  function set<K extends keyof Values>(key: K, value: Values[K]) {
+  const sent = status === "sent";
+  const sending = status === "sending";
+
+  function set<K extends keyof ContactSubmission>(key: K, value: ContactSubmission[K]) {
     setValues((current) => ({ ...current, [key]: value }));
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const found = validate(values);
+    if (sending) return;
+
+    const found = validateContact(values);
     setErrors(found);
+    setFailure("");
     if (Object.keys(found).length > 0) return;
-    // TODO: POST `values` to the contact endpoint once a backend or mail
-    // provider is wired up. Nothing leaves the browser today.
-    setSent(true);
+
+    setStatus("sending");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ...values, company }),
+      });
+      const body = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        // A 400 means the server disagreed field by field; show those against
+        // the fields rather than as one opaque banner.
+        if (body?.errors) setErrors(body.errors as ContactErrors);
+        setFailure(typeof body?.error === "string" ? body.error : GENERIC_FAILURE);
+        setStatus("idle");
+        return;
+      }
+
+      setStatus("sent");
+    } catch {
+      setFailure(GENERIC_FAILURE);
+      setStatus("idle");
+    }
   }
 
   function reset() {
     setValues(EMPTY);
     setErrors({});
-    setSent(false);
+    setFailure("");
+    setCompany("");
+    setStatus("idle");
   }
 
-  const describedBy = (field: keyof Errors) =>
+  const describedBy = (field: keyof ContactErrors) =>
     errors[field] ? `contact-${field}-error` : undefined;
 
   return (
@@ -239,8 +258,28 @@ export default function ContactForm() {
               ) : null}
             </div>
 
-            <button type="submit" className={styles.button}>
-              Send message
+            {/* Off-screen rather than display:none, which some bots skip. */}
+            <div className={styles.honeypot} aria-hidden="true">
+              <label htmlFor="contact-company">Company</label>
+              <input
+                id="contact-company"
+                name="company"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={company}
+                onChange={(event) => setCompany(event.target.value)}
+              />
+            </div>
+
+            {failure ? (
+              <p className={styles.failure} role="alert">
+                {failure}
+              </p>
+            ) : null}
+
+            <button type="submit" className={styles.button} disabled={sending}>
+              {sending ? "Sending…" : "Send message"}
             </button>
           </form>
         )}

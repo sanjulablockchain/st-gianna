@@ -3,6 +3,10 @@
 }
 
 :root {
+  /* Tells the browser which way to paint the widgets it owns and we cannot
+     style: the <option> list a <select> opens, form control internals, and
+     spinners. Without it those render light over the dark theme. */
+  color-scheme: dark;
   --logo-img: url("/images/logo-dark.png");
   --bg: #06161C;
   --bg-2: #0B2229;
@@ -47,6 +51,7 @@
 }
 
 html[data-theme="light"] {
+  color-scheme: light;
   --logo-img: url("/images/logo-light.png");
   --bg: #F5F8F7;
   --bg-2: #FFFFFF;
