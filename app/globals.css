@@ -105,6 +105,12 @@ html, body {
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--dim) transparent;
+  /* Keeps the scrollbar's column reserved at all times, so locking the page
+     behind a modal cannot hand those 10px back to the layout and shift
+     everything sideways. scrollbar-gutter is the tidier spelling but it stops
+     reserving the moment overflow becomes hidden, which is exactly when we
+     need it. See useScrollLock, which depends on this staying here. */
+  overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {

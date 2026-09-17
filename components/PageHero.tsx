@@ -17,6 +17,8 @@ type PageHeroProps = {
   stats?: HeroStat[];
   image?: string;
   imageAlt?: string;
+  /** Where to anchor the crop, for images whose subject is not centred. */
+  imagePosition?: string;
 };
 
 export default function PageHero({
@@ -27,6 +29,7 @@ export default function PageHero({
   stats,
   image,
   imageAlt,
+  imagePosition,
 }: PageHeroProps) {
   const { ref, revealed } = useScrollReveal<HTMLElement>();
   const { ref: layersRef, offset } = useParallax<HTMLSpanElement>(0.05, 18);
@@ -41,7 +44,14 @@ export default function PageHero({
       <span className={styles.layers} aria-hidden="true" ref={layersRef}>
         {image ? (
           <span className={styles.imageLayer} style={{ transform: `translateY(${offset}px)` }}>
-            <Image src={image} alt={imageAlt ?? ""} fill className={styles.image} priority />
+            <Image
+              src={image}
+              alt={imageAlt ?? ""}
+              fill
+              className={styles.image}
+              style={imagePosition ? { objectPosition: imagePosition } : undefined}
+              priority
+            />
           </span>
         ) : null}
         <span

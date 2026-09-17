@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import styles from "./BookingModal.module.css";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { CloseIcon, ArrowOutwardIcon, CallIcon, ScheduleIcon } from "@/components/icons";
 
 const HEALOW_URL =
@@ -20,12 +21,12 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
+  useScrollLock(open);
+
   useEffect(() => {
     if (!open) return;
 
     closeButtonRef.current?.focus();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
 
     // Closes only from the close button - not Escape, not an outside click -
     // so it never disappears by accident (matches WelcomePopup's convention).
@@ -49,7 +50,6 @@ export default function BookingModal({ open, onClose }: BookingModalProps) {
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
     };
   }, [open]);
 

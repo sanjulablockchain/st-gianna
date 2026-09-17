@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import styles from "./WelcomePopup.module.css";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { CloseIcon, MapIcon, CompassIcon } from "@/components/icons";
 
 const STORAGE_KEY = "sgm-welcome-popup-seen";
@@ -54,12 +55,12 @@ export default function WelcomePopup() {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
+  useScrollLock(open);
+
   useEffect(() => {
     if (!open) return;
 
     closeButtonRef.current?.focus();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
 
     // Closes only from the close button (see the click handler below) - not
     // Escape, not an outside click - so it never disappears by accident.
@@ -83,7 +84,6 @@ export default function WelcomePopup() {
     document.addEventListener("keydown", onKeyDown);
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
     };
   }, [open]);
 

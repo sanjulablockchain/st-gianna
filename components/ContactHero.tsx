@@ -16,6 +16,11 @@ export default function ContactHero() {
       stats={STATS}
       image="/images/photo-doctor-portrait.jpg"
       imageAlt=""
+      // A tall portrait in a band that is wide on desktop and narrow on phones,
+      // so each axis matters at a different size. Centring cropped the head off
+      // at the eyes on desktop, where the crop is vertical, and pushed the face
+      // half off the right edge on phones, where it is horizontal.
+      imagePosition="62% 18%"
     />
   );
 }
