@@ -70,7 +70,7 @@ describe("POST /api/contact", () => {
     expect(envelope.to).toBe("inbox@example.com");
     expect(envelope.from).toContain("sender@example.com");
     expect(envelope.replyTo).toBe("ada@example.com");
-    expect(envelope.subject).toBe("St. Gianna — Billing enquiry from Ada Lovelace");
+    expect(envelope.subject).toBe("St. Gianna: Billing enquiry from Ada Lovelace");
     expect(envelope.html).toContain("I have a question about a statement.");
     expect(envelope.text).toContain("I have a question about a statement.");
   });

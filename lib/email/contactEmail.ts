@@ -57,7 +57,7 @@ export function renderContactEmail(submission: ContactSubmission): RenderedEmail
   const { office, topic } = submission;
   const message = submission.message.trim();
 
-  const subject = `St. Gianna — ${topic} enquiry from ${name}`;
+  const subject = `St. Gianna: ${topic} enquiry from ${name}`;
 
   const messageHtml = escapeHtml(message).replace(/\r?\n/g, "<br />");
 
@@ -72,7 +72,7 @@ export function renderContactEmail(submission: ContactSubmission): RenderedEmail
 </head>
 <body style="margin:0;padding:0;background:${C.bg};">
 <!-- Shown in the inbox preview line, then hidden in the body. -->
-<div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(topic)} — ${escapeHtml(name)} &lt;${escapeHtml(email)}&gt;</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(topic)} from ${escapeHtml(name)}, ${escapeHtml(email)}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:${C.bg};">
   <tr>
     <td align="center" style="padding:32px 16px;">
@@ -145,11 +145,11 @@ export function renderContactEmail(submission: ContactSubmission): RenderedEmail
     `Preferred office: ${office}`,
     `About:            ${topic}`,
     "",
-    "Message",
-    "-------",
+    "MESSAGE",
+    "",
     message,
     "",
-    "--",
+    "",
     "Sent by the contact form at sgmdoctor.com. Reply to this email to reach",
     "the sender. This channel is not secure, so keep clinical detail out of it.",
   ].join("\n");

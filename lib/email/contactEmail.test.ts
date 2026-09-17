@@ -14,7 +14,7 @@ const SUBMISSION = {
 describe("renderContactEmail", () => {
   it("names the topic and sender in the subject so the inbox is scannable", () => {
     expect(renderContactEmail(SUBMISSION).subject).toBe(
-      "St. Gianna — Billing enquiry from Ada Lovelace",
+      "St. Gianna: Billing enquiry from Ada Lovelace",
     );
   });
 
@@ -52,7 +52,7 @@ describe("renderContactEmail", () => {
   it("escapes HTML in the subject too", () => {
     const { subject } = renderContactEmail({ ...SUBMISSION, name: "<b>Ada</b>" });
 
-    expect(subject).toBe("St. Gianna — Billing enquiry from <b>Ada</b>");
+    expect(subject).toBe("St. Gianna: Billing enquiry from <b>Ada</b>");
   });
 
   it("keeps the shape of a multi-line message", () => {
@@ -84,5 +84,18 @@ describe("renderContactEmail", () => {
 
   it("uses the sender's address as the reply-to so replying reaches them", () => {
     expect(renderContactEmail(SUBMISSION).replyTo).toBe("ada@example.com");
+  });
+
+  it("writes no dashes of its own into anything the reader sees", () => {
+    const { subject, html, text } = renderContactEmail(SUBMISSION);
+    // Strip what the submitter typed and what HTML needs, then nothing
+    // dash-like should be left in the wording we wrote.
+    const ours = [subject, text, html.replace(/<[^>]*>/g, " ")]
+      .join(" ")
+      .replaceAll("310-555-0142", "")
+      .replaceAll("Ada Lovelace", "");
+
+    expect(ours).not.toMatch(/[—–]/);
+    expect(ours).not.toMatch(/(^|\s)-{1,}(\s|$)/);
   });
 });
