@@ -116,6 +116,16 @@
   cursor: pointer;
 }
 
+/* The list a select opens is an OS window, not part of the page, and setting
+   color-scheme is not enough to darken it here. An option inherits the field's
+   near-white text but has no background of its own, so on the white list that
+   Chrome actually draws the text disappears. Give each row both colours and
+   the list stops depending on what the browser decides to paint. */
+.select option {
+  background-color: var(--bg-2);
+  color: var(--ink);
+}
+
 .input:focus-visible,
 .select:focus-visible,
 .textarea:focus-visible {

@@ -3,9 +3,12 @@
 }
 
 :root {
-  /* Tells the browser which way to paint the widgets it owns and we cannot
-     style: the <option> list a <select> opens, form control internals, and
-     spinners. Without it those render light over the dark theme. */
+  /* Tells the browser which way to paint the widgets it owns: checkbox and
+     radio fills, scrollbars, spinners. Without it the unchecked consent box
+     renders solid white on the dark theme.
+     It does NOT darken the list a <select> opens. Chrome on Windows draws
+     that list light regardless, so those rows are coloured explicitly in
+     ContactForm.module.css. */
   color-scheme: dark;
   --logo-img: url("/images/logo-dark.png");
   --bg: #06161C;
