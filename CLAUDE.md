@@ -26,6 +26,43 @@ Every component has a co-located `*.test.tsx`. Run the whole suite before consid
 - `hooks/` — shared client hooks (`useTheme`, `useScrollReveal`, `useParallax`).
 - `@/*` path alias maps to the repo root (see [tsconfig.json](tsconfig.json)).
 
+## Rules (non negotiable)
+
+1. **Responsive.** Every page and component must work on mobile, tablet and desktop. Build mobile first, then add `sm:` / `md:` / `lg:` / `xl:` overrides. Check at 375px, 768px and 1280px. No horizontal scroll at any width. Tap targets at least 44px.
+2. **No dash punctuation in visible text.** Never use em dashes, en dashes, or a hyphen as punctuation (" - ") in any copy, headings, labels, alt text, metadata or button text. Rewrite the sentence with a comma, colon, period or "and" instead. Hyphens are fine in code, class names, URLs and filenames. `npm run check:dashes` enforces this. Also avoid them in commit messages and docs we write.
+3. **Always follow the theme.** Use only the tokens in `src/app/globals.css` (`@theme`): `bg-primary`, `text-ink`, `rounded-card`, `shadow-card`, `max-w-site`, etc. No raw hex values, no arbitrary color classes like `bg-[#123456]`, no inline styles for colors. Need a new value? Add a token to `@theme` first, then use it.
+4. **Commit everything.** Small, focused commits using Conventional Commits (`feat:`, `fix:`, `chore:`, `style:`, `refactor:`, `docs:`). Never leave work uncommitted at the end of a task. The working tree must be clean when done.
+5. **New feature means a new git worktree.** Never build features directly on `main`:
+   ```bash
+   git worktree add .worktrees/<feature> -b feat/<feature>
+   cd .worktrees/<feature> && npm install
+   # work, commit
+   cd ../.. && git merge --no-ff feat/<feature>
+   git worktree remove .worktrees/<feature> && git branch -d feat/<feature>
+   ```
+   `.worktrees/` is gitignored. Small chores (docs, config) may go straight to `main`.
+6. **Follow the folder architecture.** Put new files where they belong. Do not invent new top level folders without updating this file.
+7. **Tailwind CSS only.** No CSS modules, styled components or other CSS files. `globals.css` holds only the theme tokens and base layer. Merge classes with `cn()` from `@/lib/cn`.
+8. **Light mode and dark mode.** Everything must look right in both. The site follows the OS setting by default and visitors can switch with the ThemeToggle in the header (`next-themes`, `data-theme` on `<html>`). Every color token has a dark value in `@theme` and a light value in `:root[data-theme="light"]` in `globals.css`, so use tokens and colors switch on their own. When adding a token, define both values. Use `dark:` classes only for things tokens cannot cover (for example swapping an image or logo). Text on gold fills uses `text-void` or `text-on-gold`. Check every change in both modes, with readable contrast (WCAG AA).
+9. **Images optimized for fast loading.** Every image must be light and load fast on slow networks:
+   - Always render with `next/image` (never a raw `<img>`). It serves AVIF / WebP at the right size.
+   - Always set `sizes` for responsive images and `width` / `height` (or `fill` with a sized parent) so there is no layout shift.
+   - Only the first visible (above the fold) image gets `priority`; everything else lazy loads.
+   - Use `placeholder="blur"` for large photos (static imports get this for free).
+   - Before committing, resize to at most 2x the largest display size and compress. Photos as `.webp` or `.jpg`, graphics and logos as optimized `.svg`. Limits: raster 300 KB, SVG 50 KB.
+   - Files in `public/images` and `public/icons` are cached for a year, so when replacing an image give it a new filename.
+   - `npm run check:images` enforces size limits.
+10. **No external image links.** Every image (photos, logos, icons, backgrounds, Open Graph images) is downloaded into `public/images` or `public/icons` and served from our own domain. Never use a CDN, hotlink or third party URL for an image. `next.config.ts` has no `remotePatterns` and the CSP only allows `img-src 'self'`, so external images will break. `npm run check:images` enforces this.
+11. **Tight security, always.** Think about security in every change:
+    - Keep the security headers and CSP in `next.config.ts`. Never loosen them (new external domains, `unsafe-eval` in production, removing headers) without asking the user first.
+    - No third party scripts, trackers, embeds or iframes without explicit user approval. Load fonts only through `next/font` (self hosted).
+    - Never commit secrets. Keep them in `.env.local` (gitignored). Only `NEXT_PUBLIC_*` values reach the browser, so never put secrets in them.
+    - Never use `dangerouslySetInnerHTML`, `eval` or unsanitized user input in the DOM.
+    - Forms: validate and sanitize on the server (Server Actions or Route Handlers), limit input length, add spam protection, and never trust client side validation alone.
+    - External links use `target="_blank" rel="noopener noreferrer"`.
+    - Treat any patient or health information as sensitive: never log it, never put it in URLs.
+    - Add dependencies only when needed, prefer well maintained packages, and keep `npm run check:audit` clean.
+
 ## Required rules for all UI work
 
 **1. Follow the current theme system — never hardcode colors.**
