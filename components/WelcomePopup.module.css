@@ -18,7 +18,8 @@
 .dialog {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
   width: 100%;
   max-width: 780px;
   max-height: calc(100vh - 40px);
@@ -65,12 +66,12 @@
   flex-direction: column;
   justify-content: center;
   gap: 6px;
-  padding: 44px 34px;
+  padding: 28px 22px 32px;
 }
 
 .heading {
   margin: 0;
-  font-size: 25px;
+  font-size: 21px;
   font-weight: 800;
   letter-spacing: -.01em;
   color: var(--ink);
@@ -94,9 +95,10 @@
 
 .clinic {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 10px;
+  row-gap: 4px;
   padding: 12px 4px;
   border-top: 1px solid var(--line);
 }
@@ -122,6 +124,8 @@
 .mapLinks {
   display: flex;
   gap: 6px;
+  grid-column: 1 / -1;
+  justify-content: flex-start;
 }
 
 .mapLink {
@@ -144,41 +148,40 @@
 
 .imageWrap {
   position: relative;
-  min-height: 220px;
+  order: -1;
+  min-height: 160px;
 }
 
 .image {
   object-fit: cover;
 }
 
-@media (max-width: 859px) {
+@media (min-width: 860px) {
   .dialog {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
   }
 
-  /* Image first, matching the reference layout collapsing to a single
-     column with the photo up top instead of squeezed to the bottom. */
   .imageWrap {
-    order: -1;
-    min-height: 160px;
+    order: 0;
+    min-height: 220px;
   }
 
   .content {
-    padding: 28px 22px 32px;
+    padding: 44px 34px;
   }
 
   .heading {
-    font-size: 21px;
+    font-size: 25px;
   }
 
   .clinic {
-    grid-template-columns: 1fr auto;
-    row-gap: 4px;
+    grid-template-columns: 1fr auto auto;
+    row-gap: 10px;
   }
 
   .mapLinks {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
+    grid-column: auto;
+    justify-content: normal;
   }
 }

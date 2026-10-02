@@ -119,10 +119,11 @@
 
 .subrow {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 32px;
+  gap: 20px;
   padding-top: 18px;
   border-top: 1px solid var(--hero-line);
 }
@@ -163,10 +164,10 @@
   color: var(--hero-ink-3);
 }
 
-@media (max-width: 640px) {
+@media (min-width: 641px) {
   .subrow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 32px;
   }
 }
