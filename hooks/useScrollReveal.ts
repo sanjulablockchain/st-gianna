@@ -15,8 +15,9 @@ export function useScrollReveal<T extends HTMLElement>() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (typeof IntersectionObserver === "undefined" || prefersReducedMotion) {
-      setRevealed(true);
-      return;
+      // Deferred a tick so the state change is not a synchronous setState in the effect body.
+      const frame = requestAnimationFrame(() => setRevealed(true));
+      return () => cancelAnimationFrame(frame);
     }
 
     const observer = new IntersectionObserver(
