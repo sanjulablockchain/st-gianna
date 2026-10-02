@@ -41,7 +41,7 @@
   padding: 20px 34px;
   border-radius: 999px;
   background: var(--on-accent);
-  color: #fff;
+  color: var(--hero-ink);
   font-weight: 800;
   font-size: 16px;
   transition: background .3s ease;
@@ -51,8 +51,8 @@
    is theme-invariant) with white text, so the hover shade must stay dark too.
    var(--bg-2) flips to white in light theme, which made this white-on-white. */
 .primary:hover {
-  background: #0B2229;
-  color: #fff;
+  background: var(--cta-dark);
+  color: var(--hero-ink);
 }
 
 .secondary {
@@ -61,7 +61,7 @@
   gap: 10px;
   padding: 20px 34px;
   border-radius: 999px;
-  border: 1px solid rgba(6, 22, 28, .35);
+  border: 1px solid color-mix(in srgb, var(--hero-band) 35%, transparent);
   color: var(--on-accent);
   font-weight: 800;
   font-size: 16px;
@@ -69,6 +69,6 @@
 }
 
 .secondary:hover {
-  background: rgba(6, 22, 28, .08);
+  background: color-mix(in srgb, var(--hero-band) 8%, transparent);
   color: var(--on-accent);
 }

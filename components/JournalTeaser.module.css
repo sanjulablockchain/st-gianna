@@ -37,7 +37,7 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(90deg, rgba(6, 22, 28, .96) 32%, rgba(6, 22, 28, .35));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--hero-band) 96%, transparent) 32%, color-mix(in srgb, var(--hero-band) 35%, transparent));
 }
 
 .content {
@@ -64,7 +64,7 @@
 .kickerRule {
   width: 26px;
   height: 1px;
-  background: rgba(122, 213, 213, .5);
+  background: color-mix(in srgb, var(--italic-highlight) 50%, transparent);
 }
 
 .title {
@@ -72,13 +72,13 @@
   line-height: 1.06;
   letter-spacing: -.035em;
   font-weight: 800;
-  color: #fff;
+  color: var(--hero-ink);
 }
 
 .body {
   font-size: 15.5px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, .72);
+  color: color-mix(in srgb, var(--hero-ink) 72%, transparent);
   max-width: 38ch;
 }
 
