@@ -45,7 +45,9 @@ export default function Hero() {
         <video
           ref={videoRef}
           className={styles.video}
-          src="/videos/hero.mp4"
+          src="/videos/hero-v2.mp4"
+          poster="/images/hero-poster.webp"
+          preload="metadata"
           autoPlay
           loop
           muted

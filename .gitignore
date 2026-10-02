@@ -47,3 +47,6 @@ shots/
 
 # git worktrees created inside the repo
 /.claude/worktrees/
+
+# git worktrees (project rule 5)
+/.worktrees/
