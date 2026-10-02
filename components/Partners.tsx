@@ -107,6 +107,7 @@ export default function Partners() {
               src={PARTNERS[previewIndex].image}
               alt={`${PARTNERS[previewIndex].name} preview`}
               fill
+              sizes="320px"
               className={styles.previewImage}
             />
           </span>

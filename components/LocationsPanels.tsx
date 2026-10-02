@@ -63,6 +63,7 @@ export default function LocationsPanels() {
                 src={office.image}
                 alt={`${office.name} clinic`}
                 fill
+                sizes="(min-width: 1180px) 33vw, (min-width: 860px) 50vw, 100vw"
                 className={styles.image}
               />
             </div>

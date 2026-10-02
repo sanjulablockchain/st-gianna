@@ -57,7 +57,7 @@ const GROUPS = [
     partners: [
       {
         name: "St. Joseph Hospital Negombo",
-        logo: "/images/partners/st-joseph.png",
+        logo: "/images/partners/st-joseph-logo.webp",
         tagline: "US-standard care in Negombo",
         body: "Operated by Kids & Teens Medical Group, USA, bringing American healthcare standards to affordable, accessible care for families in Sri Lanka.",
         tags: ["Emergency & outpatient", "Inpatient care", "Telemedicine", "Pharmacy & diagnostics"],

@@ -48,7 +48,7 @@ export default function ArticleView({ article }: { article: Article }) {
 
         <span className={styles.imageWrap} ref={parallaxRef}>
           <span className={styles.imageLayer} style={{ transform: `translateY(${offset}px)` }}>
-            <Image src={article.image} alt="" fill className={styles.image} priority />
+            <Image src={article.image} alt="" fill sizes="100vw" className={styles.image} priority />
           </span>
         </span>
 

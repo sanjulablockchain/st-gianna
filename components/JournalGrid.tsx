@@ -51,7 +51,7 @@ export default function JournalGrid() {
               style={{ "--reveal-index": Math.min(i, 8) } as React.CSSProperties}
             >
               <span className={styles.imageWrap}>
-                <Image src={article.image} alt="" fill className={styles.image} />
+                <Image src={article.image} alt="" fill sizes="(min-width: 1180px) 33vw, (min-width: 640px) 50vw, 100vw" className={styles.image} />
               </span>
               <span className={styles.cardMeta}>{article.category}</span>
               <h3 className={styles.cardTitle}>{article.title}</h3>

@@ -68,6 +68,7 @@ export default function ContactOffices() {
                   src={office.image}
                   alt={`${office.name} office`}
                   fill
+                  sizes="(min-width: 860px) 33vw, 100vw"
                   className={styles.image}
                 />
               </span>

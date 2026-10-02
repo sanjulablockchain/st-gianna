@@ -8,9 +8,9 @@ import "leaflet/dist/leaflet.css";
 delete (L.Icon.Default.prototype as unknown as { _getIconUrl?: unknown })._getIconUrl;
 
 L.Icon.Default.mergeOptions({
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconRetinaUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  iconUrl: "/images/map/marker-icon.png",
+  iconRetinaUrl: "/images/map/marker-icon-2x.png",
+  shadowUrl: "/images/map/marker-shadow.png",
 });
 
 export type MapOffice = {

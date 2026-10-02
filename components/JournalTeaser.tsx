@@ -21,6 +21,7 @@ export default function JournalTeaser() {
           src="/images/photo-physical-therapy.jpg"
           alt=""
           fill
+          sizes="100vw"
           className={styles.image}
         />
         <span className={styles.overlay} />

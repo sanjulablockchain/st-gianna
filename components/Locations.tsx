@@ -70,6 +70,7 @@ export default function Locations() {
                 src={location.image}
                 alt={`${location.name} clinic`}
                 fill
+                sizes="(min-width: 1180px) 33vw, (min-width: 860px) 50vw, 100vw"
                 className={styles.image}
               />
             </div>

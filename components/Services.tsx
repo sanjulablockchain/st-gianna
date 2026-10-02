@@ -76,6 +76,7 @@ export default function Services() {
             alt={`${SERVICES[previewIndex].title} preview`}
             width={300}
             height={380}
+            sizes="300px"
             className={styles.previewImage}
           />
         </span>

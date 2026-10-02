@@ -33,6 +33,7 @@ export default function JournalFeatured() {
             src={FEATURED.image}
             alt="A family at home together"
             fill
+            sizes="(min-width: 860px) 50vw, 100vw"
             className={styles.image}
           />
         </span>

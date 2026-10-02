@@ -22,6 +22,7 @@ export default function PartnerLogo({ src, name }: PartnerLogoProps) {
         alt={`${name} logo`}
         width={120}
         height={60}
+        sizes="120px"
         className={styles.image}
       />
     </span>

@@ -48,6 +48,7 @@ export default function PageHero({
               src={image}
               alt={imageAlt ?? ""}
               fill
+              sizes="100vw"
               className={styles.image}
               style={imagePosition ? { objectPosition: imagePosition } : undefined}
               priority

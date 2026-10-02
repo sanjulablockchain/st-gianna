@@ -156,6 +156,7 @@ export default function WelcomePopup() {
             src="/images/photo-pediatric-checkup.jpg"
             alt="A pediatric checkup at St. Gianna Medical Group"
             fill
+            sizes="(min-width: 640px) 360px, 100vw"
             className={styles.image}
           />
         </div>

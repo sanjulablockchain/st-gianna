@@ -26,7 +26,7 @@ export default function WhyUsNumbers() {
     >
       <span className={styles.backdrop} aria-hidden="true" ref={parallaxRef}>
         <span className={styles.imageLayer} style={{ transform: `translateY(${offset}px)` }}>
-          <Image src="/images/why-us-band.jpg" alt="" fill className={styles.image} />
+          <Image src="/images/why-us-band.jpg" alt="" fill sizes="100vw" className={styles.image} />
         </span>
         <span className={styles.overlay} />
       </span>

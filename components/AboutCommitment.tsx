@@ -34,6 +34,7 @@ export default function AboutCommitment() {
             src="/images/photo-doctor-portrait.jpg"
             alt="A St. Gianna Medical Group clinician"
             fill
+            sizes="(min-width: 860px) 50vw, 100vw"
             className={styles.image}
           />
         </span>
