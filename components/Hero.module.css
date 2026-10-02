@@ -181,6 +181,12 @@
 }
 
 @media (min-width: 641px) {
+  /* Keeps the stats and the subrow rule clear of the scroll hint, which sits
+     in the same right inset as the hero padding. */
+  .content {
+    padding-right: 48px;
+  }
+
   .subrow {
     flex-direction: row;
     align-items: flex-end;
