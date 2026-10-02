@@ -84,7 +84,7 @@ export default function LocationsPanels() {
                   <a
                     href={office.map}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className={styles.directionsLink}
                   >
                     <NearMeIcon size={18} />
