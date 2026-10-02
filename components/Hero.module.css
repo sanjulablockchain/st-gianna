@@ -22,6 +22,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Keeps the father and daughter in frame when a portrait screen crops the
+     16:9 footage down to a narrow slice. */
+  object-position: 28% 40%;
   animation: slowZoom 26s ease-in-out infinite alternate;
 }
 
@@ -186,5 +189,12 @@
 
   .scrollHint {
     display: flex;
+  }
+
+  .video {
+    /* Mirrored so the faces sit on the right, clear of the headline. The footage
+       has no text in it, so flipping it changes nothing else. */
+    object-position: 22% 40%;
+    scale: -1 1;
   }
 }

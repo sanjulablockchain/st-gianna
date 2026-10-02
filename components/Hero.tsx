@@ -45,8 +45,8 @@ export default function Hero() {
         <video
           ref={videoRef}
           className={styles.video}
-          src="/videos/hero-v2.mp4"
-          poster="/images/hero-poster.webp"
+          src="/videos/hero-clinic.mp4"
+          poster="/images/hero-clinic-poster.webp"
           preload="metadata"
           autoPlay
           loop
