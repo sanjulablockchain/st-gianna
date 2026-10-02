@@ -16,6 +16,7 @@ npm test               # vitest run (jsdom + @testing-library/react)
 npm run check:dashes   # no em or en dashes in source
 npm run check:images   # image size limits, no external image URLs
 npm run check:audit    # npm audit, high severity and above
+npm run gen:blur       # regenerate lib/blurData.json after adding or replacing a photo
 ```
 
 Every component has a co-located `*.test.tsx`. Run the whole suite and the three `check:*` scripts before considering a change done.
@@ -56,7 +57,7 @@ Every component has a co-located `*.test.tsx`. Run the whole suite and the three
     - Always render with `next/image` (never a raw `<img>`). It serves AVIF / WebP at the right size.
     - Always set `sizes` for responsive images and `width` / `height` (or `fill` with a sized parent) so there is no layout shift.
     - Only the first visible (above the fold) image gets `priority`; everything else lazy loads.
-    - Use `placeholder="blur"` for large photos (static imports get this for free).
+    - Use `placeholder="blur"` for large photos. Spread `{...blurProps(src)}` from `@/lib/blur`, and run `npm run gen:blur` after adding a photo.
     - Before committing, resize to at most 2x the largest display size and compress. Photos as `.webp` or `.jpg`, graphics and logos as optimized `.svg`. Limits: raster 300 KB, SVG 50 KB.
     - Files in `public/images` are cached for a year, so when replacing an image give it a new filename.
     - `npm run check:images` enforces size limits.
