@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import Link from "next/link";
 import styles from "./PageHero.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -49,6 +50,7 @@ export default function PageHero({
               alt={imageAlt ?? ""}
               fill
               sizes="100vw"
+              {...blurProps(image)}
               className={styles.image}
               style={imagePosition ? { objectPosition: imagePosition } : undefined}
               priority

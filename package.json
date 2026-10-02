@@ -10,7 +10,8 @@
     "test": "vitest run",
     "check:dashes": "node scripts/check-dashes.mjs",
     "check:images": "node scripts/check-images.mjs",
-    "check:audit": "npm audit --audit-level=high"
+    "check:audit": "npm audit --audit-level=high",
+    "gen:blur": "node scripts/gen-blur.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

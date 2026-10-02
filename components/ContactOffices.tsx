@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import styles from "./ContactOffices.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
@@ -69,6 +70,7 @@ export default function ContactOffices() {
                   alt={`${office.name} office`}
                   fill
                   sizes="(min-width: 860px) 33vw, 100vw"
+                  {...blurProps(office.image)}
                   className={styles.image}
                 />
               </span>

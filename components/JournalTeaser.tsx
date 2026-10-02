@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import Link from "next/link";
 import styles from "./JournalTeaser.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -22,6 +23,7 @@ export default function JournalTeaser() {
           alt=""
           fill
           sizes="100vw"
+          {...blurProps("/images/photo-physical-therapy.jpg")}
           className={styles.image}
         />
         <span className={styles.overlay} />

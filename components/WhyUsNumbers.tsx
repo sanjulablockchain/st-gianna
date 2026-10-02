@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import styles from "./WhyUsNumbers.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
@@ -26,7 +27,7 @@ export default function WhyUsNumbers() {
     >
       <span className={styles.backdrop} aria-hidden="true" ref={parallaxRef}>
         <span className={styles.imageLayer} style={{ transform: `translateY(${offset}px)` }}>
-          <Image src="/images/why-us-band.jpg" alt="" fill sizes="100vw" className={styles.image} />
+          <Image src="/images/why-us-band.jpg" alt="" fill sizes="100vw" {...blurProps("/images/why-us-band.jpg")} className={styles.image} />
         </span>
         <span className={styles.overlay} />
       </span>

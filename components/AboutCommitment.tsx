@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import styles from "./AboutCommitment.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
@@ -35,6 +36,7 @@ export default function AboutCommitment() {
             alt="A St. Gianna Medical Group clinician"
             fill
             sizes="(min-width: 860px) 50vw, 100vw"
+            {...blurProps("/images/photo-doctor-portrait.jpg")}
             className={styles.image}
           />
         </span>

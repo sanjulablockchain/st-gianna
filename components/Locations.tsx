@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import Link from "next/link";
 import styles from "./Locations.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -71,6 +72,7 @@ export default function Locations() {
                 alt={`${location.name} clinic`}
                 fill
                 sizes="(min-width: 1180px) 33vw, (min-width: 860px) 50vw, 100vw"
+                {...blurProps(location.image)}
                 className={styles.image}
               />
             </div>

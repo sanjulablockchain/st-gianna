@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import Link from "next/link";
 import styles from "./ArticleView.module.css";
 import PageHero from "./PageHero";
@@ -48,7 +49,7 @@ export default function ArticleView({ article }: { article: Article }) {
 
         <span className={styles.imageWrap} ref={parallaxRef}>
           <span className={styles.imageLayer} style={{ transform: `translateY(${offset}px)` }}>
-            <Image src={article.image} alt="" fill sizes="100vw" className={styles.image} priority />
+            <Image src={article.image} alt="" fill sizes="100vw" {...blurProps(article.image)} className={styles.image} priority />
           </span>
         </span>
 

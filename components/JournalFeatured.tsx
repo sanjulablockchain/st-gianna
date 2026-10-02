@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import Link from "next/link";
 import styles from "./JournalFeatured.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -34,6 +35,7 @@ export default function JournalFeatured() {
             alt="A family at home together"
             fill
             sizes="(min-width: 860px) 50vw, 100vw"
+            {...blurProps(FEATURED.image)}
             className={styles.image}
           />
         </span>

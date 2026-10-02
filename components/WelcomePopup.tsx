@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import styles from "./WelcomePopup.module.css";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { CloseIcon, MapIcon, CompassIcon } from "@/components/icons";
@@ -157,6 +158,7 @@ export default function WelcomePopup() {
             alt="A pediatric checkup at St. Gianna Medical Group"
             fill
             sizes="(min-width: 640px) 360px, 100vw"
+            {...blurProps("/images/photo-pediatric-checkup.jpg")}
             className={styles.image}
           />
         </div>

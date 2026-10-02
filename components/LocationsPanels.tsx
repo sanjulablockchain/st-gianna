@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { blurProps } from "@/lib/blur";
 import styles from "./LocationsPanels.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
@@ -64,6 +65,7 @@ export default function LocationsPanels() {
                 alt={`${office.name} clinic`}
                 fill
                 sizes="(min-width: 1180px) 33vw, (min-width: 860px) 50vw, 100vw"
+                {...blurProps(office.image)}
                 className={styles.image}
               />
             </div>
