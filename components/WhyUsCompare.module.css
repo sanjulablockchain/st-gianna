@@ -79,19 +79,48 @@
   transform: translateY(18px);
 }
 
+/* Below tablet the table is one card per row. Each cell announces its own
+   column via data-label, so the stacked form reads without a visible header. */
+.table,
+.table tbody,
+.row,
+.rowLabel,
+.typical,
+.ours {
+  display: block;
+  width: auto;
+}
+
+.head {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.row {
+  margin-bottom: 14px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
 .rowLabel {
-  width: 22%;
-  padding: 22px 24px 22px 0;
+  padding: 0 0 14px;
   vertical-align: top;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--ink);
-  border-top: 1px solid var(--line);
+  border-top: none;
 }
 
 .typical,
 .ours {
-  padding: 22px 24px 22px 0;
+  padding: 14px 0 0;
   vertical-align: top;
   border-top: 1px solid var(--line);
   font-size: 14.5px;
@@ -103,9 +132,25 @@
 }
 
 .ours {
-  padding-left: 22px;
-  border-left: 2px solid var(--rule-accent);
+  padding-left: 0;
+  border-left: none;
   color: var(--ink-2);
+}
+
+.typical::before,
+.ours::before {
+  content: attr(data-label);
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.ours::before {
+  color: var(--accent);
 }
 
 .srOnly {
@@ -119,67 +164,58 @@
   white-space: nowrap;
 }
 
-/* Below tablet the table becomes one card per row. Each cell announces its own
-   column via data-label, so the stacked form reads without a visible header. */
-@media (max-width: 859px) {
-  .table,
-  .table tbody,
-  .row,
-  .rowLabel,
-  .typical,
-  .ours {
-    display: block;
-    width: auto;
+/* From tablet up the stacked cards go back to a real table. */
+@media (min-width: 860px) {
+  .table {
+    display: table;
+    width: 100%;
+  }
+
+  .table tbody {
+    display: table-row-group;
   }
 
   .head {
-    position: absolute;
-    width: 1px;
-    height: 1px;
+    position: static;
+    width: auto;
+    height: auto;
     padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
   }
 
   .row {
-    margin-bottom: 14px;
-    padding: 18px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
+    display: table-row;
+    margin-bottom: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
   }
 
   .rowLabel {
-    padding: 0 0 14px;
-    border-top: none;
-    font-size: 17px;
+    display: table-cell;
+    width: 22%;
+    padding: 22px 24px 22px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
   }
 
   .typical,
   .ours {
-    padding: 14px 0 0;
-    border-top: 1px solid var(--line);
+    display: table-cell;
+    width: auto;
+    padding: 22px 24px 22px 0;
   }
 
   .ours {
-    padding-left: 0;
-    border-left: none;
+    padding-left: 22px;
+    border-left: 2px solid var(--rule-accent);
   }
 
   .typical::before,
   .ours::before {
-    content: attr(data-label);
-    display: block;
-    margin-bottom: 6px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--muted-2);
-  }
-
-  .ours::before {
-    color: var(--accent);
+    content: none;
   }
 }

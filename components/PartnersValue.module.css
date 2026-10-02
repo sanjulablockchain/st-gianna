@@ -37,7 +37,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 28px 26px 34px 0;
+  padding: 28px 0 34px 0;
   border-top: 2px solid var(--rule-accent);
   transition: opacity .6s ease, transform .6s ease;
   transition-delay: calc(var(--reveal-index, 0) * 70ms);
@@ -67,8 +67,8 @@
   color: var(--muted);
 }
 
-@media (max-width: 640px) {
+@media (min-width: 641px) {
   .card {
-    padding-right: 0;
+    padding-right: 26px;
   }
 }

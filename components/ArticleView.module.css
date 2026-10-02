@@ -65,7 +65,7 @@
   display: block;
   height: clamp(220px, 38vw, 460px);
   margin-bottom: clamp(34px, 4vw, 54px);
-  border-radius: 20px;
+  border-radius: 14px;
   overflow: hidden;
 }
 
@@ -82,13 +82,13 @@
 
 .layout {
   display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: clamp(30px, 5vw, 70px);
   align-items: start;
 }
 
 .summary {
-  position: sticky;
+  position: static;
   top: 110px;
   display: flex;
   flex-direction: column;
@@ -173,7 +173,7 @@
 
 .relatedGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: 20px;
 }
 
@@ -221,22 +221,22 @@
   color: var(--link);
 }
 
-@media (max-width: 1179px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .summary {
-    position: static;
-  }
-}
-
-@media (max-width: 640px) {
+@media (min-width: 641px) {
   .imageWrap {
-    border-radius: 14px;
+    border-radius: 20px;
   }
 
   .relatedGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+
+  .summary {
+    position: sticky;
   }
 }

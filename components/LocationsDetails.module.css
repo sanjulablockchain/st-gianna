@@ -50,9 +50,9 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 18px 28px;
-  padding: 26px 0;
+  align-items: flex-start;
+  gap: 10px 16px;
+  padding: 20px 0;
   border-top: 1px solid var(--line);
   transition: padding .4s cubic-bezier(.2, .9, .2, 1), border-color .3s ease;
 }
@@ -62,7 +62,7 @@
 }
 
 .rowActive {
-  padding: 26px 26px;
+  padding: 20px 20px;
   border-color: var(--line-2);
 }
 
@@ -132,14 +132,14 @@
   color: var(--dim-2);
 }
 
-@media (max-width: 640px) {
+@media (min-width: 641px) {
   .row {
-    align-items: flex-start;
-    gap: 10px 16px;
-    padding: 20px 0;
+    align-items: center;
+    gap: 18px 28px;
+    padding: 26px 0;
   }
 
   .rowActive {
-    padding: 20px 20px;
+    padding: 26px 26px;
   }
 }

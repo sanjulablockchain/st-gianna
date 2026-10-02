@@ -21,8 +21,8 @@
   max-width: 460px;
   max-height: calc(100vh - 40px);
   overflow: hidden auto;
-  padding: 44px 32px 32px;
-  border-radius: 24px;
+  padding: 36px 20px 24px;
+  border-radius: 20px;
   border: 1px solid var(--line);
   background: var(--bg-2);
   box-shadow: 0 40px 90px -30px var(--shadow);
@@ -75,7 +75,7 @@
 
 .heading {
   margin: 0 0 6px;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: -.01em;
   color: var(--ink);
@@ -97,8 +97,8 @@
 .option {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
+  gap: 12px;
+  padding: 14px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--chip-bg);
@@ -117,8 +117,8 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: 999px;
   background: var(--pill);
   color: var(--accent);
@@ -168,23 +168,23 @@
   font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 640px) {
+@media (min-width: 641px) {
   .dialog {
-    padding: 36px 20px 24px;
-    border-radius: 20px;
+    padding: 44px 32px 32px;
+    border-radius: 24px;
   }
 
   .heading {
-    font-size: 20px;
+    font-size: 23px;
   }
 
   .option {
-    padding: 14px;
-    gap: 12px;
+    padding: 16px;
+    gap: 16px;
   }
 
   .optionIcon {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 }

@@ -57,7 +57,7 @@
   display: block;
   height: clamp(240px, 42vw, 520px);
   margin-bottom: clamp(34px, 4vw, 54px);
-  border-radius: 20px;
+  border-radius: 14px;
   overflow: hidden;
 }
 
@@ -105,8 +105,8 @@
   color: var(--on-accent);
 }
 
-@media (max-width: 640px) {
+@media (min-width: 641px) {
   .imageWrap {
-    border-radius: 14px;
+    border-radius: 20px;
   }
 }

@@ -1,18 +1,31 @@
 .nav {
+  --wheel-chip-radius: 34%;
+  --wheel-accent: var(--accent);
+
   position: fixed;
-  left: 22px;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 50%;
+  top: auto;
+  bottom: 0;
+  transform: translateX(-50%);
   z-index: 90;
-  width: 52px;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0 calc(16px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, transparent, var(--nav-pill) 38%);
+  backdrop-filter: blur(14px);
 }
 
 /* Mirrors .list's own flex layout so blobs always line up with the links on
-   every breakpoint, including when the mobile pill wraps to a second row. */
+   every breakpoint, including when the mobile pill wraps to a second row.
+   Desktop only: hidden on the mobile wheel. */
 .blobLayer {
   position: absolute;
   inset: 0;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
@@ -44,19 +57,23 @@
 
 .link {
   position: relative;
-  height: 52px;
-  width: 52px;
-  border-radius: 999px;
+  height: 44px;
+  width: 44px;
+  border-radius: var(--wheel-chip-radius);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   color: var(--nav-ink);
-  transition: color .3s ease;
+  /* Colour is deliberately NOT transitioned on the mobile wheel. Easing the
+     icon from light ink to dark on-accent passes through mid greys that sit at
+     almost zero contrast against the accent fill, so the icon appeared to
+     vanish for a few hundred milliseconds every time the wheel settled. */
+  transition: background .28s ease, border-color .28s ease;
   /* Reset so the theme-toggle <button> renders identically to the anchors. */
   padding: 0;
-  border: none;
-  background: none;
+  border: 1px solid var(--line-2);
+  background: var(--nav-pill);
   font-family: inherit;
   cursor: pointer;
 }
@@ -66,30 +83,16 @@
   color: var(--on-accent);
 }
 
-/* Desktop only. On the mobile wheel the current page is also the centred
-   chip, which is already filled with the accent, so tinting its icon accent
-   too painted the icon in exactly the colour of its own background and made
-   it invisible. */
-@media (min-width: 860px) {
-  .link[aria-current="page"] .iconWrap {
-    color: var(--accent);
-  }
-
-  .link[aria-current="page"]:hover .iconWrap {
-    color: inherit;
-  }
-}
-
 .iconWrap {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .label {
-  display: block;
+  display: none;
   position: absolute;
   left: 54px;
   white-space: nowrap;
@@ -107,184 +110,229 @@
   transform: translateX(0);
 }
 
-/* Mobile-only readout and dots. Rendered unconditionally (see Nav.tsx) so
-   the breakpoint below - not a JS media-query hook that briefly lags behind
-   the real viewport on first paint - is what decides whether they show. */
-.readout,
-.dots {
-  display: none;
-}
-
 /* ---------------------------------------------------------------------------
-   Mobile: bottom wheel picker.
+   Mobile (the base styles): bottom wheel picker.
 
    A curved 3D carousel of icon chips. The centred chip fills with accent and
    names itself in the readout above; dots track position. Per-item transforms
    are set inline from JS because they follow a continuous drag position.
 
+   The readout, wheel and dots are rendered unconditionally (see Nav.tsx), so
+   the breakpoints, not a JS media-query hook that briefly lags behind the
+   real viewport on first paint, decide what shows. The desktop block at the
+   end of this file resets every wheel rule for the desktop pill.
+
    Tuning: CURVE, SPACING and DEPTH live in Nav.tsx. Chip shape is
-   --wheel-chip-radius below: 50% for a circle, 34% for the squircle used now.
+   --wheel-chip-radius above: 50% for a circle, 34% for the squircle used now.
    Accent is --wheel-accent.
 --------------------------------------------------------------------------- */
-@media (max-width: 859px) {
-  .nav {
-    --wheel-chip-radius: 34%;
-    --wheel-accent: var(--accent);
+.readout {
+  display: block;
+  /* Reserve the line so the wheel never shifts as the name changes. */
+  min-height: 15px;
+  line-height: 15px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--nav-ink);
+}
 
-    left: 50%;
-    top: auto;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 0 calc(16px + env(safe-area-inset-bottom, 0px));
-    background: linear-gradient(180deg, transparent, var(--nav-pill) 38%);
-    backdrop-filter: blur(14px);
-  }
+.wheel {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 66px;
+  margin: 0;
+  padding: 0;
+  perspective: 620px;
+  /* No transform-style: preserve-3d here. The chips are only one level deep,
+     so perspective alone projects them, and preserve-3d made every rotated
+     chip un-hittable: pointer events fell through to this list and taps did
+     nothing except on the one chip with rotateY(0). */
+  touch-action: pan-y;
+  cursor: grab;
+}
 
-  /* Desktop-only hover blobs. Always rendered in the DOM, so hide them here. */
-  .blobLayer {
-    display: none;
-  }
+.wheel.dragging {
+  cursor: grabbing;
+}
 
-  .readout {
-    display: block;
-    /* Reserve the line so the wheel never shifts as the name changes. */
-    min-height: 15px;
-    line-height: 15px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    color: var(--nav-ink);
-  }
+/* The centre well: a fixed ring marking the one slot that commits, so the
+   armed position is legible even while the wheel is mid-spin. It sits
+   behind the chips, which carry their own z-index. */
+.wheel::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--wheel-chip-radius);
+  opacity: .45;
+  pointer-events: none;
+}
 
-  .wheel {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 66px;
-    margin: 0;
-    padding: 0;
-    perspective: 620px;
-    /* No transform-style: preserve-3d here. The chips are only one level deep,
-       so perspective alone projects them, and preserve-3d made every rotated
-       chip un-hittable: pointer events fell through to this list and taps did
-       nothing except on the one chip with rotateY(0). */
-    touch-action: pan-y;
-    cursor: grab;
-  }
+.wheelItem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -22px 0 0 -22px;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+  transition: transform .28s cubic-bezier(.2, .9, .2, 1), opacity .28s ease;
+  /* Set from JS on every item, every render (see Nav.tsx), but only ever
+     consumed here: the desktop block below resets them. */
+  transform: var(--wheel-transform);
+  opacity: var(--wheel-opacity);
+  pointer-events: var(--wheel-pointer);
+  z-index: var(--wheel-z);
+}
 
-  .wheel.dragging {
-    cursor: grabbing;
-  }
+/* While dragging the position is already continuous, so easing would only
+   put lag between finger and chip. */
+.dragging .wheelItem {
+  transition: none;
+}
 
-  /* The centre well: a fixed ring marking the one slot that commits, so the
-     armed position is legible even while the wheel is mid-spin. It sits
-     behind the chips, which carry their own z-index. */
-  .wheel::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 64px;
-    height: 64px;
-    margin: -32px 0 0 -32px;
-    border: 1px solid var(--line-2);
-    border-radius: var(--wheel-chip-radius);
-    opacity: .45;
-    pointer-events: none;
-  }
+.link.centred {
+  background: var(--wheel-accent);
+  border-color: var(--wheel-accent);
+  color: var(--on-accent);
+}
 
-  .wheelItem {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -25px 0 0 -25px;
-    transform-origin: 50% 50%;
-    will-change: transform, opacity;
-    transition: transform .28s cubic-bezier(.2, .9, .2, 1), opacity .28s ease;
-    /* Set from JS on every item, every render (see Nav.tsx), but only ever
-       consumed here, inside the mobile breakpoint. */
-    transform: var(--wheel-transform);
-    opacity: var(--wheel-opacity);
-    pointer-events: var(--wheel-pointer);
-    z-index: var(--wheel-z);
-  }
+.link.centred:hover,
+.link.centred:focus-visible {
+  color: var(--on-accent);
+}
 
-  /* While dragging the position is already continuous, so easing would only
-     put lag between finger and chip. */
-  .dragging .wheelItem {
-    transition: none;
-  }
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--nav-ink);
+  opacity: .28;
+  transition: opacity .25s ease, transform .25s ease, background .25s ease;
+}
+
+.dotActive {
+  opacity: 1;
+  background: var(--wheel-accent);
+  transform: scale(1.5);
+}
+
+@media (min-width: 360px) {
   .link,
   .iconWrap {
     width: 50px;
     height: 50px;
   }
 
-  .link {
-    border: 1px solid var(--line-2);
-    border-radius: var(--wheel-chip-radius);
-    background: var(--nav-pill);
-    /* Colour is deliberately NOT transitioned. Easing the icon from light ink
-       to dark on-accent passes through mid greys that sit at almost zero
-       contrast against the accent fill, so the icon appeared to vanish for a
-       few hundred milliseconds every time the wheel settled. */
-    transition: background .28s ease, border-color .28s ease;
+  .wheelItem {
+    margin: -25px 0 0 -25px;
+  }
+}
+
+/* Desktop: the left-edge pill. Each rule below undoes the matching mobile
+   wheel rule above. */
+@media (min-width: 860px) {
+  .nav {
+    left: 22px;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 52px;
+    max-width: none;
+    display: block;
+    flex-direction: row;
+    align-items: normal;
+    gap: normal;
+    padding: 0;
+    background: none;
+    backdrop-filter: none;
   }
 
-  .link.centred {
-    background: var(--wheel-accent);
-    border-color: var(--wheel-accent);
-    color: var(--on-accent);
+  .blobLayer {
+    display: flex;
   }
 
-  .link.centred:hover,
-  .link.centred:focus-visible {
-    color: var(--on-accent);
-  }
-
-  .label {
+  .readout,
+  .dots {
     display: none;
   }
 
-  .dots {
+  .wheel {
     display: flex;
-    align-items: center;
-    gap: 6px;
+    width: auto;
+    height: auto;
+    perspective: none;
+    touch-action: auto;
+    cursor: inherit;
   }
 
-  .dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--nav-ink);
-    opacity: .28;
-    transition: opacity .25s ease, transform .25s ease, background .25s ease;
+  .wheel.dragging {
+    cursor: inherit;
   }
 
-  .dotActive {
-    opacity: 1;
-    background: var(--wheel-accent);
-    transform: scale(1.5);
-  }
-}
-
-@media (max-width: 359px) {
-  .link,
-  .iconWrap {
-    width: 44px;
-    height: 44px;
+  .wheel::before {
+    content: none;
   }
 
   .wheelItem {
-    margin: -22px 0 0 -22px;
+    position: static;
+    top: auto;
+    left: auto;
+    margin: 0;
+    will-change: auto;
+    transition: none;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: auto;
+  }
+
+  .link,
+  .iconWrap {
+    width: 52px;
+    height: 52px;
+  }
+
+  .link,
+  .link.centred {
+    border: none;
+    background: none;
+  }
+
+  .link {
+    border-radius: 999px;
+    transition: color .3s ease;
+  }
+
+  .link.centred {
+    color: var(--nav-ink);
+  }
+
+  .label {
+    display: block;
+  }
+
+  /* Desktop only. On the mobile wheel the current page is also the centred
+     chip, which is already filled with the accent, so tinting its icon accent
+     too painted the icon in exactly the colour of its own background and made
+     it invisible. */
+  .link[aria-current="page"] .iconWrap {
+    color: var(--accent);
+  }
+
+  .link[aria-current="page"]:hover .iconWrap {
+    color: inherit;
   }
 }
-
