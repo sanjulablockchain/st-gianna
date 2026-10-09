@@ -6,18 +6,23 @@ import { PRIVACY_INTRO, PRIVACY_SECTIONS } from "@/components/legal/privacyConte
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structuredData";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | St. Gianna Medical Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Privacy Policy",
   description:
     "What St. Gianna Medical Group collects, how it is used, how protected health information is handled under HIPAA, and the rights you can exercise.",
-};
+  path: "/privacy",
+});
 
 // No TickerBar here on purpose: a scrolling marquee above a legal document is
 // noise the reader has to work around.
 export default function PrivacyPage() {
   return (
     <div style={{ position: "relative", background: "var(--bg)", overflowX: "hidden" }}>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Privacy policy", path: "/privacy" }])} />
       <Nav />
       <BookCta />
       <LegalPage

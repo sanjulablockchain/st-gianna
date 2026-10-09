@@ -38,7 +38,7 @@ const OFFICES = [
     hours: "Mon to Fri, 9am to 6pm",
     note: "Suite 200, on the first floor at the rear of the courtyard. Step-free access from the car park.",
     image: "/images/photo-pediatric-checkup.jpg",
-    maps: "https://www.google.com/maps/search/?api=1&query=12675+La+Mirada+Blvd+%23200+La+Mirada+CA+90638",
+    maps: "https://www.google.com/maps/search/?api=1&query=11900+La+Mirada+Blvd+Ste+7+La+Mirada+CA+90638",
   },
 ];
 

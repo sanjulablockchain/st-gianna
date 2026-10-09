@@ -20,6 +20,11 @@ type PageHeroProps = {
   imageAlt?: string;
   /** Where to anchor the crop, for images whose subject is not centred. */
   imagePosition?: string;
+  /**
+   * The headline is the page h1 by default. Pages whose real title sits
+   * further down, like a journal article, render it as a paragraph instead.
+   */
+  headlineAs?: "h1" | "p";
 };
 
 export default function PageHero({
@@ -31,6 +36,7 @@ export default function PageHero({
   image,
   imageAlt,
   imagePosition,
+  headlineAs: Headline = "h1",
 }: PageHeroProps) {
   const { ref, revealed } = useScrollReveal<HTMLElement>();
   const { ref: layersRef, offset } = useParallax<HTMLSpanElement>(0.05, 18);
@@ -74,11 +80,11 @@ export default function PageHero({
           </Link>{" "}
           <span>/ {breadcrumb}</span>
         </span>
-        <h1 className={styles.headline}>
+        <Headline className={styles.headline}>
           {headline}
           <br />
           <span className={styles.headlineItalic}>{italic}</span>
-        </h1>
+        </Headline>
         <div className={styles.subrow}>
           <p className={styles.subcopy}>{subcopy}</p>
           {stats && stats.length > 0 ? (

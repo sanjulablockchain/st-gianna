@@ -9,16 +9,21 @@ import JournalGuides from "@/components/JournalGuides";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structuredData";
 
-export const metadata: Metadata = {
-  title: "Journal | St. Gianna Medical Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Journal: Family Health Guides",
   description:
-    "Plain writing from our clinicians on preventive care, parenting, nutrition, seasonal illness, and chronic conditions.",
-};
+    "Plain writing from our pediatricians and family clinicians on preventive care, parenting, nutrition, seasonal illness and chronic conditions.",
+  path: "/journal",
+});
 
 export default function JournalPage() {
   return (
     <div style={{ position: "relative", background: "var(--bg)", overflowX: "hidden" }}>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Journal", path: "/journal" }])} />
       <Nav />
       <BookCta />
       <JournalHero />

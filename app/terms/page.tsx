@@ -6,18 +6,23 @@ import { TERMS_INTRO, TERMS_SECTIONS } from "@/components/legal/termsContent";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structuredData";
 
-export const metadata: Metadata = {
-  title: "Terms & Conditions | St. Gianna Medical Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Terms & Conditions",
   description:
     "The terms covering use of this website, including no medical advice, emergencies, appointments, telehealth, accessibility, and governing law.",
-};
+  path: "/terms",
+});
 
 // No TickerBar here on purpose: a scrolling marquee above a legal document is
 // noise the reader has to work around.
 export default function TermsPage() {
   return (
     <div style={{ position: "relative", background: "var(--bg)", overflowX: "hidden" }}>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Terms and conditions", path: "/terms" }])} />
       <Nav />
       <BookCta />
       <LegalPage

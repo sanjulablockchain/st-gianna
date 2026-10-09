@@ -29,7 +29,8 @@ Every component has a co-located `*.test.tsx`. Run the whole suite and the three
 - `components/*.tsx` + `components/*.module.css`: one section or UI piece per file pair.
 - `components/icons/`: hand rolled inline SVG icon set (`Icon.tsx` + `index.tsx`), not an icon package.
 - `hooks/`: shared client hooks (`useTheme`, `useScrollReveal`, `useParallax`).
-- `lib/`: server and shared helpers (`validation`, `rateLimit`, `email/`).
+- `lib/`: server and shared helpers (`validation`, `rateLimit`, `email/`, `site`, `seo`, `structuredData`, `llms`).
+- SEO and GEO: [lib/site.ts](lib/site.ts) is the single source of truth for the practice name, canonical URL, offices, phones and hours. Page metadata (`pageMetadata` in `lib/seo.ts`), JSON-LD (`components/JsonLd.tsx`), `app/sitemap.ts`, `app/robots.ts` and `/llms.txt` all read from it. When an office, phone or hours change, update `lib/site.ts` as well as the visible copy. Every new route needs `pageMetadata` with its own `path` and an entry in `PAGES`.
 - `scripts/`: repo checks run by the `check:*` npm scripts.
 - `public/images/`: every image the site serves. `public/videos/`: the hero video.
 - `@/*` path alias maps to the repo root (see [tsconfig.json](tsconfig.json)).

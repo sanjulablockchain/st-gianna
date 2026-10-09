@@ -31,6 +31,14 @@ describe("PageHero", () => {
     expect(container.querySelectorAll("[class*='statNumber']")).toHaveLength(0);
   });
 
+  it("renders the headline as a paragraph when the page h1 lives elsewhere", () => {
+    render(
+      <PageHero breadcrumb="Journal" headline="Parenting" italic="5 min read" subcopy="c" headlineAs="p" />,
+    );
+    expect(screen.queryByRole("heading", { level: 1 })).toBeNull();
+    expect(screen.getByText("Parenting")).toBeInTheDocument();
+  });
+
   it("renders an image layer only when an image is given", async () => {
     const { container, rerender } = render(
       <PageHero breadcrumb="A" headline="A" italic="b." subcopy="c" />,
