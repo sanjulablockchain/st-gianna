@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import sitemap from "./sitemap";
 import { ARTICLES } from "@/components/journal/articles";
 import { PAGES, SITE_URL } from "@/lib/site";

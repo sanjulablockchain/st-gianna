@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import robots from "./robots";
 import { SITE_URL } from "@/lib/site";
 
