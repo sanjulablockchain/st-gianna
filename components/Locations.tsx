@@ -28,7 +28,7 @@ const LOCATIONS = [
   {
     name: "La Mirada",
     status: "Opens 9am",
-    address: "11900 La Mirada Blvd, Ste 7, La Mirada, CA 90638",
+    address: "11900 La Mirada Blvd, Unit 7, La Mirada, CA 90638",
     phone: "562-941-9853",
     hours: "Mon-Fri 9am-6pm",
     image: "/images/photo-pediatric-checkup.jpg",

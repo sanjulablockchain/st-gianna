@@ -4,7 +4,7 @@
 // the name, address and phone stay identical everywhere they are published.
 
 /** Canonical origin, no trailing slash. Override per environment. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sgmdoctor.com").replace(
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://sgmdoctor.com").replace(
   /\/+$/,
   "",
 );
@@ -90,7 +90,7 @@ export const OFFICES: Office[] = [
   {
     id: "la-mirada",
     name: "La Mirada",
-    street: "11900 La Mirada Blvd, Ste 7",
+    street: "11900 La Mirada Blvd, Unit 7",
     city: "La Mirada",
     region: "CA",
     postalCode: "90638",

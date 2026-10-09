@@ -29,7 +29,7 @@ const CLINICS = [
     name: "La Mirada",
     phone: "562-941-9853",
     tel: "tel:+15629419853",
-    address: "11900 La Mirada Blvd, Ste 7, La Mirada, CA 90638",
+    address: "11900 La Mirada Blvd, Unit 7, La Mirada, CA 90638",
   },
 ];
 

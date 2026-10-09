@@ -32,13 +32,13 @@ const OFFICES = [
   },
   {
     name: "La Mirada",
-    address: "11900 La Mirada Blvd, Ste 7, La Mirada, CA 90638",
+    address: "11900 La Mirada Blvd, Unit 7, La Mirada, CA 90638",
     phone: "562-941-9853",
     tel: "tel:+15629419853",
     hours: "Mon to Fri, 9am to 6pm",
-    note: "Suite 200, on the first floor at the rear of the courtyard. Step-free access from the car park.",
+    note: "Look for Unit 7 when you arrive. Call the office if you need help finding us.",
     image: "/images/photo-pediatric-checkup.jpg",
-    maps: "https://www.google.com/maps/search/?api=1&query=11900+La+Mirada+Blvd+Ste+7+La+Mirada+CA+90638",
+    maps: "https://www.google.com/maps/search/?api=1&query=11900+La+Mirada+Blvd+Unit+7+La+Mirada+CA+90638",
   },
 ];
 

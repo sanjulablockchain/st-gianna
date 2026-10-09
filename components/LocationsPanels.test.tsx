@@ -38,7 +38,7 @@ describe("LocationsPanels", () => {
     );
     expect(screen.getAllByRole("link", { name: /directions/i })[2]).toHaveAttribute(
       "href",
-      "https://maps.google.com/?q=11900+La+Mirada+Blvd+Ste+7,+La+Mirada,+CA+90638",
+      "https://maps.google.com/?q=11900+La+Mirada+Blvd+Unit+7,+La+Mirada,+CA+90638",
     );
 
     // Verify all three "Open now" status badges are present
