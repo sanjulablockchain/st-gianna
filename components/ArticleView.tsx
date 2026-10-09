@@ -4,6 +4,7 @@ import Image from "next/image";
 import { blurProps } from "@/lib/blur";
 import Link from "next/link";
 import styles from "./ArticleView.module.css";
+import { isoDate } from "@/lib/site";
 import PageHero from "./PageHero";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useParallax } from "@/hooks/useParallax";
@@ -27,6 +28,7 @@ export default function ArticleView({ article }: { article: Article }) {
         headline={article.category}
         italic={article.readTime}
         subcopy={article.standfirst}
+        headlineAs="p"
       />
 
       <article
@@ -40,11 +42,11 @@ export default function ArticleView({ article }: { article: Article }) {
           </Link>
         </p>
 
-        <h2 className={styles.title}>{article.title}</h2>
+        <h1 className={styles.title}>{article.title}</h1>
         <p className={styles.meta}>
           <span>{article.category}</span>
           <span>{article.readTime}</span>
-          <span>{article.date}</span>
+          <time dateTime={isoDate(article.date)}>{article.date}</time>
         </p>
 
         <span className={styles.imageWrap} ref={parallaxRef}>

@@ -8,7 +8,7 @@ const article = getArticle("asthma-action-plan")!;
 describe("ArticleView", () => {
   it("renders the title, meta, summary panel, and full body", () => {
     render(<ArticleView article={article} />);
-    expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(article.title);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(article.title);
     expect(screen.getAllByRole("heading", { level: 3 })).toHaveLength(article.body.length);
     expect(screen.getByText(/the short version/i)).toBeInTheDocument();
     article.keyPoints.forEach((point) => {
