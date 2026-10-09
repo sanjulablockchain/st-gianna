@@ -34,10 +34,8 @@ export const metadata: Metadata = {
     "after hours pediatric care",
   ],
   category: "health",
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    url: "/",
     siteName: SITE_NAME,
     locale: "en_US",
     title: `${SITE_NAME} | Pediatric and Family Care in Los Angeles`,

@@ -11,16 +11,21 @@ import AboutLocations from "@/components/AboutLocations";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/structuredData";
 
-export const metadata: Metadata = {
-  title: "About Us | St. Gianna Medical Group",
+export const metadata: Metadata = pageMetadata({
+  title: "About Us",
   description:
-    "Dedicated to providing exceptional healthcare services for adults and children across our Los Angeles clinics.",
-};
+    "St. Gianna Medical Group is a pediatric and family practice caring for newborns through seniors across three Los Angeles offices, with one shared chart and a clinician who answers after hours.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (
     <div style={{ position: "relative", background: "var(--bg)", overflowX: "hidden" }}>
+      <JsonLd data={breadcrumbJsonLd([{ name: "About us", path: "/about" }])} />
       <Nav />
       <BookCta />
       <AboutHero />

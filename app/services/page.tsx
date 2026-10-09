@@ -12,16 +12,23 @@ import ServicesFaq from "@/components/ServicesFaq";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import JsonLd from "@/components/JsonLd";
+import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd } from "@/lib/structuredData";
+import { SERVICE_FAQS } from "@/components/services/faqs";
 
-export const metadata: Metadata = {
-  title: "Services | St. Gianna Medical Group",
+export const metadata: Metadata = pageMetadata({
+  title: "Pediatric and Family Care Services",
   description:
-    "Sick visits, chronic condition management, preventative care and more across our Los Angeles clinics.",
-};
+    "Same day sick visits, well child checks, immunizations, chronic condition care, wound care and telehealth at our Hollywood, Santa Monica and La Mirada offices. Most Los Angeles HMO and IPA plans accepted.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (
     <div style={{ position: "relative", background: "var(--bg)", overflowX: "hidden" }}>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Services", path: "/services" }])} />
+      <JsonLd data={faqJsonLd(SERVICE_FAQS)} />
       <Nav />
       <BookCta />
       <ServicesHero />

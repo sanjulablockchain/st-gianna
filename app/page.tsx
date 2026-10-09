@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import TickerBar from "@/components/TickerBar";
@@ -11,6 +12,12 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import BookCta from "@/components/BookCta";
 import WelcomePopup from "@/components/WelcomePopup";
+
+// Title, description and social cards come from the root layout. The
+// canonical lives here, not in the layout, so no other page inherits it.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (
