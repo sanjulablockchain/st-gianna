@@ -32,6 +32,7 @@ Every component has a co-located `*.test.tsx`. Run the whole suite and the three
 - `lib/`: server and shared helpers (`validation`, `rateLimit`, `email/`, `site`, `seo`, `structuredData`, `llms`).
 - SEO and GEO: [lib/site.ts](lib/site.ts) is the single source of truth for the practice name, canonical URL, offices, phones and hours. Page metadata (`pageMetadata` in `lib/seo.ts`), JSON-LD (`components/JsonLd.tsx`), `app/sitemap.ts`, `app/robots.ts` and `/llms.txt` all read from it. When an office, phone or hours change, update `lib/site.ts` as well as the visible copy. Every new route needs `pageMetadata` with its own `path` and an entry in `PAGES`.
 - `scripts/`: repo checks run by the `check:*` npm scripts.
+- `Dockerfile` + `docker-compose.yml`: the production image (`output: "standalone"`). It runs on the shared Lightsail box behind host nginx and Cloudflare, at `127.0.0.1:8210`. Secrets live in `.env.local` on the box and never enter the image.
 - `public/images/`: every image the site serves. `public/videos/`: the hero video.
 - `@/*` path alias maps to the repo root (see [tsconfig.json](tsconfig.json)).
 
@@ -78,6 +79,8 @@ Every component has a co-located `*.test.tsx`. Run the whole suite and the three
 - `html.js` class + `suppressHydrationWarning`: `app/layout.tsx` adds a pre-paint inline script that sets `document.documentElement.classList.add("js")` and reads the stored theme before React hydrates, so scroll-reveal CSS and theme don't flash the wrong state on load. Don't remove this without checking `useScrollReveal`'s CSS dependency on `html.js`.
 - `useTheme` uses a module-level store (`useSyncExternalStore`) shared across every component instance, not React context. All theme reads and writes go through [hooks/useTheme.ts](hooks/useTheme.ts).
 - Images referenced by CSS `var(--logo-img)` swap per theme; see `public/images/logo-dark.png` / `logo-light.png`.
+- Client IPs come only from `X-Real-IP` via [lib/clientIp.ts](lib/clientIp.ts), which nginx overwrites. Never read `X-Forwarded-For` for rate limiting: visitors control its left most entry.
+- Old WordPress URLs from the previous sgmdoctor.com are redirected in `next.config.ts`. Keep those entries when renaming routes.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

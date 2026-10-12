@@ -1,5 +1,6 @@
 import { renderContactEmail } from "@/lib/email/contactEmail";
 import { getTransport, readSmtpConfig } from "@/lib/email/transport";
+import { clientIp } from "@/lib/clientIp";
 import { createRateLimiter } from "@/lib/rateLimit";
 import { validateContact, type ContactSubmission } from "@/lib/validation";
 
@@ -7,13 +8,6 @@ import { validateContact, type ContactSubmission } from "@/lib/validation";
 export const runtime = "nodejs";
 
 const limiter = createRateLimiter({ limit: 5, windowMs: 10 * 60 * 1000 });
-
-function clientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  // Left-most entry is the original client; the rest are proxies.
-  if (forwarded) return forwarded.split(",")[0].trim();
-  return request.headers.get("x-real-ip")?.trim() || "unknown";
-}
 
 function asString(value: unknown): string {
   return typeof value === "string" ? value : "";

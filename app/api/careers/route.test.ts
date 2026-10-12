@@ -40,7 +40,7 @@ function post(
   if (cv) form.set("cv", cv);
   return new Request("http://localhost/api/careers", {
     method: "POST",
-    headers: { "x-forwarded-for": `10.1.0.${ip}`, ...headers },
+    headers: { "x-real-ip": `10.1.0.${ip}`, ...headers },
     body: form,
   });
 }
@@ -154,8 +154,17 @@ describe("POST /api/careers", () => {
     const { POST } = await importRoute();
     const huge = new Uint8Array(8 * 1024 * 1024);
     huge.set(PDF);
+    // Serialized up front: undici's FormData body stream keeps enqueuing after
+    // the route cancels it and throws an unhandled rejection. A body from the
+    // network, as in production, has no such source.
+    const original = post(VALID, cvFile(huge));
+    const request = new Request(original.url, {
+      method: "POST",
+      headers: original.headers,
+      body: await original.arrayBuffer(),
+    });
 
-    const response = await POST(post(VALID, cvFile(huge)));
+    const response = await POST(request);
 
     expect(response.status).toBe(413);
     expect(sendMail).not.toHaveBeenCalled();
@@ -198,7 +207,7 @@ describe("POST /api/careers", () => {
 
   it("rate limits repeated applications from one address", async () => {
     const { POST } = await importRoute();
-    const from = { "x-forwarded-for": "203.0.113.77" };
+    const from = { "x-real-ip": "203.0.113.77" };
 
     for (let i = 0; i < 3; i++) {
       expect((await POST(post(VALID, cvFile(), from))).status).toBe(200);

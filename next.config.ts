@@ -30,9 +30,35 @@ const securityHeaders = [
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
 ];
 
+// URLs the old WordPress site at sgmdoctor.com had indexed (its All in One SEO
+// sitemaps and REST API, October 2026), sent to their closest new page so
+// links and search results keep working. Next already drops trailing slashes,
+// so pages whose path did not change (/contact, /careers) need no entry.
+// /wp-admin and /wp-login.php stay 404 on purpose.
+const wordpressRedirects: Array<[source: string, destination: string]> = [
+  ["/about-us", "/about"],
+  ["/terms-conditions", "/terms"],
+  ["/privacy-policy", "/privacy"],
+  ["/advanced-wound-care-services", "/services"],
+  ["/thank-you-for-applying", "/careers"],
+  ["/under-development", "/"],
+  ["/10-healthy-medical-tips-for-a-healthier-life", "/journal/10-essential-habits"],
+  ["/category/:slug*", "/journal"],
+  ["/feed", "/journal"],
+  ["/comments/feed", "/journal"],
+  ["/page-sitemap.xml", "/sitemap.xml"],
+  ["/post-sitemap.xml", "/sitemap.xml"],
+  ["/sitemap_index.xml", "/sitemap.xml"],
+];
+
 const nextConfig: NextConfig = {
+  // A self contained server in .next/standalone, which the Dockerfile ships.
+  output: "standalone",
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
+  },
+  async redirects() {
+    return wordpressRedirects.map(([source, destination]) => ({ source, destination, permanent: true }));
   },
 };
 

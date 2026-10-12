@@ -1,0 +1,10 @@
+# On the server: put the secrets in .env.local and HOST_PORT=8210 in .env.prod,
+# then run: docker compose --env-file .env.prod up -d --build
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    env_file: .env.local
+    ports:
+      # Localhost only, so the app is reachable through nginx and nothing else.
+      - "127.0.0.1:${HOST_PORT:-3000}:3000"
