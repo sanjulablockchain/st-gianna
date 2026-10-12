@@ -24,6 +24,15 @@ export const C = {
 export const FONT =
   "'Hanken Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
+/**
+ * Collapses line breaks and other control characters to single spaces, for
+ * any visitor text that lands in a header (subject) or a one line field. A
+ * newline in a header is how header injection starts.
+ */
+export function oneLine(value: string): string {
+  return value.replace(/[\u0000-\u001f\u007f]+/g, " ").replace(/\s{2,}/g, " ").trim();
+}
+
 export function escapeHtml(value: string): string {
   return value
     .replace(/&/g, "&amp;")

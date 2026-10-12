@@ -322,13 +322,13 @@ export default function CareersForm() {
           <span className={styles.dropTitle}>
             {cv ? "Choose a different file" : "Drop your CV here, or click to browse"}
           </span>
-          {cv ? null : <span className={styles.dropHint}>PDF or Word document, up to 5 MB</span>}
+          {cv ? null : <span className={styles.dropHint}>PDF or Word (.docx), up to 5 MB</span>}
         </label>
         <input
           ref={fileRef}
           id="careers-cv"
           type="file"
-          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
           className={styles.fileInput}
           onChange={(event) => chooseFile(event.target.files?.[0] ?? null)}
           aria-labelledby="careers-cv-label"
@@ -336,7 +336,7 @@ export default function CareersForm() {
           aria-describedby={describedBy("cv", "careers-cv-hint")}
         />
         <span id="careers-cv-hint" className={styles.srOnly}>
-          PDF or Word document, up to 5 MB
+          PDF or Word (.docx), up to 5 MB
         </span>
         {errorText("cv")}
       </div>

@@ -40,7 +40,7 @@ function post(
   if (cv) form.set("cv", cv);
   return new Request("http://localhost/api/careers", {
     method: "POST",
-    headers: { "x-real-ip": `10.1.0.${ip}`, ...headers },
+    headers: { origin: "http://localhost", host: "localhost", "x-real-ip": `10.1.0.${ip}`, ...headers },
     body: form,
   });
 }
@@ -123,7 +123,7 @@ describe("POST /api/careers", () => {
     const response = await POST(post(VALID, cvFile(PDF, "cv.html", "text/html")));
 
     expect(response.status).toBe(400);
-    expect((await response.json()).errors.cv).toMatch(/pdf or word/i);
+    expect((await response.json()).errors.cv).toMatch(/pdf or a word/i);
     expect(sendMail).not.toHaveBeenCalled();
   });
 
@@ -134,7 +134,30 @@ describe("POST /api/careers", () => {
     const response = await POST(post(VALID, cvFile(disguised, "cv.pdf")));
 
     expect(response.status).toBe(400);
-    expect((await response.json()).errors.cv).toMatch(/does not look like/i);
+    expect((await response.json()).errors.cv).toMatch(/not a pdf or a plain word/i);
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("refuses a Word file that carries macros", async () => {
+    const { POST } = await importRoute();
+    const macro = new Uint8Array([
+      0x50, 0x4b, 0x03, 0x04,
+      ...new TextEncoder().encode("word/document.xml\u0000word/vbaProject.bin"),
+    ]);
+
+    const response = await POST(post(VALID, cvFile(macro, "cv.docx", "application/octet-stream")));
+
+    expect(response.status).toBe(400);
+    expect((await response.json()).errors.cv).toMatch(/macros/i);
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("refuses a legacy .doc file", async () => {
+    const { POST } = await importRoute();
+
+    const response = await POST(post(VALID, cvFile(PDF, "cv.doc", "application/msword")));
+
+    expect(response.status).toBe(400);
     expect(sendMail).not.toHaveBeenCalled();
   });
 
@@ -154,9 +177,9 @@ describe("POST /api/careers", () => {
     const { POST } = await importRoute();
     const huge = new Uint8Array(8 * 1024 * 1024);
     huge.set(PDF);
-    // Serialized up front: undici's FormData body stream keeps enqueuing after
-    // the route cancels it and throws an unhandled rejection. A body from the
-    // network, as in production, has no such source.
+    // Serialized up front so the test body behaves like one from the network.
+    // undici's FormData body stream keeps enqueuing after its reader stops,
+    // which the route now handles by releasing the reader, not cancelling it.
     const original = post(VALID, cvFile(huge));
     const request = new Request(original.url, {
       method: "POST",
@@ -185,13 +208,33 @@ describe("POST /api/careers", () => {
     const response = await POST(
       new Request("http://localhost/api/careers", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", origin: "http://localhost", host: "localhost" },
         body: JSON.stringify(VALID),
       }),
     );
 
     expect(response.status).toBe(415);
     expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("refuses applications posted from another website or with no origin", async () => {
+    const { POST } = await importRoute();
+
+    const foreign = await POST(post(VALID, cvFile(), { origin: "https://evil.example" }));
+    const bare = new Request("http://localhost/api/careers", { method: "POST", body: new FormData() });
+
+    expect(foreign.status).toBe(403);
+    expect((await POST(bare)).status).toBe(403);
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("ignores a forged X-Forwarded-For when rate limiting", async () => {
+    const { POST } = await importRoute();
+    const attempt = (forged: string) =>
+      POST(post(VALID, cvFile(), { "x-forwarded-for": `${forged}, 203.0.113.88` }));
+
+    for (let i = 0; i < 3; i++) expect((await attempt(`198.51.100.${i}`)).status).toBe(200);
+    expect((await attempt("198.51.100.99")).status).toBe(429);
   });
 
   // Telling a bot it was caught just teaches it to fill the field correctly.

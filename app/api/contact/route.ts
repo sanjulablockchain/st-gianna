@@ -2,6 +2,7 @@ import { renderContactEmail } from "@/lib/email/contactEmail";
 import { getTransport, readSmtpConfig } from "@/lib/email/transport";
 import { clientIp } from "@/lib/clientIp";
 import { createRateLimiter } from "@/lib/rateLimit";
+import { forbidden, isSameOrigin } from "@/lib/requestGuards";
 import { validateContact, type ContactSubmission } from "@/lib/validation";
 
 // Nodemailer opens a TCP socket, so this route cannot run on the edge runtime.
@@ -14,6 +15,10 @@ function asString(value: unknown): string {
 }
 
 export async function POST(request: Request) {
+  // Only pages on this site may post here; other websites and bare scripts
+  // without an Origin are turned away before anything is read.
+  if (!isSameOrigin(request)) return forbidden();
+
   let payload: Record<string, unknown>;
   try {
     const parsed = await request.json();

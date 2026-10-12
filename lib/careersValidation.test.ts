@@ -52,7 +52,7 @@ describe("validateApplication", () => {
   });
 
   it("rejects the wrong file type, empty files and oversized files", () => {
-    expect(validateApplication(VALID, { name: "cv.exe", size: 10 }).cv).toMatch(/pdf or word/i);
+    expect(validateApplication(VALID, { name: "cv.exe", size: 10 }).cv).toMatch(/pdf or a word/i);
     expect(validateApplication(VALID, { name: "cv.pdf", size: 0 }).cv).toMatch(/empty/i);
     expect(validateApplication(VALID, { name: "cv.pdf", size: CV_MAX_BYTES + 1 }).cv).toMatch(/5 MB/);
   });
@@ -66,20 +66,35 @@ describe("cv helpers", () => {
     expect(cvExtension("resume")).toBeNull();
   });
 
+  it("no longer accepts legacy .doc files, which can carry macros", () => {
+    expect(cvExtension("resume.doc")).toBeNull();
+  });
+
+  // A zip local file header followed by the entry names a Word package would hold.
+  const zipWith = (...entries: string[]) =>
+    new Uint8Array([0x50, 0x4b, 0x03, 0x04, ...new TextEncoder().encode(entries.join("\u0000"))]);
+
   it("matches file signatures to their extension", () => {
     const pdf = new TextEncoder().encode("%PDF-1.7 rest");
-    const zip = new Uint8Array([0x50, 0x4b, 0x03, 0x04, 0, 0]);
-    const ole = new Uint8Array([0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1, 0]);
+    const docx = zipWith("[Content_Types].xml", "word/document.xml", "word/styles.xml");
     expect(cvBytesMatch("pdf", pdf)).toBe(true);
-    expect(cvBytesMatch("docx", zip)).toBe(true);
-    expect(cvBytesMatch("doc", ole)).toBe(true);
-    expect(cvBytesMatch("pdf", zip)).toBe(false);
+    expect(cvBytesMatch("docx", docx)).toBe(true);
+    expect(cvBytesMatch("pdf", docx)).toBe(false);
     expect(cvBytesMatch("docx", new TextEncoder().encode("<script>"))).toBe(false);
+  });
+
+  it("refuses a zip that is not a Word document", () => {
+    expect(cvBytesMatch("docx", zipWith("payload.exe"))).toBe(false);
+  });
+
+  it("refuses Word files carrying macros or ActiveX controls", () => {
+    expect(cvBytesMatch("docx", zipWith("word/document.xml", "word/vbaProject.bin"))).toBe(false);
+    expect(cvBytesMatch("docx", zipWith("word/document.xml", "word/activeX/activeX1.xml"))).toBe(false);
   });
 
   it("builds a safe attachment name from the applicant", () => {
     expect(cvFilename("José O'Brien", "pdf")).toBe("CV_Jose_OBrien.pdf");
-    expect(cvFilename("../../etc/passwd", "doc")).toBe("CV_etcpasswd.doc");
+    expect(cvFilename("../../etc/passwd", "pdf")).toBe("CV_etcpasswd.pdf");
     expect(cvFilename("<>", "docx")).toBe("CV_applicant.docx");
   });
 });

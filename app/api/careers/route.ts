@@ -2,6 +2,7 @@ import { renderCareersEmail } from "@/lib/email/careersEmail";
 import { getTransport, readSmtpConfig } from "@/lib/email/transport";
 import { clientIp } from "@/lib/clientIp";
 import { createRateLimiter } from "@/lib/rateLimit";
+import { forbidden, isSameOrigin } from "@/lib/requestGuards";
 import {
   CV_CONTENT_TYPES,
   CV_MAX_BYTES,
@@ -39,7 +40,10 @@ async function readLimited(request: Request, limit: number): Promise<Uint8Array<
     if (done) break;
     total += value.byteLength;
     if (total > limit) {
-      await reader.cancel();
+      // Just stop reading. Cancelling the stream makes undici's internal pump
+      // throw an unhandled rejection, which can take the process down; the
+      // server discards the unread remainder once the response is sent.
+      reader.releaseLock();
       return null;
     }
     chunks.push(value);
@@ -61,6 +65,10 @@ function tooLarge() {
 }
 
 export async function POST(request: Request) {
+  // Only pages on this site may post here; other websites and bare scripts
+  // without an Origin are turned away before anything is read.
+  if (!isSameOrigin(request)) return forbidden();
+
   const contentType = request.headers.get("content-type") ?? "";
   if (!contentType.toLowerCase().startsWith("multipart/form-data")) {
     return Response.json({ ok: false, error: "Malformed request." }, { status: 415 });
@@ -120,7 +128,12 @@ export async function POST(request: Request) {
   const bytes = new Uint8Array(await cv!.arrayBuffer());
   if (!cvBytesMatch(ext, bytes)) {
     return Response.json(
-      { ok: false, errors: { cv: "That file does not look like a PDF or Word document." } },
+      {
+        ok: false,
+        errors: {
+          cv: "That file is not a PDF or a plain Word (.docx) document. Word files with macros are not accepted.",
+        },
+      },
       { status: 400 },
     );
   }

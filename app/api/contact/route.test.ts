@@ -24,7 +24,13 @@ let ip = 0;
 function post(body: unknown, headers: Record<string, string> = {}) {
   return new Request("http://localhost/api/contact", {
     method: "POST",
-    headers: { "content-type": "application/json", "x-real-ip": `10.0.0.${ip}`, ...headers },
+    headers: {
+      "content-type": "application/json",
+      origin: "http://localhost",
+      host: "localhost",
+      "x-real-ip": `10.0.0.${ip}`,
+      ...headers,
+    },
     body: typeof body === "string" ? body : JSON.stringify(body),
   });
 }
@@ -93,6 +99,21 @@ describe("POST /api/contact", () => {
     const response = await POST(post({ ...VALID, office: "Atlantis" }));
 
     expect(response.status).toBe(400);
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("refuses messages posted from another website or with no origin", async () => {
+    const { POST } = await importRoute();
+
+    const foreign = await POST(post(VALID, { origin: "https://evil.example" }));
+    const bare = new Request("http://localhost/api/contact", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(VALID),
+    });
+
+    expect(foreign.status).toBe(403);
+    expect((await POST(bare)).status).toBe(403);
     expect(sendMail).not.toHaveBeenCalled();
   });
 
