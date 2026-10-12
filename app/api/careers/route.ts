@@ -1,6 +1,7 @@
 import { renderCareersEmail } from "@/lib/email/careersEmail";
 import { getTransport, readSmtpConfig } from "@/lib/email/transport";
 import { createRateLimiter } from "@/lib/rateLimit";
+import { clientIp, forbidden, isSameOrigin } from "@/lib/requestGuards";
 import {
   CV_CONTENT_TYPES,
   CV_MAX_BYTES,
@@ -18,13 +19,6 @@ export const runtime = "nodejs";
 const MAX_BODY_BYTES = CV_MAX_BYTES + 256 * 1024;
 
 const limiter = createRateLimiter({ limit: 3, windowMs: 60 * 60 * 1000 });
-
-function clientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  // Left-most entry is the original client; the rest are proxies.
-  if (forwarded) return forwarded.split(",")[0].trim();
-  return request.headers.get("x-real-ip")?.trim() || "unknown";
-}
 
 function field(form: FormData, key: string): string {
   const value = form.get(key);
@@ -45,7 +39,10 @@ async function readLimited(request: Request, limit: number): Promise<Uint8Array<
     if (done) break;
     total += value.byteLength;
     if (total > limit) {
-      await reader.cancel();
+      // Just stop reading. Cancelling the stream makes undici's internal pump
+      // throw an unhandled rejection, which can take the process down; the
+      // server discards the unread remainder once the response is sent.
+      reader.releaseLock();
       return null;
     }
     chunks.push(value);
@@ -67,6 +64,10 @@ function tooLarge() {
 }
 
 export async function POST(request: Request) {
+  // Only pages on this site may post here; other websites and bare scripts
+  // without an Origin are turned away before anything is read.
+  if (!isSameOrigin(request)) return forbidden();
+
   const contentType = request.headers.get("content-type") ?? "";
   if (!contentType.toLowerCase().startsWith("multipart/form-data")) {
     return Response.json({ ok: false, error: "Malformed request." }, { status: 415 });

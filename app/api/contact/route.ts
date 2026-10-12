@@ -1,6 +1,7 @@
 import { renderContactEmail } from "@/lib/email/contactEmail";
 import { getTransport, readSmtpConfig } from "@/lib/email/transport";
 import { createRateLimiter } from "@/lib/rateLimit";
+import { clientIp, forbidden, isSameOrigin } from "@/lib/requestGuards";
 import { validateContact, type ContactSubmission } from "@/lib/validation";
 
 // Nodemailer opens a TCP socket, so this route cannot run on the edge runtime.
@@ -8,18 +9,15 @@ export const runtime = "nodejs";
 
 const limiter = createRateLimiter({ limit: 5, windowMs: 10 * 60 * 1000 });
 
-function clientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  // Left-most entry is the original client; the rest are proxies.
-  if (forwarded) return forwarded.split(",")[0].trim();
-  return request.headers.get("x-real-ip")?.trim() || "unknown";
-}
-
 function asString(value: unknown): string {
   return typeof value === "string" ? value : "";
 }
 
 export async function POST(request: Request) {
+  // Only pages on this site may post here; other websites and bare scripts
+  // without an Origin are turned away before anything is read.
+  if (!isSameOrigin(request)) return forbidden();
+
   let payload: Record<string, unknown>;
   try {
     const parsed = await request.json();

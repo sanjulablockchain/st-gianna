@@ -40,7 +40,7 @@ function post(
   if (cv) form.set("cv", cv);
   return new Request("http://localhost/api/careers", {
     method: "POST",
-    headers: { "x-forwarded-for": `10.1.0.${ip}`, ...headers },
+    headers: { origin: "http://localhost", host: "localhost", "x-forwarded-for": `10.1.0.${ip}`, ...headers },
     body: form,
   });
 }
@@ -176,13 +176,33 @@ describe("POST /api/careers", () => {
     const response = await POST(
       new Request("http://localhost/api/careers", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "content-type": "application/json", origin: "http://localhost", host: "localhost" },
         body: JSON.stringify(VALID),
       }),
     );
 
     expect(response.status).toBe(415);
     expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("refuses applications posted from another website or with no origin", async () => {
+    const { POST } = await importRoute();
+
+    const foreign = await POST(post(VALID, cvFile(), { origin: "https://evil.example" }));
+    const bare = new Request("http://localhost/api/careers", { method: "POST", body: new FormData() });
+
+    expect(foreign.status).toBe(403);
+    expect((await POST(bare)).status).toBe(403);
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("rate limits by the address the proxy saw, so a forged one does not help", async () => {
+    const { POST } = await importRoute();
+    const attempt = (forged: string) =>
+      POST(post(VALID, cvFile(), { "x-forwarded-for": `${forged}, 203.0.113.88` }));
+
+    for (let i = 0; i < 3; i++) expect((await attempt(`198.51.100.${i}`)).status).toBe(200);
+    expect((await attempt("198.51.100.99")).status).toBe(429);
   });
 
   // Telling a bot it was caught just teaches it to fill the field correctly.
