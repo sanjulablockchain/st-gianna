@@ -115,8 +115,8 @@ export type HiringStep = { title: string; body: string };
 
 export const HIRING_STEPS: HiringStep[] = [
   {
-    title: "Send your CV",
-    body: "Email it to us with the role and the office you are interested in. A short note about why you want to work in family medicine helps us more than a long cover letter.",
+    title: "Apply with your CV",
+    body: "Fill in the short form below and attach your CV, or email it to us with the role and office. A short note about why you want to work in family medicine helps us more than a long cover letter.",
   },
   {
     title: "A short phone call",
@@ -143,7 +143,7 @@ export const CAREERS_FAQS: Faq[] = [
   },
   {
     q: "Which office would I work at?",
-    a: "Tell us your preference in your email. Most roles are based at one office, though some team members split their week between two, and we always talk about location before an offer.",
+    a: "Choose your preferred office on the form. Most roles are based at one office, though some team members split their week between two, and we always talk about location before an offer.",
   },
   {
     q: "Do you hire part time or per diem?",
@@ -154,7 +154,7 @@ export const CAREERS_FAQS: Faq[] = [
     a: "Yes. We hire newly certified medical assistants and newly licensed clinicians, and onboarding is built around pairing you with someone experienced.",
   },
   {
-    q: "What should I leave out of my email?",
+    q: "What should I leave out of my application?",
     a: "Never include your Social Security number, bank details or any patient information. We only need your CV, the role, your preferred office and how to reach you.",
   },
   {

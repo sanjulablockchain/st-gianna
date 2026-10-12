@@ -15,10 +15,10 @@ describe("CareersRoles", () => {
     expect(screen.getAllByText("What we look for")).toHaveLength(ROLES.length);
   });
 
-  it("links every role to an application email", () => {
+  it("sends every role to the application form", () => {
     render(<CareersRoles />);
-    const links = screen.getAllByRole("link", { name: /apply by email/i });
+    const links = screen.getAllByRole("link", { name: /apply now/i });
     expect(links).toHaveLength(ROLES.length);
-    expect(links[0].getAttribute("href")).toMatch(/^mailto:contact@sgmdoctor\.com\?subject=/);
+    for (const link of links) expect(link).toHaveAttribute("href", "#apply");
   });
 });

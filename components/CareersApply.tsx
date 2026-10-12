@@ -2,18 +2,9 @@
 
 import styles from "./CareersApply.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { CAREERS_MAILTO, CAREERS_SUBJECT } from "@/components/careers/content";
+import CareersForm from "./CareersForm";
+import { CAREERS_MAILTO } from "@/components/careers/content";
 import { SITE_EMAIL } from "@/lib/site";
-import { ArrowOutwardIcon } from "@/components/icons";
-
-const INCLUDE = [
-  "Your CV, as a PDF or Word document",
-  "The role you are applying for",
-  "Your preferred office: Hollywood, Santa Monica or La Mirada",
-  "Whether you want full time, part time or per diem hours",
-  "Any languages you speak besides English",
-  "The best phone number to reach you",
-];
 
 const LEAVE_OUT = [
   "Your Social Security number",
@@ -32,29 +23,11 @@ export default function CareersApply() {
     >
       <div className={styles.inner}>
         <div className={styles.lead}>
-          <h2 className={styles.heading}>How to apply.</h2>
+          <h2 className={styles.heading}>Apply now.</h2>
           <p className={styles.body}>
-            Email your CV to{" "}
-            <a href={CAREERS_MAILTO} className={styles.inlineLink}>
-              {SITE_EMAIL}
-            </a>{" "}
-            with the subject line <strong className={styles.subject}>{CAREERS_SUBJECT}</strong>,
-            filling in the role and the office. That is the whole application.
+            Tell us a little about yourself, choose the role and office, and attach your CV. It
+            takes about three minutes, and the practice team reads every application.
           </p>
-          <a href={CAREERS_MAILTO} className={styles.cta}>
-            Email your CV
-            <ArrowOutwardIcon size={19} />
-          </a>
-        </div>
-        <div className={styles.lists}>
-          <div className={styles.panel}>
-            <h3 className={styles.panelHeading}>Please include</h3>
-            <ul className={styles.points}>
-              {INCLUDE.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
           <div className={`${styles.panel} ${styles.warning}`}>
             <h3 className={styles.panelHeading}>Never send us</h3>
             <ul className={styles.points}>
@@ -63,6 +36,16 @@ export default function CareersApply() {
               ))}
             </ul>
           </div>
+          <p className={styles.alt}>
+            Prefer email? Send your CV to{" "}
+            <a href={CAREERS_MAILTO} className={styles.inlineLink}>
+              {SITE_EMAIL}
+            </a>{" "}
+            with the role and office in the subject line.
+          </p>
+        </div>
+        <div className={styles.formWrap}>
+          <CareersForm />
         </div>
       </div>
     </section>

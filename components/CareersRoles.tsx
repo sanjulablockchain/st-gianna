@@ -2,7 +2,7 @@
 
 import styles from "./CareersRoles.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { CAREERS_MAILTO, ROLES } from "@/components/careers/content";
+import { ROLES } from "@/components/careers/content";
 import { ArrowOutwardIcon } from "@/components/icons";
 
 export default function CareersRoles() {
@@ -40,8 +40,8 @@ export default function CareersRoles() {
                   </li>
                 ))}
               </ul>
-              <a href={CAREERS_MAILTO} className={styles.apply}>
-                Apply by email
+              <a href="#apply" className={styles.apply}>
+                Apply now
                 <ArrowOutwardIcon size={18} />
               </a>
             </div>

@@ -11,7 +11,7 @@ describe("CareersFaq", () => {
       screen.getByRole("heading", { name: "Questions from applicants" }),
     ).toBeInTheDocument();
     expect(screen.getAllByRole("button")).toHaveLength(CAREERS_FAQS.length);
-    expect(screen.getByText("What should I leave out of my email?")).toBeInTheDocument();
+    expect(screen.getByText("What should I leave out of my application?")).toBeInTheDocument();
   });
 
   it("opens the first answer by default and collapses it on click", async () => {
