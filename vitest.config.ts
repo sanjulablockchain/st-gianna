@@ -8,11 +8,11 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
     globals: true,
-    // Git worktrees live under .claude/worktrees, inside the repo. Without
+    // Git worktrees live under .claude/worktrees and .worktrees, inside the repo. Without
     // this, every test file is collected twice, once from this checkout and
     // once from each worktree, and the worktree copies fail because the @
     // alias still resolves to this root.
-    exclude: [...configDefaults.exclude, "**/.claude/**"],
+    exclude: [...configDefaults.exclude, "**/.claude/**", "**/.worktrees/**"],
   },
   resolve: {
     alias: {
