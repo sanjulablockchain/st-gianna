@@ -140,6 +140,12 @@ export const PAGES = [
     summary: "Health guides from our clinicians on preventive care, parenting, nutrition and chronic care.",
   },
   {
+    path: "/medical-tips",
+    title: "Medical tips",
+    summary:
+      "Practical guidance on fever, colds, stomach bugs, sleep, nutrition, injuries, medicine safety, allergies and asthma, with the signs that need urgent care.",
+  },
+  {
     path: "/partners",
     title: "Partners",
     summary: "Sister companies and partners covering therapy, after hours care, hospital care and insurance.",
@@ -148,6 +154,12 @@ export const PAGES = [
     path: "/contact",
     title: "Contact",
     summary: "Phone, email, online booking, a contact form and records requests.",
+  },
+  {
+    path: "/careers",
+    title: "Careers",
+    summary:
+      "Jobs for clinicians, medical assistants and front office staff across the three offices, the hiring process and how to apply.",
   },
   { path: "/privacy", title: "Privacy policy", summary: "How personal and health information is handled." },
   { path: "/terms", title: "Terms and conditions", summary: "Terms of use for this website." },

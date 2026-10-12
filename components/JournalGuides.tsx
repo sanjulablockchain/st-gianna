@@ -60,7 +60,12 @@ export default function JournalGuides() {
         <h2 className={styles.heading}>Where to start.</h2>
         <p className={styles.subtext}>
           Four short reading paths, depending on which stage your family is in right now. Each
-          one is three pieces, in the order we would hand them to you.
+          one is three pieces, in the order we would hand them to you. Need a quick answer
+          instead? Our{" "}
+          <Link href="/medical-tips" className={styles.inlineLink}>
+            medical tips
+          </Link>{" "}
+          cover the common questions in a few lines each.
         </p>
       </div>
 

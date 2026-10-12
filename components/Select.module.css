@@ -1,0 +1,119 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--field-border);
+  border-radius: 12px;
+  background: var(--field-bg);
+  color: var(--ink);
+  font-size: 15px;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .2s ease;
+}
+
+.trigger:hover {
+  border-color: var(--line-2);
+}
+
+.trigger:focus-visible,
+.open {
+  outline: none;
+  border-color: var(--field-border-focus);
+}
+
+.invalid {
+  border-color: var(--danger);
+}
+
+.value {
+  color: var(--ink);
+}
+
+.placeholder {
+  color: var(--muted-2);
+}
+
+.chevron {
+  flex-shrink: 0;
+  width: 12px;
+  height: 8px;
+  background-image: var(--select-chevron);
+  background-repeat: no-repeat;
+  background-size: 12px 8px;
+  transition: transform .25s ease;
+}
+
+.open .chevron {
+  transform: rotate(180deg);
+}
+
+.list {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 324px;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  border: 1px solid var(--field-border);
+  border-radius: 14px;
+  background: var(--bg-2);
+  box-shadow: 0 20px 44px var(--shadow);
+  list-style: none;
+}
+
+.list[hidden] {
+  display: none;
+}
+
+/* 1px panel border + 6px panel padding + 9px here lines the option text up
+   with the 16px inset of the field above it. */
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 44px;
+  padding: 10px 9px;
+  border-radius: 10px;
+  color: var(--ink);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.active {
+  background: var(--chip-bg);
+}
+
+.option[aria-selected="true"] {
+  background: var(--chip-bg-active);
+}
+
+.tick {
+  flex-shrink: 0;
+  width: 12px;
+  height: 7px;
+  margin-top: -3px;
+  border-left: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  transform: rotate(-45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

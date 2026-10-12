@@ -1,0 +1,320 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 16px;
+  border: 1px solid var(--field-border);
+  border-radius: 12px;
+  background: var(--field-bg);
+  color: var(--ink);
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--muted-2);
+}
+
+.textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.input:focus-visible,
+.textarea:focus-visible {
+  outline: none;
+  border-color: var(--field-border-focus);
+}
+
+.invalid {
+  border-color: var(--danger);
+}
+
+.error {
+  margin: 0;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.counter {
+  align-self: flex-end;
+  font-size: 12px;
+  color: var(--muted-2);
+}
+
+/* The real file input stays in the tab order and the accessibility tree, just
+   out of sight; the drop zone label is what people see and click. */
+.fileInput,
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 128px;
+  padding: 22px 18px;
+  border: 1.5px dashed var(--field-border);
+  border-radius: 14px;
+  background: var(--field-bg);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .2s ease, background-color .2s ease;
+}
+
+.dropzone:hover,
+.dragging {
+  border-color: var(--field-border-focus);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.field:has(.fileInput:focus-visible) .dropzone {
+  border-color: var(--field-border-focus);
+  border-style: solid;
+}
+
+.dropzone.invalid {
+  border-color: var(--danger);
+}
+
+.dropzoneCompact {
+  min-height: 48px;
+  padding: 12px 18px;
+}
+
+.dropTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.dropHint {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.fileCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--field-border);
+  border-radius: 14px;
+  background: var(--field-bg);
+}
+
+.fileIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--chip-bg-active);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  color: var(--link);
+}
+
+.fileMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.fileName {
+  overflow: hidden;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileSize {
+  font-size: 12.5px;
+  color: var(--muted-2);
+}
+
+.fileRemove {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color .25s ease;
+}
+
+.fileRemove:hover {
+  border-color: var(--danger);
+}
+
+.consentRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.checkbox {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+.consentLabel {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.button {
+  align-self: flex-start;
+  width: 100%;
+  min-height: 50px;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.button:hover {
+  opacity: .88;
+}
+
+.button:disabled {
+  opacity: .6;
+  cursor: progress;
+}
+
+/* Pulled off-screen instead of display:none, which some bots skip. Kept out of
+   the tab order and the accessibility tree so nobody can reach it by accident. */
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.failure {
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--danger);
+  border-radius: 12px;
+  background: var(--field-bg);
+  color: var(--danger);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 30px;
+  border: 1px solid var(--success);
+  border-radius: 18px;
+  background: var(--bg);
+}
+
+.successHeading {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.successBody {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.reset {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color .3s ease;
+}
+
+.reset:hover {
+  border-color: var(--accent);
+}
+
+@media (min-width: 641px) {
+  .row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .button {
+    width: auto;
+  }
+}

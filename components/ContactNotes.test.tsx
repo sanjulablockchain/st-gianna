@@ -10,10 +10,14 @@ describe("ContactNotes", () => {
     expect(screen.getByText(/call 911/i)).toBeInTheDocument();
   });
 
-  it("exposes the careers anchor the footer links to", () => {
+  it("keeps the careers note and points it at the careers page", () => {
     const { container } = render(<ContactNotes />);
     expect(container.querySelector("#careers")).not.toBeNull();
     expect(screen.getByText("Careers")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /see the roles/i })).toHaveAttribute(
+      "href",
+      "/careers",
+    );
   });
 
   it("covers refills, records, and billing", () => {

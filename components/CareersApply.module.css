@@ -1,0 +1,125 @@
+.section {
+  padding: clamp(70px, 9vw, 118px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 118px) clamp(24px, 9vw, 150px);
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  /* The contact page and role cards link straight to /careers#apply. */
+  scroll-margin-top: 90px;
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 36px;
+}
+
+.lead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 62ch;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(30px, 3.8vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -.038em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.alt {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.inlineLink {
+  color: var(--link);
+  font-weight: 600;
+}
+
+.inlineLink:hover {
+  color: var(--link-hover);
+}
+
+.panel {
+  align-self: stretch;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--rule-accent);
+  border-radius: 14px;
+  background: var(--bg);
+}
+
+.warning {
+  border-top-color: var(--danger);
+}
+
+.panelHeading {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.formWrap {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--bg);
+}
+
+@media (min-width: 641px) {
+  .formWrap {
+    padding: 32px;
+  }
+}
+
+@media (min-width: 1180px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: 56px;
+    align-items: start;
+  }
+
+  .formWrap {
+    padding: 40px;
+  }
+}

@@ -41,6 +41,17 @@
   color: var(--muted);
 }
 
+.inlineLink {
+  color: var(--link);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inlineLink:hover {
+  color: var(--link-hover);
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr;

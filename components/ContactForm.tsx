@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./ContactForm.module.css";
+import Select from "./Select";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import {
   OFFICES,
@@ -181,39 +182,29 @@ export default function ContactForm() {
 
             <div className={styles.row}>
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="contact-office">
+                <label className={styles.label} id="contact-office-label" htmlFor="contact-office">
                   Preferred office
                 </label>
-                <select
+                <Select
                   id="contact-office"
-                  className={styles.select}
+                  labelId="contact-office-label"
                   value={values.office}
-                  onChange={(event) => set("office", event.target.value)}
-                >
-                  {OFFICES.map((office) => (
-                    <option key={office} value={office}>
-                      {office}
-                    </option>
-                  ))}
-                </select>
+                  options={OFFICES}
+                  onChange={(office) => set("office", office)}
+                />
               </div>
 
               <div className={styles.field}>
-                <label className={styles.label} htmlFor="contact-topic">
+                <label className={styles.label} id="contact-topic-label" htmlFor="contact-topic">
                   What is this about
                 </label>
-                <select
+                <Select
                   id="contact-topic"
-                  className={styles.select}
+                  labelId="contact-topic-label"
                   value={values.topic}
-                  onChange={(event) => set("topic", event.target.value)}
-                >
-                  {TOPICS.map((topic) => (
-                    <option key={topic} value={topic}>
-                      {topic}
-                    </option>
-                  ))}
-                </select>
+                  options={TOPICS}
+                  onChange={(topic) => set("topic", topic)}
+                />
               </div>
             </div>
 
