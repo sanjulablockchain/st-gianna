@@ -95,6 +95,22 @@ describe("ContactForm", () => {
     });
   });
 
+  it("uses themed dropdowns, not native selects, for office and topic", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<ContactForm />);
+    expect(container.querySelector("select")).toBeNull();
+
+    await user.click(screen.getByRole("combobox", { name: /preferred office/i }));
+    await user.click(screen.getByRole("option", { name: "La Mirada" }));
+    await user.click(screen.getByRole("combobox", { name: /what is this about/i }));
+    await user.click(screen.getByRole("option", { name: "Billing" }));
+    await fillValid(user);
+    await send(user);
+
+    const [, init] = fetchMock.mock.calls[0];
+    expect(JSON.parse(init.body)).toMatchObject({ office: "La Mirada", topic: "Billing" });
+  });
+
   it("shows the success panel and hides the form once the server accepts it", async () => {
     const user = userEvent.setup();
     render(<ContactForm />);

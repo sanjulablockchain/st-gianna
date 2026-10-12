@@ -7,7 +7,7 @@ type SelectProps<T extends string> = {
   id: string;
   /** Id of the visible label. A <label htmlFor={id}> also works, since this renders a button. */
   labelId: string;
-  value: T | "";
+  value: string;
   options: readonly T[];
   onChange: (value: T) => void;
   /** Shown while nothing is chosen. */
