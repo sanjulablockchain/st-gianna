@@ -61,6 +61,16 @@ describe("CareersForm", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
+  it("clears a field's error once it is fixed", async () => {
+    const user = userEvent.setup();
+    render(<CareersForm />);
+    await send(user);
+    expect(screen.getByText("Choose the role you are applying for.")).toBeInTheDocument();
+    await pick(user, /^role$/i, "Front office");
+    expect(screen.queryByText("Choose the role you are applying for.")).toBeNull();
+    expect(screen.getByRole("combobox", { name: /^role$/i })).not.toHaveAttribute("aria-invalid");
+  });
+
   it("shows the chosen file and lets the applicant remove it", async () => {
     const user = userEvent.setup();
     render(<CareersForm />);

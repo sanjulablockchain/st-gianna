@@ -52,6 +52,8 @@ export default function CareersForm() {
 
   function set<K extends keyof ApplicationSubmission>(key: K, value: ApplicationSubmission[K]) {
     setValues((current) => ({ ...current, [key]: value }));
+    // Editing a field clears its message; submit checks everything again.
+    setErrors((current) => (current[key] ? { ...current, [key]: undefined } : current));
   }
 
   function chooseFile(file: File | null) {
