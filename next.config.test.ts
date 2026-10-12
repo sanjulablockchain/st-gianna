@@ -23,7 +23,7 @@ describe("next.config", () => {
     ["/advanced-wound-care-services", "/services"],
     ["/thank-you-for-applying", "/careers"],
     ["/under-development", "/"],
-    ["/10-healthy-medical-tips-for-a-healthier-life", "/medical-tips"],
+    ["/10-healthy-medical-tips-for-a-healthier-life", "/journal/10-essential-habits"],
     ["/category/uncategorized", "/journal"],
     ["/feed", "/journal"],
     ["/comments/feed", "/journal"],
