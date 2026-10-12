@@ -149,6 +149,12 @@ export const PAGES = [
     title: "Contact",
     summary: "Phone, email, online booking, a contact form and records requests.",
   },
+  {
+    path: "/careers",
+    title: "Careers",
+    summary:
+      "Jobs for clinicians, medical assistants and front office staff across the three offices, the hiring process and how to apply.",
+  },
   { path: "/privacy", title: "Privacy policy", summary: "How personal and health information is handled." },
   { path: "/terms", title: "Terms and conditions", summary: "Terms of use for this website." },
 ] as const;

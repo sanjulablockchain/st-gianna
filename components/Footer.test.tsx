@@ -48,7 +48,7 @@ describe("Footer", () => {
     );
     expect(screen.getByRole("link", { name: "Careers" })).toHaveAttribute(
       "href",
-      "/contact#careers",
+      "/careers",
     );
   });
 

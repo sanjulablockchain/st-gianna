@@ -27,7 +27,7 @@ export default function Footer() {
           <Link href="/#book" className={styles.link}>Book appointment</Link>
           <Link href="/contact" className={styles.link}>Contact</Link>
           <Link href="/services#insurance" className={styles.link}>Insurance &amp; billing</Link>
-          <Link href="/contact#careers" className={styles.link}>Careers</Link>
+          <Link href="/careers" className={styles.link}>Careers</Link>
         </div>
         <div className={styles.column}>
           <span className={styles.columnHeading}>Contact</span>

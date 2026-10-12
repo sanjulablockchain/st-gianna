@@ -1,0 +1,135 @@
+.section {
+  padding: clamp(70px, 9vw, 118px) clamp(28px, 6vw, 96px) clamp(70px, 9vw, 118px) clamp(24px, 9vw, 150px);
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  /* The contact page links straight to /careers#apply. */
+  scroll-margin-top: 90px;
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 36px;
+}
+
+.lead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  max-width: 62ch;
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(30px, 3.8vw, 54px);
+  line-height: 1.05;
+  letter-spacing: -.038em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.inlineLink {
+  color: var(--link);
+  font-weight: 600;
+}
+
+.inlineLink:hover {
+  color: var(--link-hover);
+}
+
+.subject {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 15px;
+  font-weight: 700;
+  transition: opacity .3s ease;
+}
+
+.cta:hover {
+  opacity: .88;
+  color: var(--on-accent);
+}
+
+.lists {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.panel {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--rule-accent);
+  border-radius: 14px;
+  background: var(--bg);
+}
+
+.warning {
+  border-top-color: var(--danger);
+}
+
+.panelHeading {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+@media (min-width: 641px) {
+  .lists {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: 56px;
+    align-items: start;
+  }
+}

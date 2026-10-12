@@ -1,9 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import styles from "./ContactNotes.module.css";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-const NOTES = [
+type Note = {
+  id: string;
+  title: string;
+  body: string;
+  urgent?: boolean;
+  link?: { href: string; label: string };
+};
+
+const NOTES: Note[] = [
   {
     id: "emergency",
     title: "If this is an emergency",
@@ -29,6 +38,7 @@ const NOTES = [
     id: "careers",
     title: "Careers",
     body: "We hire clinicians, medical assistants, and front office staff across all three offices, and we are always glad to hear from bilingual candidates. Send a CV to contact@sgmdoctor.com with the role and location you are interested in.",
+    link: { href: "/careers", label: "See the roles and how to apply" },
   },
 ];
 
@@ -52,6 +62,11 @@ export default function ContactNotes() {
           >
             <h3 className={styles.title}>{note.title}</h3>
             <p className={styles.body}>{note.body}</p>
+            {note.link ? (
+              <Link href={note.link.href} className={styles.link}>
+                {note.link.label}
+              </Link>
+            ) : null}
           </article>
         ))}
       </div>
