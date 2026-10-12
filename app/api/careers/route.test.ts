@@ -123,7 +123,7 @@ describe("POST /api/careers", () => {
     const response = await POST(post(VALID, cvFile(PDF, "cv.html", "text/html")));
 
     expect(response.status).toBe(400);
-    expect((await response.json()).errors.cv).toMatch(/pdf or word/i);
+    expect((await response.json()).errors.cv).toMatch(/pdf or a word/i);
     expect(sendMail).not.toHaveBeenCalled();
   });
 
@@ -134,7 +134,30 @@ describe("POST /api/careers", () => {
     const response = await POST(post(VALID, cvFile(disguised, "cv.pdf")));
 
     expect(response.status).toBe(400);
-    expect((await response.json()).errors.cv).toMatch(/does not look like/i);
+    expect((await response.json()).errors.cv).toMatch(/not a pdf or a plain word/i);
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("refuses a Word file that carries macros", async () => {
+    const { POST } = await importRoute();
+    const macro = new Uint8Array([
+      0x50, 0x4b, 0x03, 0x04,
+      ...new TextEncoder().encode("word/document.xml\u0000word/vbaProject.bin"),
+    ]);
+
+    const response = await POST(post(VALID, cvFile(macro, "cv.docx", "application/octet-stream")));
+
+    expect(response.status).toBe(400);
+    expect((await response.json()).errors.cv).toMatch(/macros/i);
+    expect(sendMail).not.toHaveBeenCalled();
+  });
+
+  it("refuses a legacy .doc file", async () => {
+    const { POST } = await importRoute();
+
+    const response = await POST(post(VALID, cvFile(PDF, "cv.doc", "application/msword")));
+
+    expect(response.status).toBe(400);
     expect(sendMail).not.toHaveBeenCalled();
   });
 

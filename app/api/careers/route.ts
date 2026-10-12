@@ -127,7 +127,12 @@ export async function POST(request: Request) {
   const bytes = new Uint8Array(await cv!.arrayBuffer());
   if (!cvBytesMatch(ext, bytes)) {
     return Response.json(
-      { ok: false, errors: { cv: "That file does not look like a PDF or Word document." } },
+      {
+        ok: false,
+        errors: {
+          cv: "That file is not a PDF or a plain Word (.docx) document. Word files with macros are not accepted.",
+        },
+      },
       { status: 400 },
     );
   }

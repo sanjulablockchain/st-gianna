@@ -27,7 +27,7 @@ export const NOTE_MAX = 3000;
 
 /** 5 MB. The route also caps the whole request a little above this. */
 export const CV_MAX_BYTES = 5 * 1024 * 1024;
-export const CV_EXTENSIONS = ["pdf", "doc", "docx"] as const;
+export const CV_EXTENSIONS = ["pdf", "docx"] as const;
 export type CvExtension = (typeof CV_EXTENSIONS)[number];
 
 export type ApplicationSubmission = {
@@ -104,7 +104,7 @@ export function validateApplication(
   if (!cv) {
     errors.cv = "Attach your CV.";
   } else if (!cvExtension(cv.name)) {
-    errors.cv = "Attach your CV as a PDF or Word document.";
+    errors.cv = "Attach your CV as a PDF or a Word (.docx) document.";
   } else if (cv.size === 0) {
     errors.cv = "That file is empty. Please attach your CV again.";
   } else if (cv.size > CV_MAX_BYTES) {
@@ -116,9 +116,27 @@ export function validateApplication(
   return errors;
 }
 
+function contains(bytes: Uint8Array, text: string): boolean {
+  const needle = new TextEncoder().encode(text);
+  outer: for (let i = 0; i <= bytes.length - needle.length; i += 1) {
+    for (let j = 0; j < needle.length; j += 1) {
+      if (bytes[i + j] !== needle[j]) continue outer;
+    }
+    return true;
+  }
+  return false;
+}
+
 /**
- * Checks the file's first bytes against what its extension claims, so a
- * renamed executable or script cannot pass as a CV. Server side only.
+ * Parts of a Word package that carry executable content. Zip archives store
+ * entry names uncompressed, so they can be found in the raw bytes.
+ */
+const DOCX_ACTIVE_PARTS = ["vbaProject", "vbaData", "activeX", "macroEnabled"];
+
+/**
+ * Checks the file's bytes against what its extension claims, so a renamed
+ * executable or script cannot pass as a CV, and refuses Word files that carry
+ * macros or ActiveX controls. Server side only.
  */
 export function cvBytesMatch(ext: CvExtension, bytes: Uint8Array): boolean {
   const starts = (signature: number[]) => signature.every((byte, i) => bytes[i] === byte);
@@ -127,17 +145,17 @@ export function cvBytesMatch(ext: CvExtension, bytes: Uint8Array): boolean {
       // %PDF-
       return starts([0x25, 0x50, 0x44, 0x46, 0x2d]);
     case "docx":
-      // A .docx is a zip archive: PK\x03\x04
-      return starts([0x50, 0x4b, 0x03, 0x04]);
-    case "doc":
-      // Legacy Office files use the OLE compound document header.
-      return starts([0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1]);
+      // A .docx is a zip archive (PK\x03\x04) holding word/document.xml.
+      return (
+        starts([0x50, 0x4b, 0x03, 0x04]) &&
+        contains(bytes, "word/document.xml") &&
+        !DOCX_ACTIVE_PARTS.some((part) => contains(bytes, part))
+      );
   }
 }
 
 export const CV_CONTENT_TYPES: Record<CvExtension, string> = {
   pdf: "application/pdf",
-  doc: "application/msword",
   docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 };
 
