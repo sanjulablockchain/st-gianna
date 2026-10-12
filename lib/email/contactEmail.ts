@@ -1,8 +1,8 @@
 import type { ContactSubmission } from "@/lib/validation";
-import { C, FONT, escapeHtml, row, type RenderedEmail } from "./emailParts";
+import { C, FONT, escapeHtml, oneLine, row, type RenderedEmail } from "./emailParts";
 
 export function renderContactEmail(submission: ContactSubmission): RenderedEmail {
-  const name = submission.name.trim();
+  const name = oneLine(submission.name);
   const email = submission.email.trim();
   const phone = submission.phone.trim() || "Not given";
   const { office, topic } = submission;

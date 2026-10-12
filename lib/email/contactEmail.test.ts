@@ -98,4 +98,13 @@ describe("renderContactEmail", () => {
     expect(ours).not.toMatch(/[—–]/);
     expect(ours).not.toMatch(/(^|\s)-{1,}(\s|$)/);
   });
+
+  it("keeps line breaks in the name out of the subject header", () => {
+    const { subject } = renderContactEmail({
+      ...SUBMISSION,
+      name: "Ada\r\nBcc: victim@example.com",
+    });
+    expect(subject).not.toMatch(/[\r\n]/);
+    expect(subject).toContain("Ada Bcc: victim@example.com");
+  });
 });

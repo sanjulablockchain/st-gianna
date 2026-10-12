@@ -41,6 +41,15 @@ describe("renderCareersEmail", () => {
     expect(email.html).toContain("&lt;script&gt;");
   });
 
+  it("keeps line breaks in the name out of the subject header", () => {
+    const email = renderCareersEmail(
+      { ...APPLICATION, name: "Ada\nBcc: victim@example.com\u0000" },
+      "CV_applicant.pdf",
+    );
+    expect(email.subject).not.toMatch(/[\r\n\u0000]/);
+    expect(email.subject).toContain("from Ada Bcc: victim@example.com");
+  });
+
   it("leaves the note block out when there is no note", () => {
     const email = renderCareersEmail({ ...APPLICATION, note: "  " }, "CV_Ada_Lovelace.pdf");
     expect(email.html).not.toContain("Note from the applicant");

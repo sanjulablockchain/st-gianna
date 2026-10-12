@@ -1,11 +1,11 @@
 import type { ApplicationSubmission } from "@/lib/careersValidation";
-import { C, FONT, escapeHtml, row, type RenderedEmail } from "./emailParts";
+import { C, FONT, escapeHtml, oneLine, row, type RenderedEmail } from "./emailParts";
 
 export function renderCareersEmail(
   submission: ApplicationSubmission,
   attachmentName: string,
 ): RenderedEmail {
-  const name = submission.name.trim();
+  const name = oneLine(submission.name);
   const email = submission.email.trim();
   const phone = submission.phone.trim();
   const { role, office, hours, start } = submission;
