@@ -1,5 +1,6 @@
 import { renderCareersEmail } from "@/lib/email/careersEmail";
 import { getTransport, readSmtpConfig } from "@/lib/email/transport";
+import { clientIp } from "@/lib/clientIp";
 import { createRateLimiter } from "@/lib/rateLimit";
 import {
   CV_CONTENT_TYPES,
@@ -18,13 +19,6 @@ export const runtime = "nodejs";
 const MAX_BODY_BYTES = CV_MAX_BYTES + 256 * 1024;
 
 const limiter = createRateLimiter({ limit: 3, windowMs: 60 * 60 * 1000 });
-
-function clientIp(request: Request): string {
-  const forwarded = request.headers.get("x-forwarded-for");
-  // Left-most entry is the original client; the rest are proxies.
-  if (forwarded) return forwarded.split(",")[0].trim();
-  return request.headers.get("x-real-ip")?.trim() || "unknown";
-}
 
 function field(form: FormData, key: string): string {
   const value = form.get(key);

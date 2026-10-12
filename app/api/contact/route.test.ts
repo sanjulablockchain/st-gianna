@@ -24,7 +24,7 @@ let ip = 0;
 function post(body: unknown, headers: Record<string, string> = {}) {
   return new Request("http://localhost/api/contact", {
     method: "POST",
-    headers: { "content-type": "application/json", "x-forwarded-for": `10.0.0.${ip}`, ...headers },
+    headers: { "content-type": "application/json", "x-real-ip": `10.0.0.${ip}`, ...headers },
     body: typeof body === "string" ? body : JSON.stringify(body),
   });
 }
@@ -118,7 +118,7 @@ describe("POST /api/contact", () => {
 
   it("rate-limits repeated submissions from one address", async () => {
     const { POST } = await importRoute();
-    const from = { "x-forwarded-for": "203.0.113.9" };
+    const from = { "x-real-ip": "203.0.113.9" };
 
     for (let i = 0; i < 5; i++) {
       expect((await POST(post(VALID, from))).status).toBe(200);
@@ -128,6 +128,18 @@ describe("POST /api/contact", () => {
     expect(blocked.status).toBe(429);
     expect(Number(blocked.headers.get("retry-after"))).toBeGreaterThan(0);
     expect(sendMail).toHaveBeenCalledTimes(5);
+  });
+
+  it("keeps limiting when the visitor rotates a forged X-Forwarded-For", async () => {
+    const { POST } = await importRoute();
+
+    for (let i = 0; i < 5; i++) {
+      const forged = { "x-real-ip": "203.0.113.10", "x-forwarded-for": `198.51.100.${i}` };
+      expect((await POST(post(VALID, forged))).status).toBe(200);
+    }
+    const blocked = await POST(post(VALID, { "x-real-ip": "203.0.113.10", "x-forwarded-for": "198.51.100.99" }));
+
+    expect(blocked.status).toBe(429);
   });
 
   it("reports a send failure without leaking the SMTP error to the browser", async () => {
