@@ -1,0 +1,199 @@
+.section {
+  padding: clamp(60px, 8vw, 104px) clamp(28px, 6vw, 96px) clamp(60px, 8vw, 104px) clamp(24px, 9vw, 150px);
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 90px;
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  padding: 24px;
+  border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--danger) 7%, var(--bg));
+}
+
+.lead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.kicker {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--danger);
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height: 1.06;
+  letter-spacing: -.035em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.body {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  transition: opacity .3s ease, border-color .3s ease;
+}
+
+.primary {
+  background: var(--danger);
+  color: var(--on-danger);
+}
+
+.primary:hover {
+  opacity: .88;
+  color: var(--on-danger);
+}
+
+.secondary {
+  border: 1px solid var(--line-2);
+  color: var(--ink);
+}
+
+.secondary:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.signs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sign {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.sign::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .5em;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--danger);
+}
+
+.offices {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.officesLead {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.officeList {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.officeLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg);
+  transition: border-color .25s ease;
+}
+
+.officeLink:hover {
+  border-color: var(--rule-accent);
+}
+
+.officeName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.officePhone {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--link);
+}
+
+@media (min-width: 641px) {
+  .inner {
+    padding: 34px;
+  }
+
+  .officeList {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 56px;
+    padding: 44px;
+  }
+}

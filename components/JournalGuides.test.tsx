@@ -14,11 +14,22 @@ describe("JournalGuides", () => {
 
   it("links only to articles that actually exist", () => {
     render(<JournalGuides />);
-    const hrefs = screen.getAllByRole("link").map((a) => a.getAttribute("href") ?? "");
+    const hrefs = screen
+      .getAllByRole("link")
+      .map((a) => a.getAttribute("href") ?? "")
+      .filter((href) => href.startsWith("/journal/"));
     expect(hrefs.length).toBe(12);
     hrefs.forEach((href) => {
       const slug = href.replace("/journal/", "");
       expect(getArticle(slug), `no article for ${slug}`).toBeDefined();
     });
+  });
+
+  it("points readers who want a quick answer to the medical tips", () => {
+    render(<JournalGuides />);
+    expect(screen.getByRole("link", { name: "medical tips" })).toHaveAttribute(
+      "href",
+      "/medical-tips",
+    );
   });
 });

@@ -1,0 +1,179 @@
+.section {
+  padding: clamp(60px, 8vw, 104px) clamp(28px, 6vw, 96px) clamp(60px, 8vw, 104px) clamp(24px, 9vw, 150px);
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  /* The topic chips jump here; keep the heading clear of the floating nav. */
+  scroll-margin-top: 90px;
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+.shaded {
+  background: var(--bg-2);
+}
+
+/* Scroll-reveal start state, only when JS is confirmed present (html.js is set
+   pre-paint in layout.tsx) so the section stays visible if JS never runs. */
+:global(html.js) .section:not(.revealed) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: clamp(28px, 3.6vw, 44px);
+}
+
+.heading {
+  margin: 0;
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.intro {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+
+.tips {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px 28px;
+}
+
+.tip {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px 0 24px;
+  border-top: 2px solid var(--rule-accent);
+  transition: opacity .6s ease, transform .6s ease;
+  transition-delay: calc(var(--reveal-index, 0) * 70ms);
+}
+
+:global(html.js) .section:not(.revealed) .tip {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.tipTitle {
+  margin: 0;
+  font-size: 17.5px;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+}
+
+.tipBody {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-self: start;
+}
+
+.callUs {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-2));
+}
+
+.shaded .callUs {
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+}
+
+.callUsHeading {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--link);
+}
+
+.callUsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 44px;
+  padding: 18px 22px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  transition: border-color .25s ease;
+}
+
+.article:hover {
+  border-color: var(--rule-accent);
+}
+
+.articleLabel {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.articleTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.article:hover .articleTitle {
+  color: var(--accent);
+}
+
+@media (min-width: 641px) {
+  .tips {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1180px) {
+  .layout {
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    gap: 48px;
+  }
+}

@@ -46,6 +46,10 @@ describe("Footer", () => {
       "href",
       "/services#insurance",
     );
+    expect(screen.getByRole("link", { name: "Medical tips" })).toHaveAttribute(
+      "href",
+      "/medical-tips",
+    );
     expect(screen.getByRole("link", { name: "Careers" })).toHaveAttribute(
       "href",
       "/careers",

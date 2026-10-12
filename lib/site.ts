@@ -140,6 +140,12 @@ export const PAGES = [
     summary: "Health guides from our clinicians on preventive care, parenting, nutrition and chronic care.",
   },
   {
+    path: "/medical-tips",
+    title: "Medical tips",
+    summary:
+      "Practical guidance on fever, colds, stomach bugs, sleep, nutrition, injuries, medicine safety, allergies and asthma, with the signs that need urgent care.",
+  },
+  {
     path: "/partners",
     title: "Partners",
     summary: "Sister companies and partners covering therapy, after hours care, hospital care and insurance.",
