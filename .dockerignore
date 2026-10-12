@@ -1,0 +1,21 @@
+# Secrets never enter the image; docker compose passes .env.local at runtime.
+.env*
+!.env.example
+
+node_modules
+.next
+out
+coverage
+*.tsbuildinfo
+next-env.d.ts
+
+.git
+.claude
+.worktrees
+docs
+shots
+/*.png
+
+Dockerfile
+docker-compose.yml
+.dockerignore
